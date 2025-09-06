@@ -8,7 +8,7 @@
             "type": "action",
             "provider": {
                 "type": "python",
-                "module": "continuos_pod_restart",
+                "module": "pod_restart",
                 "func": "restart_pods_continuous",
                 "arguments": {
                     "label_selector": "app=petclinic",
