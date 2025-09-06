@@ -1,0 +1,63 @@
+{
+  "chaoslib-version": "1.44.0",
+  "platform": "Linux-6.11.0-1018-azure-x86_64-with-glibc2.39",
+  "node": "chaos-experiments-vm",
+  "experiment": {
+    "version": "1.0.0",
+    "title": "Delete Specific Count of Nodes",
+    "description": "Delete exactly N nodes randomly",
+    "method": [
+      {
+        "name": "delete-count-nodes",
+        "type": "action",
+        "provider": {
+          "type": "python",
+          "module": "chaosk8s.node.actions",
+          "func": "delete_nodes",
+          "arguments": {
+            "label_selector": "agentpool=nodepool1",
+            "count": 1,
+            "rand": true
+          }
+        }
+      }
+    ],
+    "dry": null
+  },
+  "start": "2025-09-05T10:44:14.376007+00:00",
+  "status": "completed",
+  "deviated": false,
+  "steady_states": {
+    "before": null,
+    "after": null,
+    "during": []
+  },
+  "run": [
+    {
+      "activity": {
+        "name": "delete-count-nodes",
+        "type": "action",
+        "provider": {
+          "type": "python",
+          "module": "chaosk8s.node.actions",
+          "func": "delete_nodes",
+          "arguments": {
+            "label_selector": "agentpool=nodepool1",
+            "count": 1,
+            "rand": true
+          }
+        }
+      },
+      "output": [
+        "aks-nodepool1-39725355-vmss000009"
+      ],
+      "start": "2025-09-05T10:44:14.377166+00:00",
+      "status": "succeeded",
+      "end": "2025-09-05T10:44:14.797904+00:00",
+      "duration": 0.420738
+    }
+  ],
+  "rollbacks": [],
+  "end": "2025-09-05T10:44:14.798374+00:00",
+  "duration": 0.4248650074005127
+}

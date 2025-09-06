@@ -1,0 +1,21 @@
+{
+    "version": "1.0.0",
+    "title": "Drain Kubernetes Nodes",
+    "description": "Gracefully drain nodes to move pods to other nodes",
+    "method": [
+        {
+            "name": "drain-nodes",
+            "type": "action",
+            "provider": {
+                "type": "python",
+                "module": "chaosk8s.node.actions",
+                "func": "drain_nodes",
+                "arguments": {
+                    "label_selector": "agentpool=nodepool1",
+                    "delete_pods_with_local_storage": true,
+                    "timeout": 300
+                }
+            }
+        }
+    ]
+}

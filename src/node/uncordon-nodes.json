@@ -1,0 +1,19 @@
+{
+    "version": "1.0.0",
+    "title": "Uncordon Kubernetes Nodes", 
+    "description": "Mark nodes as schedulable again to allow new pods to be scheduled",
+    "method": [
+        {
+            "name": "uncordon-nodes",
+            "type": "action",
+            "provider": {
+                "type": "python",
+                "module": "chaosk8s.node.actions",
+                "func": "uncordon_node",
+                "arguments": {
+                    "label_selector": "agentpool=nodepool1"
+                }
+            }
+        }
+    ]
+}

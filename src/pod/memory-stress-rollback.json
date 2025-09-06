@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "title": "Memory Stress Test - Database Pod with Timed Rollback",
+  "description": "Apply memory stress to database pod with automatic cleanup after duration",
+  "method": [
+    {
+      "type": "action",
+      "name": "apply-database-memory-stress",
+      "provider": {
+        "type": "python",
+        "module": "chaosk8s.chaosmesh.stress.actions",
+        "func": "stress_memory",
+        "arguments": {
+          "name": "memory-stress-database",
+          "workers": 1,
+          "size": "25GB",
+          "duration": "180s",
+          "ns": "default",
+          "label_selectors": "app=demo-db",
+          "mode": "one"
+        }
+      }
+    },
+    {
+      "type": "probe",
+      "name": "wait-for-memory-stress-duration",
+      "provider": {
+        "type": "process",
+        "path": "sleep",
+        "arguments": "185"
+      }
+    }
+  ],
+  "rollbacks": [
+    {
+      "type": "action",
+      "name": "cleanup-database-memory-stress",
+      "provider": {
+        "type": "python",
+        "module": "chaosk8s.chaosmesh.stress.actions",
+        "func": "delete_stressor",
+        "arguments": {
+          "name": "memory-stress-database",
+          "ns": "default"
+        }
+      }
+    }
+  ]
+}

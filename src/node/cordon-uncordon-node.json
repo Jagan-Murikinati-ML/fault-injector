@@ -1,0 +1,54 @@
+{
+    "version": "1.0.0",
+    "title": "Node Cordon-Uncordon Sequence",
+    "description": "Cordon a node, wait, then uncordon it to test scheduling resilience",
+    "method": [
+        {
+            "name": "cordon-random-node",
+            "type": "action",
+            "provider": {
+                "type": "python",
+                "module": "chaosk8s.node.actions",
+                "func": "cordon_node",
+                "arguments": {
+                    "label_selector": "agentpool=nodepool1"
+                }
+            }
+        },
+        {
+            "name": "wait-after-cordon",
+            "type": "action",
+            "provider": {
+                "type": "process",
+                "path": "sleep",
+                "arguments": ["60"]
+            }
+        },
+        {
+            "name": "uncordon-node",
+            "type": "action",
+            "provider": {
+                "type": "python",
+                "module": "chaosk8s.node.actions",
+                "func": "uncordon_node",
+                "arguments": {
+                    "label_selector": "agentpool=nodepool1"
+                }
+            }
+        }
+    ],
+    "rollbacks": [
+        {
+            "name": "emergency-uncordon",
+            "type": "action",
+            "provider": {
+                "type": "python",
+                "module": "chaosk8s.node.actions",
+                "func": "uncordon_node",
+                "arguments": {
+                    "label_selector": "agentpool=nodepool1"
+                }
+            }
+        }
+    ]
+}

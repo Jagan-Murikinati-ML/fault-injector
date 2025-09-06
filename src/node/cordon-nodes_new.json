@@ -1,0 +1,19 @@
+{
+    "version": "1.0.0",
+    "title": "Cordon Kubernetes Nodes",
+    "description": "Mark nodes as unschedulable to prevent new pods from being scheduled",
+    "method": [
+        {
+            "name": "cordon-nodes",
+            "type": "action",
+            "provider": {
+                "type": "python",
+                "module": "chaosk8s.node.actions",
+                "func": "cordon_node",
+                "arguments": {
+                    "label_selector": "agentpool=nodepool1"
+                }
+            }
+        }
+    ]
+}

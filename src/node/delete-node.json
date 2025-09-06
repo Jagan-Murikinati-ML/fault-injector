@@ -1,0 +1,21 @@
+{
+    "version": "1.0.0",
+    "title": "Delete Specific Count of Nodes",
+    "description": "Delete exactly N nodes randomly",
+    "method": [
+        {
+            "name": "delete-count-nodes",
+            "type": "action",
+            "provider": {
+                "type": "python",
+                "module": "chaosk8s.node.actions",
+                "func": "delete_nodes",
+                "arguments": {
+                    "label_selector": "agentpool=nodepool1",
+                    "count": 1,
+                    "rand": true
+                }
+            }
+        }
+    ]
+}
