@@ -1,0 +1,763 @@
+[36m[2025-09-04 07:19:21 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2025-09-04 07:19:21 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2025-09-04 07:19:21 DEBUG] [__init__:106][39m Using settings file '/home/azureuser/.chaostoolkit/settings.yaml'
+[36m[2025-09-04 07:19:21 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/home/azureuser/.chaostoolkit/settings.yaml'.
+[36m[2025-09-04 07:19:21 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 07:19:21 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 07:19:21 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 07:19:21 DEBUG] [caching:35][39m Cached 1 activities
+[32m[2025-09-04 07:19:21 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2025-09-04 07:19:21 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 07:19:21 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 07:19:21 DEBUG] [secret:104][39m Done loading secrets
+[36m[2025-09-04 07:19:22 DEBUG] [caching:42][39m Clearing activities cache
+[31m[2025-09-04 07:19:22 ERROR] [run:188][39m argument 'qty' is not part of the function signature in activity 'cordon_node'
+[36m[2025-09-04 07:19:22 DEBUG] [run:189][39m argument 'qty' is not part of the function signature in activity 'cordon_node'
+[36m[2025-09-04 07:23:32 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2025-09-04 07:23:32 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2025-09-04 07:23:32 DEBUG] [__init__:106][39m Using settings file '/home/azureuser/.chaostoolkit/settings.yaml'
+[36m[2025-09-04 07:23:32 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/home/azureuser/.chaostoolkit/settings.yaml'.
+[36m[2025-09-04 07:23:32 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 07:23:32 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 07:23:32 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 07:23:32 DEBUG] [caching:35][39m Cached 1 activities
+[32m[2025-09-04 07:23:32 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2025-09-04 07:23:32 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 07:23:32 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 07:23:32 DEBUG] [secret:104][39m Done loading secrets
+[32m[2025-09-04 07:23:33 INFO] [experiment:112][39m Experiment looks valid
+[36m[2025-09-04 07:23:33 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-04 07:23:33 DEBUG] [run:224][39m Runtime strategies: hypothesis - default / rollbacks - default
+[36m[2025-09-04 07:23:33 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 07:23:33 DEBUG] [caching:35][39m Cached 1 activities
+[36m[2025-09-04 07:23:33 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 07:23:33 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 07:23:33 DEBUG] [secret:104][39m Done loading secrets
+[36m[2025-09-04 07:23:33 DEBUG] [configuration:161][39m Loading dynamic configuration...
+[32m[2025-09-04 07:23:33 INFO] [run:440][39m Running experiment: Cordon Kubernetes Nodes
+[36m[2025-09-04 07:23:33 DEBUG] [__init__:67][39m Initializing controls
+[32m[2025-09-04 07:23:33 INFO] [run:471][39m Steady-state strategy: default
+[32m[2025-09-04 07:23:33 INFO] [run:477][39m Rollbacks strategy: default
+[32m[2025-09-04 07:23:33 INFO] [run:485][39m No steady state hypothesis defined. That's ok, just exploring.
+[36m[2025-09-04 07:23:33 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[32m[2025-09-04 07:23:33 INFO] [run:778][39m Playing your experiment's method now...
+[36m[2025-09-04 07:23:33 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[36m[2025-09-04 07:23:33 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[32m[2025-09-04 07:23:33 INFO] [activity:232][39m Action: cordon-nodes
+[36m[2025-09-04 07:23:33 DEBUG] [python:33][39m Activity 'cordon-nodes' loaded from '/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py'
+[36m[2025-09-04 07:23:33 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 07:23:33 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 07:23:33 DEBUG] [actions:62][39m Filtering nodes by label agentpool=nodepool1
+[36m[2025-09-04 07:23:33 DEBUG] [actions:64][39m Found 2 nodes
+[36m[2025-09-04 07:23:33 DEBUG] [actions:100][39m Picked nodes 'aks-nodepool1-39725355-vmss000004, aks-nodepool1-39725355-vmss000005'
+[36m[2025-09-04 07:23:33 DEBUG] [activity:260][39m   => succeeded with '['aks-nodepool1-39725355-vmss000004', 'aks-nodepool1-39725355-vmss000005']'
+[36m[2025-09-04 07:23:33 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[36m[2025-09-04 07:23:33 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[32m[2025-09-04 07:23:33 INFO] [run:1072][39m Let's rollback...
+[36m[2025-09-04 07:23:33 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-04 07:23:33 INFO] [rollback:33][39m No declared rollbacks, let's move on.
+[36m[2025-09-04 07:23:33 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-04 07:23:33 INFO] [run:598][39m Experiment ended with status: completed
+[36m[2025-09-04 07:23:33 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[36m[2025-09-04 07:23:33 DEBUG] [__init__:106][39m Cleaning up controls
+[36m[2025-09-04 07:23:33 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-04 07:27:35 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2025-09-04 07:27:35 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2025-09-04 07:27:35 DEBUG] [__init__:106][39m Using settings file '/home/azureuser/.chaostoolkit/settings.yaml'
+[36m[2025-09-04 07:27:35 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/home/azureuser/.chaostoolkit/settings.yaml'.
+[36m[2025-09-04 07:27:35 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 07:27:35 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 07:27:35 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 07:27:35 DEBUG] [caching:35][39m Cached 1 activities
+[32m[2025-09-04 07:27:35 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2025-09-04 07:27:35 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 07:27:35 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 07:27:35 DEBUG] [secret:104][39m Done loading secrets
+[32m[2025-09-04 07:27:36 INFO] [experiment:112][39m Experiment looks valid
+[36m[2025-09-04 07:27:36 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-04 07:27:36 DEBUG] [run:224][39m Runtime strategies: hypothesis - default / rollbacks - default
+[36m[2025-09-04 07:27:36 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 07:27:36 DEBUG] [caching:35][39m Cached 1 activities
+[36m[2025-09-04 07:27:36 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 07:27:36 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 07:27:36 DEBUG] [secret:104][39m Done loading secrets
+[36m[2025-09-04 07:27:36 DEBUG] [configuration:161][39m Loading dynamic configuration...
+[32m[2025-09-04 07:27:36 INFO] [run:440][39m Running experiment: Uncordon Kubernetes Nodes
+[36m[2025-09-04 07:27:36 DEBUG] [__init__:67][39m Initializing controls
+[32m[2025-09-04 07:27:36 INFO] [run:471][39m Steady-state strategy: default
+[32m[2025-09-04 07:27:36 INFO] [run:477][39m Rollbacks strategy: default
+[32m[2025-09-04 07:27:36 INFO] [run:485][39m No steady state hypothesis defined. That's ok, just exploring.
+[36m[2025-09-04 07:27:36 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[32m[2025-09-04 07:27:36 INFO] [run:778][39m Playing your experiment's method now...
+[36m[2025-09-04 07:27:36 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[36m[2025-09-04 07:27:36 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[32m[2025-09-04 07:27:36 INFO] [activity:232][39m Action: uncordon-nodes
+[36m[2025-09-04 07:27:36 DEBUG] [python:33][39m Activity 'uncordon-nodes' loaded from '/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py'
+[36m[2025-09-04 07:27:36 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 07:27:36 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 07:27:36 DEBUG] [actions:62][39m Filtering nodes by label agentpool=nodepool1
+[36m[2025-09-04 07:27:36 DEBUG] [actions:64][39m Found 2 nodes
+[36m[2025-09-04 07:27:36 DEBUG] [actions:100][39m Picked nodes 'aks-nodepool1-39725355-vmss000004, aks-nodepool1-39725355-vmss000005'
+[36m[2025-09-04 07:27:36 DEBUG] [activity:260][39m   => succeeded with '['aks-nodepool1-39725355-vmss000004', 'aks-nodepool1-39725355-vmss000005']'
+[36m[2025-09-04 07:27:36 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[36m[2025-09-04 07:27:36 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[32m[2025-09-04 07:27:36 INFO] [run:1072][39m Let's rollback...
+[36m[2025-09-04 07:27:36 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-04 07:27:36 INFO] [rollback:33][39m No declared rollbacks, let's move on.
+[36m[2025-09-04 07:27:36 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-04 07:27:36 INFO] [run:598][39m Experiment ended with status: completed
+[36m[2025-09-04 07:27:36 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[36m[2025-09-04 07:27:36 DEBUG] [__init__:106][39m Cleaning up controls
+[36m[2025-09-04 07:27:36 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-04 07:28:20 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2025-09-04 07:28:20 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2025-09-04 07:28:20 DEBUG] [__init__:106][39m Using settings file '/home/azureuser/.chaostoolkit/settings.yaml'
+[36m[2025-09-04 07:28:20 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/home/azureuser/.chaostoolkit/settings.yaml'.
+[36m[2025-09-04 07:28:20 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 07:28:20 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 07:28:20 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 07:28:20 DEBUG] [caching:35][39m Cached 3 activities
+[32m[2025-09-04 07:28:20 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2025-09-04 07:28:20 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 07:28:20 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 07:28:20 DEBUG] [secret:104][39m Done loading secrets
+[36m[2025-09-04 07:28:20 DEBUG] [caching:42][39m Clearing activities cache
+[31m[2025-09-04 07:28:20 ERROR] [run:188][39m argument 'qty' is not part of the function signature in activity 'cordon_node'
+[36m[2025-09-04 07:28:20 DEBUG] [run:189][39m argument 'qty' is not part of the function signature in activity 'cordon_node'
+[36m[2025-09-04 07:29:03 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2025-09-04 07:29:03 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2025-09-04 07:29:03 DEBUG] [__init__:106][39m Using settings file '/home/azureuser/.chaostoolkit/settings.yaml'
+[36m[2025-09-04 07:29:03 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/home/azureuser/.chaostoolkit/settings.yaml'.
+[36m[2025-09-04 07:29:03 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 07:29:03 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 07:29:03 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 07:29:03 DEBUG] [caching:35][39m Cached 3 activities
+[32m[2025-09-04 07:29:03 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2025-09-04 07:29:03 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 07:29:03 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 07:29:03 DEBUG] [secret:104][39m Done loading secrets
+[32m[2025-09-04 07:29:03 INFO] [experiment:112][39m Experiment looks valid
+[36m[2025-09-04 07:29:03 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-04 07:29:03 DEBUG] [run:224][39m Runtime strategies: hypothesis - default / rollbacks - default
+[36m[2025-09-04 07:29:03 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 07:29:03 DEBUG] [caching:35][39m Cached 3 activities
+[36m[2025-09-04 07:29:03 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 07:29:03 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 07:29:03 DEBUG] [secret:104][39m Done loading secrets
+[36m[2025-09-04 07:29:03 DEBUG] [configuration:161][39m Loading dynamic configuration...
+[32m[2025-09-04 07:29:03 INFO] [run:440][39m Running experiment: Node Cordon-Uncordon Sequence
+[36m[2025-09-04 07:29:03 DEBUG] [__init__:67][39m Initializing controls
+[32m[2025-09-04 07:29:03 INFO] [run:471][39m Steady-state strategy: default
+[32m[2025-09-04 07:29:03 INFO] [run:477][39m Rollbacks strategy: default
+[32m[2025-09-04 07:29:03 INFO] [run:485][39m No steady state hypothesis defined. That's ok, just exploring.
+[36m[2025-09-04 07:29:03 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[32m[2025-09-04 07:29:03 INFO] [run:778][39m Playing your experiment's method now...
+[36m[2025-09-04 07:29:03 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[36m[2025-09-04 07:29:03 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[32m[2025-09-04 07:29:03 INFO] [activity:232][39m Action: cordon-random-node
+[36m[2025-09-04 07:29:03 DEBUG] [python:33][39m Activity 'cordon-random-node' loaded from '/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py'
+[36m[2025-09-04 07:29:03 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 07:29:03 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 07:29:03 DEBUG] [actions:62][39m Filtering nodes by label agentpool=nodepool1
+[36m[2025-09-04 07:29:03 DEBUG] [actions:64][39m Found 2 nodes
+[36m[2025-09-04 07:29:03 DEBUG] [actions:100][39m Picked nodes 'aks-nodepool1-39725355-vmss000004, aks-nodepool1-39725355-vmss000005'
+[36m[2025-09-04 07:29:04 DEBUG] [activity:260][39m   => succeeded with '['aks-nodepool1-39725355-vmss000004', 'aks-nodepool1-39725355-vmss000005']'
+[36m[2025-09-04 07:29:04 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[36m[2025-09-04 07:29:04 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[32m[2025-09-04 07:29:04 INFO] [activity:232][39m Action: wait-after-cordon
+[36m[2025-09-04 07:29:04 DEBUG] [process:52][39m Running: ['/usr/bin/sleep', '60']
+[36m[2025-09-04 07:30:04 DEBUG] [activity:260][39m   => succeeded with '{'status': 0, 'stdout': '', 'stderr': ''}'
+[36m[2025-09-04 07:30:04 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[36m[2025-09-04 07:30:04 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[32m[2025-09-04 07:30:04 INFO] [activity:232][39m Action: uncordon-node
+[36m[2025-09-04 07:30:04 DEBUG] [python:33][39m Activity 'uncordon-node' loaded from '/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py'
+[36m[2025-09-04 07:30:04 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 07:30:04 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 07:30:04 DEBUG] [actions:62][39m Filtering nodes by label agentpool=nodepool1
+[36m[2025-09-04 07:30:04 DEBUG] [actions:64][39m Found 2 nodes
+[36m[2025-09-04 07:30:04 DEBUG] [actions:100][39m Picked nodes 'aks-nodepool1-39725355-vmss000004, aks-nodepool1-39725355-vmss000005'
+[36m[2025-09-04 07:30:05 DEBUG] [activity:260][39m   => succeeded with '['aks-nodepool1-39725355-vmss000004', 'aks-nodepool1-39725355-vmss000005']'
+[36m[2025-09-04 07:30:05 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[36m[2025-09-04 07:30:05 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[32m[2025-09-04 07:30:05 INFO] [run:1072][39m Let's rollback...
+[36m[2025-09-04 07:30:05 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-04 07:30:05 INFO] [rollback:36][39m Rollback: emergency-uncordon
+[36m[2025-09-04 07:30:05 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[32m[2025-09-04 07:30:05 INFO] [activity:232][39m Action: emergency-uncordon
+[36m[2025-09-04 07:30:05 DEBUG] [python:33][39m Activity 'emergency-uncordon' loaded from '/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py'
+[36m[2025-09-04 07:30:05 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 07:30:05 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 07:30:05 DEBUG] [actions:62][39m Filtering nodes by label agentpool=nodepool1
+[36m[2025-09-04 07:30:05 DEBUG] [actions:64][39m Found 2 nodes
+[36m[2025-09-04 07:30:05 DEBUG] [actions:100][39m Picked nodes 'aks-nodepool1-39725355-vmss000004, aks-nodepool1-39725355-vmss000005'
+[36m[2025-09-04 07:30:05 DEBUG] [activity:260][39m   => succeeded with '['aks-nodepool1-39725355-vmss000004', 'aks-nodepool1-39725355-vmss000005']'
+[36m[2025-09-04 07:30:05 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[36m[2025-09-04 07:30:05 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-04 07:30:05 INFO] [run:598][39m Experiment ended with status: completed
+[36m[2025-09-04 07:30:05 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[36m[2025-09-04 07:30:05 DEBUG] [__init__:106][39m Cleaning up controls
+[36m[2025-09-04 07:30:05 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-04 07:34:23 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2025-09-04 07:34:23 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2025-09-04 07:34:23 DEBUG] [__init__:106][39m Using settings file '/home/azureuser/.chaostoolkit/settings.yaml'
+[36m[2025-09-04 07:34:23 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/home/azureuser/.chaostoolkit/settings.yaml'.
+[36m[2025-09-04 07:34:23 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 07:34:23 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 07:34:23 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 07:34:23 DEBUG] [caching:35][39m Cached 3 activities
+[32m[2025-09-04 07:34:23 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2025-09-04 07:34:23 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 07:34:23 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 07:34:23 DEBUG] [secret:104][39m Done loading secrets
+[32m[2025-09-04 07:34:24 INFO] [experiment:112][39m Experiment looks valid
+[36m[2025-09-04 07:34:24 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-04 07:34:24 DEBUG] [run:224][39m Runtime strategies: hypothesis - default / rollbacks - default
+[36m[2025-09-04 07:34:24 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 07:34:24 DEBUG] [caching:35][39m Cached 3 activities
+[36m[2025-09-04 07:34:24 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 07:34:24 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 07:34:24 DEBUG] [secret:104][39m Done loading secrets
+[36m[2025-09-04 07:34:24 DEBUG] [configuration:161][39m Loading dynamic configuration...
+[32m[2025-09-04 07:34:24 INFO] [run:440][39m Running experiment: Node Cordon-Uncordon Sequence
+[36m[2025-09-04 07:34:24 DEBUG] [__init__:67][39m Initializing controls
+[32m[2025-09-04 07:34:24 INFO] [run:471][39m Steady-state strategy: default
+[32m[2025-09-04 07:34:24 INFO] [run:477][39m Rollbacks strategy: default
+[32m[2025-09-04 07:34:24 INFO] [run:485][39m No steady state hypothesis defined. That's ok, just exploring.
+[36m[2025-09-04 07:34:24 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[32m[2025-09-04 07:34:24 INFO] [run:778][39m Playing your experiment's method now...
+[36m[2025-09-04 07:34:24 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[36m[2025-09-04 07:34:24 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[32m[2025-09-04 07:34:24 INFO] [activity:232][39m Action: cordon-random-node
+[36m[2025-09-04 07:34:24 DEBUG] [python:33][39m Activity 'cordon-random-node' loaded from '/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py'
+[36m[2025-09-04 07:34:24 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 07:34:24 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 07:34:24 DEBUG] [actions:62][39m Filtering nodes by label agentpool=nodepool1
+[36m[2025-09-04 07:34:24 DEBUG] [actions:64][39m Found 2 nodes
+[36m[2025-09-04 07:34:24 DEBUG] [actions:100][39m Picked nodes 'aks-nodepool1-39725355-vmss000004, aks-nodepool1-39725355-vmss000005'
+[36m[2025-09-04 07:34:24 DEBUG] [activity:260][39m   => succeeded with '['aks-nodepool1-39725355-vmss000004', 'aks-nodepool1-39725355-vmss000005']'
+[36m[2025-09-04 07:34:24 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[36m[2025-09-04 07:34:24 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[32m[2025-09-04 07:34:24 INFO] [activity:232][39m Action: wait-after-cordon
+[36m[2025-09-04 07:34:24 DEBUG] [process:52][39m Running: ['/usr/bin/sleep', '60']
+[36m[2025-09-04 07:35:24 DEBUG] [activity:260][39m   => succeeded with '{'status': 0, 'stdout': '', 'stderr': ''}'
+[36m[2025-09-04 07:35:24 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[36m[2025-09-04 07:35:24 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[32m[2025-09-04 07:35:24 INFO] [activity:232][39m Action: uncordon-node
+[36m[2025-09-04 07:35:24 DEBUG] [python:33][39m Activity 'uncordon-node' loaded from '/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py'
+[36m[2025-09-04 07:35:24 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 07:35:24 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 07:35:24 DEBUG] [actions:62][39m Filtering nodes by label agentpool=nodepool1
+[36m[2025-09-04 07:35:25 DEBUG] [actions:64][39m Found 2 nodes
+[36m[2025-09-04 07:35:25 DEBUG] [actions:100][39m Picked nodes 'aks-nodepool1-39725355-vmss000004, aks-nodepool1-39725355-vmss000005'
+[36m[2025-09-04 07:35:25 DEBUG] [activity:260][39m   => succeeded with '['aks-nodepool1-39725355-vmss000004', 'aks-nodepool1-39725355-vmss000005']'
+[36m[2025-09-04 07:35:25 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[36m[2025-09-04 07:35:25 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[32m[2025-09-04 07:35:25 INFO] [run:1072][39m Let's rollback...
+[36m[2025-09-04 07:35:25 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-04 07:35:25 INFO] [rollback:36][39m Rollback: emergency-uncordon
+[36m[2025-09-04 07:35:25 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[32m[2025-09-04 07:35:25 INFO] [activity:232][39m Action: emergency-uncordon
+[36m[2025-09-04 07:35:25 DEBUG] [python:33][39m Activity 'emergency-uncordon' loaded from '/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py'
+[36m[2025-09-04 07:35:25 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 07:35:25 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 07:35:25 DEBUG] [actions:62][39m Filtering nodes by label agentpool=nodepool1
+[36m[2025-09-04 07:35:25 DEBUG] [actions:64][39m Found 2 nodes
+[36m[2025-09-04 07:35:25 DEBUG] [actions:100][39m Picked nodes 'aks-nodepool1-39725355-vmss000004, aks-nodepool1-39725355-vmss000005'
+[36m[2025-09-04 07:35:26 DEBUG] [activity:260][39m   => succeeded with '['aks-nodepool1-39725355-vmss000004', 'aks-nodepool1-39725355-vmss000005']'
+[36m[2025-09-04 07:35:26 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[36m[2025-09-04 07:35:26 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-04 07:35:26 INFO] [run:598][39m Experiment ended with status: completed
+[36m[2025-09-04 07:35:26 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[36m[2025-09-04 07:35:26 DEBUG] [__init__:106][39m Cleaning up controls
+[36m[2025-09-04 07:35:26 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-04 07:52:04 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2025-09-04 07:52:04 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2025-09-04 07:52:04 DEBUG] [__init__:106][39m Using settings file '/home/azureuser/.chaostoolkit/settings.yaml'
+[36m[2025-09-04 07:52:04 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/home/azureuser/.chaostoolkit/settings.yaml'.
+[36m[2025-09-04 07:52:04 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 07:52:04 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 07:52:04 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 07:52:04 DEBUG] [caching:35][39m Cached 1 activities
+[32m[2025-09-04 07:52:04 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2025-09-04 07:52:04 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 07:52:04 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 07:52:04 DEBUG] [secret:104][39m Done loading secrets
+[36m[2025-09-04 07:52:05 DEBUG] [caching:42][39m Clearing activities cache
+[31m[2025-09-04 07:52:05 ERROR] [run:188][39m argument 'name' is not part of the function signature in activity 'delete_nodes'
+[36m[2025-09-04 07:52:05 DEBUG] [run:189][39m argument 'name' is not part of the function signature in activity 'delete_nodes'
+[36m[2025-09-04 07:53:53 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2025-09-04 07:53:53 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2025-09-04 07:53:53 DEBUG] [__init__:106][39m Using settings file '/home/azureuser/.chaostoolkit/settings.yaml'
+[36m[2025-09-04 07:53:53 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/home/azureuser/.chaostoolkit/settings.yaml'.
+[36m[2025-09-04 07:53:53 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 07:53:53 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 07:53:53 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 07:53:53 DEBUG] [caching:35][39m Cached 1 activities
+[32m[2025-09-04 07:53:53 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2025-09-04 07:53:53 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 07:53:53 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 07:53:53 DEBUG] [secret:104][39m Done loading secrets
+[36m[2025-09-04 07:53:53 DEBUG] [caching:42][39m Clearing activities cache
+[31m[2025-09-04 07:53:53 ERROR] [run:188][39m argument 'name' is not part of the function signature in activity 'delete_nodes'
+[36m[2025-09-04 07:53:53 DEBUG] [run:189][39m argument 'name' is not part of the function signature in activity 'delete_nodes'
+[36m[2025-09-04 08:05:04 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2025-09-04 08:05:04 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2025-09-04 08:05:04 DEBUG] [__init__:106][39m Using settings file '/home/azureuser/.chaostoolkit/settings.yaml'
+[36m[2025-09-04 08:05:04 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/home/azureuser/.chaostoolkit/settings.yaml'.
+[36m[2025-09-04 08:05:04 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 08:05:04 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 08:05:04 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 08:05:04 DEBUG] [caching:35][39m Cached 1 activities
+[32m[2025-09-04 08:05:04 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2025-09-04 08:05:04 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 08:05:04 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 08:05:04 DEBUG] [secret:104][39m Done loading secrets
+[32m[2025-09-04 08:05:04 INFO] [experiment:112][39m Experiment looks valid
+[36m[2025-09-04 08:05:04 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-04 08:05:04 DEBUG] [run:224][39m Runtime strategies: hypothesis - default / rollbacks - default
+[36m[2025-09-04 08:05:04 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 08:05:04 DEBUG] [caching:35][39m Cached 1 activities
+[36m[2025-09-04 08:05:04 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 08:05:04 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 08:05:04 DEBUG] [secret:104][39m Done loading secrets
+[36m[2025-09-04 08:05:04 DEBUG] [configuration:161][39m Loading dynamic configuration...
+[32m[2025-09-04 08:05:04 INFO] [run:440][39m Running experiment: Delete Specific Count of Nodes
+[36m[2025-09-04 08:05:04 DEBUG] [__init__:67][39m Initializing controls
+[32m[2025-09-04 08:05:04 INFO] [run:471][39m Steady-state strategy: default
+[32m[2025-09-04 08:05:04 INFO] [run:477][39m Rollbacks strategy: default
+[32m[2025-09-04 08:05:04 INFO] [run:485][39m No steady state hypothesis defined. That's ok, just exploring.
+[36m[2025-09-04 08:05:04 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[32m[2025-09-04 08:05:04 INFO] [run:778][39m Playing your experiment's method now...
+[36m[2025-09-04 08:05:04 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[36m[2025-09-04 08:05:04 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[32m[2025-09-04 08:05:04 INFO] [activity:232][39m Action: delete-count-nodes
+[36m[2025-09-04 08:05:04 DEBUG] [python:33][39m Activity 'delete-count-nodes' loaded from '/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py'
+[36m[2025-09-04 08:05:04 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 08:05:04 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 08:05:04 DEBUG] [actions:62][39m Filtering nodes by label agentpool=nodepool1
+[36m[2025-09-04 08:05:05 DEBUG] [actions:64][39m Found 1 nodes
+[36m[2025-09-04 08:05:05 DEBUG] [actions:100][39m Picked nodes 'aks-nodepool1-39725355-vmss000005'
+[36m[2025-09-04 08:05:05 DEBUG] [actions:176][39m Node '{n.metadata.name}' deleted
+[36m[2025-09-04 08:05:05 DEBUG] [activity:260][39m   => succeeded with '['aks-nodepool1-39725355-vmss000005']'
+[36m[2025-09-04 08:05:05 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[36m[2025-09-04 08:05:05 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[32m[2025-09-04 08:05:05 INFO] [run:1072][39m Let's rollback...
+[36m[2025-09-04 08:05:05 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-04 08:05:05 INFO] [rollback:33][39m No declared rollbacks, let's move on.
+[36m[2025-09-04 08:05:05 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-04 08:05:05 INFO] [run:598][39m Experiment ended with status: completed
+[36m[2025-09-04 08:05:05 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[36m[2025-09-04 08:05:05 DEBUG] [__init__:106][39m Cleaning up controls
+[36m[2025-09-04 08:05:05 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-04 10:42:14 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2025-09-04 10:42:14 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2025-09-04 10:42:14 DEBUG] [__init__:106][39m Using settings file '/home/azureuser/.chaostoolkit/settings.yaml'
+[36m[2025-09-04 10:42:14 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/home/azureuser/.chaostoolkit/settings.yaml'.
+[36m[2025-09-04 10:42:14 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 10:42:14 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 10:42:14 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 10:42:14 DEBUG] [caching:35][39m Cached 1 activities
+[32m[2025-09-04 10:42:14 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2025-09-04 10:42:14 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 10:42:14 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 10:42:14 DEBUG] [secret:104][39m Done loading secrets
+[32m[2025-09-04 10:42:14 INFO] [experiment:112][39m Experiment looks valid
+[36m[2025-09-04 10:42:14 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-04 10:42:14 DEBUG] [run:224][39m Runtime strategies: hypothesis - default / rollbacks - default
+[36m[2025-09-04 10:42:14 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 10:42:14 DEBUG] [caching:35][39m Cached 1 activities
+[36m[2025-09-04 10:42:14 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 10:42:14 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 10:42:14 DEBUG] [secret:104][39m Done loading secrets
+[36m[2025-09-04 10:42:14 DEBUG] [configuration:161][39m Loading dynamic configuration...
+[32m[2025-09-04 10:42:14 INFO] [run:440][39m Running experiment: Drain Kubernetes Nodes
+[36m[2025-09-04 10:42:14 DEBUG] [__init__:67][39m Initializing controls
+[32m[2025-09-04 10:42:14 INFO] [run:471][39m Steady-state strategy: default
+[32m[2025-09-04 10:42:14 INFO] [run:477][39m Rollbacks strategy: default
+[32m[2025-09-04 10:42:14 INFO] [run:485][39m No steady state hypothesis defined. That's ok, just exploring.
+[36m[2025-09-04 10:42:14 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[32m[2025-09-04 10:42:14 INFO] [run:778][39m Playing your experiment's method now...
+[36m[2025-09-04 10:42:14 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[36m[2025-09-04 10:42:14 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[32m[2025-09-04 10:42:14 INFO] [activity:232][39m Action: drain-nodes
+[36m[2025-09-04 10:42:14 DEBUG] [python:33][39m Activity 'drain-nodes' loaded from '/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py'
+[36m[2025-09-04 10:42:14 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 10:42:14 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 10:42:14 DEBUG] [actions:62][39m Filtering nodes by label agentpool=nodepool1
+[36m[2025-09-04 10:42:14 DEBUG] [actions:64][39m Found 1 nodes
+[36m[2025-09-04 10:42:14 DEBUG] [actions:100][39m Picked nodes 'aks-nodepool1-39725355-vmss000006'
+[36m[2025-09-04 10:42:14 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 10:42:14 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 10:42:14 DEBUG] [actions:58][39m Filtering nodes by name aks-nodepool1-39725355-vmss000006
+[36m[2025-09-04 10:42:15 DEBUG] [actions:60][39m Found 1 nodes
+[36m[2025-09-04 10:42:15 DEBUG] [actions:100][39m Picked nodes 'aks-nodepool1-39725355-vmss000006'
+[36m[2025-09-04 10:42:15 DEBUG] [actions:326][39m Found 28 pods on node 'aks-nodepool1-39725355-vmss000006'
+[36m[2025-09-04 10:42:15 DEBUG] [actions:348][39m Pod 'gatekeeper-audit-68d8fccc54-vb59k' on node 'aks-nodepool1-39725355-vmss000006' has a volume made of a local storage
+[36m[2025-09-04 10:42:15 DEBUG] [actions:353][39m Not evicting a pod with local storage
+[36m[2025-09-04 10:42:15 DEBUG] [actions:348][39m Pod 'ama-logs-8j8ds' on node 'aks-nodepool1-39725355-vmss000006' has a volume made of a local storage
+[36m[2025-09-04 10:42:15 DEBUG] [actions:353][39m Not evicting a pod with local storage
+[36m[2025-09-04 10:42:15 DEBUG] [actions:368][39m Pod 'azure-cns-58vpv' on node 'aks-nodepool1-39725355-vmss000006' is owned by a DaemonSet. Will not evict it
+[36m[2025-09-04 10:42:15 DEBUG] [actions:368][39m Pod 'azure-ip-masq-agent-dcxz8' on node 'aks-nodepool1-39725355-vmss000006' is owned by a DaemonSet. Will not evict it
+[36m[2025-09-04 10:42:15 DEBUG] [actions:368][39m Pod 'cloud-node-manager-mlpf8' on node 'aks-nodepool1-39725355-vmss000006' is owned by a DaemonSet. Will not evict it
+[36m[2025-09-04 10:42:15 DEBUG] [actions:348][39m Pod 'coredns-6f776c8fb5-bbdh6' on node 'aks-nodepool1-39725355-vmss000006' has a volume made of a local storage
+[36m[2025-09-04 10:42:15 DEBUG] [actions:353][39m Not evicting a pod with local storage
+[36m[2025-09-04 10:42:15 DEBUG] [actions:348][39m Pod 'coredns-6f776c8fb5-mdmkp' on node 'aks-nodepool1-39725355-vmss000006' has a volume made of a local storage
+[36m[2025-09-04 10:42:15 DEBUG] [actions:353][39m Not evicting a pod with local storage
+[36m[2025-09-04 10:42:15 DEBUG] [actions:368][39m Pod 'csi-azuredisk-node-mdc6f' on node 'aks-nodepool1-39725355-vmss000006' is owned by a DaemonSet. Will not evict it
+[36m[2025-09-04 10:42:15 DEBUG] [actions:368][39m Pod 'csi-azurefile-node-rwbj7' on node 'aks-nodepool1-39725355-vmss000006' is owned by a DaemonSet. Will not evict it
+[36m[2025-09-04 10:42:15 DEBUG] [actions:368][39m Pod 'kube-proxy-ksb7p' on node 'aks-nodepool1-39725355-vmss000006' is owned by a DaemonSet. Will not evict it
+[36m[2025-09-04 10:42:15 DEBUG] [actions:348][39m Pod 'metrics-server-6c4cb48ddc-bq72p' on node 'aks-nodepool1-39725355-vmss000006' has a volume made of a local storage
+[36m[2025-09-04 10:42:15 DEBUG] [actions:353][39m Not evicting a pod with local storage
+[36m[2025-09-04 10:42:15 DEBUG] [actions:348][39m Pod 'metrics-server-6c4cb48ddc-tnwxq' on node 'aks-nodepool1-39725355-vmss000006' has a volume made of a local storage
+[36m[2025-09-04 10:42:15 DEBUG] [actions:353][39m Not evicting a pod with local storage
+[36m[2025-09-04 10:42:15 DEBUG] [actions:348][39m Pod 'microsoft-defender-collector-ds-zn9qb' on node 'aks-nodepool1-39725355-vmss000006' has a volume made of a local storage
+[36m[2025-09-04 10:42:15 DEBUG] [actions:353][39m Not evicting a pod with local storage
+[36m[2025-09-04 10:42:15 DEBUG] [actions:348][39m Pod 'microsoft-defender-publisher-ds-whrqv' on node 'aks-nodepool1-39725355-vmss000006' has a volume made of a local storage
+[36m[2025-09-04 10:42:15 DEBUG] [actions:353][39m Not evicting a pod with local storage
+[36m[2025-09-04 10:42:15 DEBUG] [actions:383][39m Found 14 pods to evict
+[36m[2025-09-04 10:42:16 DEBUG] [activity:317][39m Activity failed
+    Traceback (most recent call last):
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py", line 392, in drain_nodes
+        v1.create_namespaced_pod_eviction(
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/kubernetes/client/api/core_v1_api.py", line 7652, in create_namespaced_pod_eviction
+        return self.create_namespaced_pod_eviction_with_http_info(name, namespace, body, **kwargs)  # noqa: E501
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/kubernetes/client/api/core_v1_api.py", line 7759, in create_namespaced_pod_eviction_with_http_info
+        return self.api_client.call_api(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/kubernetes/client/api_client.py", line 348, in call_api
+        return self.__call_api(resource_path, method,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/kubernetes/client/api_client.py", line 180, in __call_api
+        response_data = self.request(
+                        ^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/kubernetes/client/api_client.py", line 391, in request
+        return self.rest_client.POST(url,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/kubernetes/client/rest.py", line 279, in POST
+        return self.request("POST", url,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/kubernetes/client/rest.py", line 238, in request
+        raise ApiException(http_resp=r)
+    kubernetes.client.exceptions.ApiException: (429)
+    Reason: Too Many Requests
+    HTTP response headers: HTTPHeaderDict({'Audit-Id': '4da11fe7-ba56-4eda-905f-0acb61e14564', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'X-Kubernetes-Pf-Flowschema-Uid': '3ce3a861-ad19-42ae-966e-c0edf24771d3', 'X-Kubernetes-Pf-Prioritylevel-Uid': '82039e11-5662-42aa-b8fe-a56e9aaf5ede', 'Date': 'Thu, 04 Sep 2025 10:42:16 GMT', 'Content-Length': '347'})
+    HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"Cannot evict pod as it would violate the pod's disruption budget.","reason":"TooManyRequests","details":{"causes":[{"reason":"DisruptionBudget","message":"The disruption budget gatekeeper-controller-manager-pdb needs 1 healthy pods and has 1 currently"}]},"code":429}
+    
+    
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaoslib/provider/python.py", line 56, in run_python_activity
+        return func(**arguments)
+               ^^^^^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py", line 396, in drain_nodes
+        raise ActivityFailed(
+    chaoslib.exceptions.ActivityFailed: Failed to evict pod gatekeeper-controller-5ff4578c5f-sxfqs: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"Cannot evict pod as it would violate the pod's disruption budget.","reason":"TooManyRequests","details":{"causes":[{"reason":"DisruptionBudget","message":"The disruption budget gatekeeper-controller-manager-pdb needs 1 healthy pods and has 1 currently"}]},"code":429}
+    
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaoslib/activity.py", line 310, in run_activity
+        result = run_python_activity(activity, configuration, secrets)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaoslib/provider/python.py", line 58, in run_python_activity
+        raise ActivityFailed(
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaoslib/provider/python.py", line 56, in run_python_activity
+        return func(**arguments)
+               ^^^^^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py", line 396, in drain_nodes
+        raise ActivityFailed(
+    chaoslib.exceptions.ActivityFailed: chaoslib.exceptions.ActivityFailed: Failed to evict pod gatekeeper-controller-5ff4578c5f-sxfqs: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"Cannot evict pod as it would violate the pod's disruption budget.","reason":"TooManyRequests","details":{"causes":[{"reason":"DisruptionBudget","message":"The disruption budget gatekeeper-controller-manager-pdb needs 1 healthy pods and has 1 currently"}]},"code":429}
+[31m[2025-09-04 10:42:16 ERROR] [activity:268][39m   => failed: chaoslib.exceptions.ActivityFailed: Failed to evict pod gatekeeper-controller-5ff4578c5f-sxfqs: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"Cannot evict pod as it would violate the pod's disruption budget.","reason":"TooManyRequests","details":{"causes":[{"reason":"DisruptionBudget","message":"The disruption budget gatekeeper-controller-manager-pdb needs 1 healthy pods and has 1 currently"}]},"code":429}
+[36m[2025-09-04 10:42:16 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[36m[2025-09-04 10:42:16 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[32m[2025-09-04 10:42:16 INFO] [run:1072][39m Let's rollback...
+[36m[2025-09-04 10:42:16 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-04 10:42:16 INFO] [rollback:33][39m No declared rollbacks, let's move on.
+[36m[2025-09-04 10:42:16 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-04 10:42:16 INFO] [run:598][39m Experiment ended with status: completed
+[36m[2025-09-04 10:42:16 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[36m[2025-09-04 10:42:16 DEBUG] [__init__:106][39m Cleaning up controls
+[36m[2025-09-04 10:42:16 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-04 15:31:39 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2025-09-04 15:31:39 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2025-09-04 15:31:39 DEBUG] [__init__:106][39m Using settings file '/home/azureuser/.chaostoolkit/settings.yaml'
+[36m[2025-09-04 15:31:39 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/home/azureuser/.chaostoolkit/settings.yaml'.
+[36m[2025-09-04 15:31:39 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 15:31:39 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 15:31:39 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 15:31:39 DEBUG] [caching:35][39m Cached 1 activities
+[32m[2025-09-04 15:31:39 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2025-09-04 15:31:39 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 15:31:39 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 15:31:39 DEBUG] [secret:104][39m Done loading secrets
+[32m[2025-09-04 15:31:40 INFO] [experiment:112][39m Experiment looks valid
+[36m[2025-09-04 15:31:40 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-04 15:31:40 DEBUG] [run:224][39m Runtime strategies: hypothesis - default / rollbacks - default
+[36m[2025-09-04 15:31:40 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 15:31:40 DEBUG] [caching:35][39m Cached 1 activities
+[36m[2025-09-04 15:31:40 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 15:31:40 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 15:31:40 DEBUG] [secret:104][39m Done loading secrets
+[36m[2025-09-04 15:31:40 DEBUG] [configuration:161][39m Loading dynamic configuration...
+[32m[2025-09-04 15:31:40 INFO] [run:440][39m Running experiment: Drain Kubernetes Nodes
+[36m[2025-09-04 15:31:40 DEBUG] [__init__:67][39m Initializing controls
+[32m[2025-09-04 15:31:40 INFO] [run:471][39m Steady-state strategy: default
+[32m[2025-09-04 15:31:40 INFO] [run:477][39m Rollbacks strategy: default
+[32m[2025-09-04 15:31:40 INFO] [run:485][39m No steady state hypothesis defined. That's ok, just exploring.
+[36m[2025-09-04 15:31:40 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[32m[2025-09-04 15:31:40 INFO] [run:778][39m Playing your experiment's method now...
+[36m[2025-09-04 15:31:40 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[36m[2025-09-04 15:31:40 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[32m[2025-09-04 15:31:40 INFO] [activity:232][39m Action: drain-nodes
+[36m[2025-09-04 15:31:40 DEBUG] [python:33][39m Activity 'drain-nodes' loaded from '/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py'
+[36m[2025-09-04 15:31:40 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 15:31:40 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 15:31:40 DEBUG] [actions:62][39m Filtering nodes by label agentpool=nodepool1
+[36m[2025-09-04 15:31:40 DEBUG] [actions:64][39m Found 1 nodes
+[36m[2025-09-04 15:31:40 DEBUG] [actions:100][39m Picked nodes 'aks-nodepool1-39725355-vmss000007'
+[36m[2025-09-04 15:31:40 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 15:31:40 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 15:31:40 DEBUG] [actions:58][39m Filtering nodes by name aks-nodepool1-39725355-vmss000007
+[36m[2025-09-04 15:31:40 DEBUG] [actions:60][39m Found 1 nodes
+[36m[2025-09-04 15:31:40 DEBUG] [actions:100][39m Picked nodes 'aks-nodepool1-39725355-vmss000007'
+[36m[2025-09-04 15:31:41 DEBUG] [actions:326][39m Found 28 pods on node 'aks-nodepool1-39725355-vmss000007'
+[36m[2025-09-04 15:31:41 DEBUG] [actions:348][39m Pod 'gatekeeper-audit-68d8fccc54-zzwzp' on node 'aks-nodepool1-39725355-vmss000007' has a volume made of a local storage
+[36m[2025-09-04 15:31:41 DEBUG] [actions:355][39m Deleting anyway due to flag
+[36m[2025-09-04 15:31:41 DEBUG] [actions:348][39m Pod 'ama-logs-r4gvl' on node 'aks-nodepool1-39725355-vmss000007' has a volume made of a local storage
+[36m[2025-09-04 15:31:41 DEBUG] [actions:355][39m Deleting anyway due to flag
+[36m[2025-09-04 15:31:41 DEBUG] [actions:368][39m Pod 'azure-cns-6j8jr' on node 'aks-nodepool1-39725355-vmss000007' is owned by a DaemonSet. Will not evict it
+[36m[2025-09-04 15:31:41 DEBUG] [actions:368][39m Pod 'azure-ip-masq-agent-nd5rf' on node 'aks-nodepool1-39725355-vmss000007' is owned by a DaemonSet. Will not evict it
+[36m[2025-09-04 15:31:41 DEBUG] [actions:368][39m Pod 'cloud-node-manager-vpdtz' on node 'aks-nodepool1-39725355-vmss000007' is owned by a DaemonSet. Will not evict it
+[36m[2025-09-04 15:31:41 DEBUG] [actions:348][39m Pod 'coredns-6f776c8fb5-lcfnr' on node 'aks-nodepool1-39725355-vmss000007' has a volume made of a local storage
+[36m[2025-09-04 15:31:41 DEBUG] [actions:355][39m Deleting anyway due to flag
+[36m[2025-09-04 15:31:41 DEBUG] [actions:348][39m Pod 'coredns-6f776c8fb5-n5swx' on node 'aks-nodepool1-39725355-vmss000007' has a volume made of a local storage
+[36m[2025-09-04 15:31:41 DEBUG] [actions:355][39m Deleting anyway due to flag
+[36m[2025-09-04 15:31:41 DEBUG] [actions:368][39m Pod 'csi-azuredisk-node-xbjfb' on node 'aks-nodepool1-39725355-vmss000007' is owned by a DaemonSet. Will not evict it
+[36m[2025-09-04 15:31:41 DEBUG] [actions:368][39m Pod 'csi-azurefile-node-8jw7k' on node 'aks-nodepool1-39725355-vmss000007' is owned by a DaemonSet. Will not evict it
+[36m[2025-09-04 15:31:41 DEBUG] [actions:368][39m Pod 'kube-proxy-snhsw' on node 'aks-nodepool1-39725355-vmss000007' is owned by a DaemonSet. Will not evict it
+[36m[2025-09-04 15:31:41 DEBUG] [actions:348][39m Pod 'metrics-server-6c4cb48ddc-98cjn' on node 'aks-nodepool1-39725355-vmss000007' has a volume made of a local storage
+[36m[2025-09-04 15:31:41 DEBUG] [actions:355][39m Deleting anyway due to flag
+[36m[2025-09-04 15:31:41 DEBUG] [actions:348][39m Pod 'metrics-server-6c4cb48ddc-tmjt2' on node 'aks-nodepool1-39725355-vmss000007' has a volume made of a local storage
+[36m[2025-09-04 15:31:41 DEBUG] [actions:355][39m Deleting anyway due to flag
+[36m[2025-09-04 15:31:41 DEBUG] [actions:348][39m Pod 'microsoft-defender-collector-ds-brkrq' on node 'aks-nodepool1-39725355-vmss000007' has a volume made of a local storage
+[36m[2025-09-04 15:31:41 DEBUG] [actions:355][39m Deleting anyway due to flag
+[36m[2025-09-04 15:31:41 DEBUG] [actions:348][39m Pod 'microsoft-defender-publisher-ds-fhzpp' on node 'aks-nodepool1-39725355-vmss000007' has a volume made of a local storage
+[36m[2025-09-04 15:31:41 DEBUG] [actions:355][39m Deleting anyway due to flag
+[36m[2025-09-04 15:31:41 DEBUG] [actions:383][39m Found 22 pods to evict
+[36m[2025-09-04 15:31:41 DEBUG] [activity:317][39m Activity failed
+    Traceback (most recent call last):
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py", line 392, in drain_nodes
+        v1.create_namespaced_pod_eviction(
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/kubernetes/client/api/core_v1_api.py", line 7652, in create_namespaced_pod_eviction
+        return self.create_namespaced_pod_eviction_with_http_info(name, namespace, body, **kwargs)  # noqa: E501
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/kubernetes/client/api/core_v1_api.py", line 7759, in create_namespaced_pod_eviction_with_http_info
+        return self.api_client.call_api(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/kubernetes/client/api_client.py", line 348, in call_api
+        return self.__call_api(resource_path, method,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/kubernetes/client/api_client.py", line 180, in __call_api
+        response_data = self.request(
+                        ^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/kubernetes/client/api_client.py", line 391, in request
+        return self.rest_client.POST(url,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/kubernetes/client/rest.py", line 279, in POST
+        return self.request("POST", url,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/kubernetes/client/rest.py", line 238, in request
+        raise ApiException(http_resp=r)
+    kubernetes.client.exceptions.ApiException: (429)
+    Reason: Too Many Requests
+    HTTP response headers: HTTPHeaderDict({'Audit-Id': 'ca1ef3cf-3059-4c0b-b341-ff813ff5ec6f', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'X-Kubernetes-Pf-Flowschema-Uid': '3ce3a861-ad19-42ae-966e-c0edf24771d3', 'X-Kubernetes-Pf-Prioritylevel-Uid': '82039e11-5662-42aa-b8fe-a56e9aaf5ede', 'Date': 'Thu, 04 Sep 2025 15:31:41 GMT', 'Content-Length': '347'})
+    HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"Cannot evict pod as it would violate the pod's disruption budget.","reason":"TooManyRequests","details":{"causes":[{"reason":"DisruptionBudget","message":"The disruption budget gatekeeper-controller-manager-pdb needs 1 healthy pods and has 1 currently"}]},"code":429}
+    
+    
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaoslib/provider/python.py", line 56, in run_python_activity
+        return func(**arguments)
+               ^^^^^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py", line 396, in drain_nodes
+        raise ActivityFailed(
+    chaoslib.exceptions.ActivityFailed: Failed to evict pod gatekeeper-controller-5ff4578c5f-fc4fc: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"Cannot evict pod as it would violate the pod's disruption budget.","reason":"TooManyRequests","details":{"causes":[{"reason":"DisruptionBudget","message":"The disruption budget gatekeeper-controller-manager-pdb needs 1 healthy pods and has 1 currently"}]},"code":429}
+    
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaoslib/activity.py", line 310, in run_activity
+        result = run_python_activity(activity, configuration, secrets)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaoslib/provider/python.py", line 58, in run_python_activity
+        raise ActivityFailed(
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaoslib/provider/python.py", line 56, in run_python_activity
+        return func(**arguments)
+               ^^^^^^^^^^^^^^^^^
+      File "/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py", line 396, in drain_nodes
+        raise ActivityFailed(
+    chaoslib.exceptions.ActivityFailed: chaoslib.exceptions.ActivityFailed: Failed to evict pod gatekeeper-controller-5ff4578c5f-fc4fc: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"Cannot evict pod as it would violate the pod's disruption budget.","reason":"TooManyRequests","details":{"causes":[{"reason":"DisruptionBudget","message":"The disruption budget gatekeeper-controller-manager-pdb needs 1 healthy pods and has 1 currently"}]},"code":429}
+[31m[2025-09-04 15:31:41 ERROR] [activity:268][39m   => failed: chaoslib.exceptions.ActivityFailed: Failed to evict pod gatekeeper-controller-5ff4578c5f-fc4fc: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"Cannot evict pod as it would violate the pod's disruption budget.","reason":"TooManyRequests","details":{"causes":[{"reason":"DisruptionBudget","message":"The disruption budget gatekeeper-controller-manager-pdb needs 1 healthy pods and has 1 currently"}]},"code":429}
+[36m[2025-09-04 15:31:41 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[36m[2025-09-04 15:31:41 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[32m[2025-09-04 15:31:41 INFO] [run:1072][39m Let's rollback...
+[36m[2025-09-04 15:31:41 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-04 15:31:41 INFO] [rollback:33][39m No declared rollbacks, let's move on.
+[36m[2025-09-04 15:31:41 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-04 15:31:41 INFO] [run:598][39m Experiment ended with status: completed
+[36m[2025-09-04 15:31:41 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[36m[2025-09-04 15:31:41 DEBUG] [__init__:106][39m Cleaning up controls
+[36m[2025-09-04 15:31:41 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-04 15:37:55 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2025-09-04 15:37:55 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2025-09-04 15:37:55 DEBUG] [__init__:106][39m Using settings file '/home/azureuser/.chaostoolkit/settings.yaml'
+[36m[2025-09-04 15:37:55 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/home/azureuser/.chaostoolkit/settings.yaml'.
+[36m[2025-09-04 15:37:55 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 15:37:55 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-04 15:37:55 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 15:37:55 DEBUG] [caching:35][39m Cached 1 activities
+[32m[2025-09-04 15:37:55 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2025-09-04 15:37:55 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 15:37:55 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 15:37:55 DEBUG] [secret:104][39m Done loading secrets
+[32m[2025-09-04 15:37:55 INFO] [experiment:112][39m Experiment looks valid
+[36m[2025-09-04 15:37:55 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-04 15:37:55 DEBUG] [run:224][39m Runtime strategies: hypothesis - default / rollbacks - default
+[36m[2025-09-04 15:37:55 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-04 15:37:55 DEBUG] [caching:35][39m Cached 1 activities
+[36m[2025-09-04 15:37:55 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-04 15:37:55 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-04 15:37:55 DEBUG] [secret:104][39m Done loading secrets
+[36m[2025-09-04 15:37:55 DEBUG] [configuration:161][39m Loading dynamic configuration...
+[32m[2025-09-04 15:37:55 INFO] [run:440][39m Running experiment: Uncordon Kubernetes Nodes
+[36m[2025-09-04 15:37:55 DEBUG] [__init__:67][39m Initializing controls
+[32m[2025-09-04 15:37:55 INFO] [run:471][39m Steady-state strategy: default
+[32m[2025-09-04 15:37:55 INFO] [run:477][39m Rollbacks strategy: default
+[32m[2025-09-04 15:37:55 INFO] [run:485][39m No steady state hypothesis defined. That's ok, just exploring.
+[36m[2025-09-04 15:37:55 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[32m[2025-09-04 15:37:55 INFO] [run:778][39m Playing your experiment's method now...
+[36m[2025-09-04 15:37:55 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[36m[2025-09-04 15:37:55 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[32m[2025-09-04 15:37:55 INFO] [activity:232][39m Action: uncordon-nodes
+[36m[2025-09-04 15:37:55 DEBUG] [python:33][39m Activity 'uncordon-nodes' loaded from '/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py'
+[36m[2025-09-04 15:37:55 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 15:37:55 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-04 15:37:55 DEBUG] [actions:62][39m Filtering nodes by label agentpool=nodepool1
+[36m[2025-09-04 15:37:55 DEBUG] [actions:64][39m Found 2 nodes
+[36m[2025-09-04 15:37:55 DEBUG] [actions:100][39m Picked nodes 'aks-nodepool1-39725355-vmss000007, aks-nodepool1-39725355-vmss000008'
+[36m[2025-09-04 15:37:56 DEBUG] [activity:260][39m   => succeeded with '['aks-nodepool1-39725355-vmss000007', 'aks-nodepool1-39725355-vmss000008']'
+[36m[2025-09-04 15:37:56 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[36m[2025-09-04 15:37:56 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[32m[2025-09-04 15:37:56 INFO] [run:1072][39m Let's rollback...
+[36m[2025-09-04 15:37:56 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-04 15:37:56 INFO] [rollback:33][39m No declared rollbacks, let's move on.
+[36m[2025-09-04 15:37:56 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-04 15:37:56 INFO] [run:598][39m Experiment ended with status: completed
+[36m[2025-09-04 15:37:56 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[36m[2025-09-04 15:37:56 DEBUG] [__init__:106][39m Cleaning up controls
+[36m[2025-09-04 15:37:56 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-05 09:59:46 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2025-09-05 09:59:46 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2025-09-05 09:59:46 DEBUG] [__init__:106][39m Using settings file '/home/azureuser/.chaostoolkit/settings.yaml'
+[36m[2025-09-05 09:59:46 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/home/azureuser/.chaostoolkit/settings.yaml'.
+[36m[2025-09-05 09:59:46 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-05 09:59:46 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-05 09:59:46 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-05 09:59:46 DEBUG] [caching:35][39m Cached 1 activities
+[32m[2025-09-05 09:59:46 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2025-09-05 09:59:46 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-05 09:59:46 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-05 09:59:46 DEBUG] [secret:104][39m Done loading secrets
+[32m[2025-09-05 09:59:47 INFO] [experiment:112][39m Experiment looks valid
+[36m[2025-09-05 09:59:47 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-05 09:59:47 DEBUG] [run:224][39m Runtime strategies: hypothesis - default / rollbacks - default
+[36m[2025-09-05 09:59:47 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-05 09:59:47 DEBUG] [caching:35][39m Cached 1 activities
+[36m[2025-09-05 09:59:47 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-05 09:59:47 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-05 09:59:47 DEBUG] [secret:104][39m Done loading secrets
+[36m[2025-09-05 09:59:47 DEBUG] [configuration:161][39m Loading dynamic configuration...
+[32m[2025-09-05 09:59:47 INFO] [run:440][39m Running experiment: Delete Specific Count of Nodes
+[36m[2025-09-05 09:59:47 DEBUG] [__init__:67][39m Initializing controls
+[32m[2025-09-05 09:59:47 INFO] [run:471][39m Steady-state strategy: default
+[32m[2025-09-05 09:59:47 INFO] [run:477][39m Rollbacks strategy: default
+[32m[2025-09-05 09:59:47 INFO] [run:485][39m No steady state hypothesis defined. That's ok, just exploring.
+[36m[2025-09-05 09:59:47 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[32m[2025-09-05 09:59:47 INFO] [run:778][39m Playing your experiment's method now...
+[36m[2025-09-05 09:59:47 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[36m[2025-09-05 09:59:47 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[32m[2025-09-05 09:59:47 INFO] [activity:232][39m Action: delete-count-nodes
+[36m[2025-09-05 09:59:47 DEBUG] [python:33][39m Activity 'delete-count-nodes' loaded from '/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py'
+[36m[2025-09-05 09:59:47 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-05 09:59:47 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-05 09:59:47 DEBUG] [actions:62][39m Filtering nodes by label agentpool=nodepool1
+[36m[2025-09-05 09:59:47 DEBUG] [actions:64][39m Found 1 nodes
+[36m[2025-09-05 09:59:47 DEBUG] [actions:100][39m Picked nodes 'aks-nodepool1-39725355-vmss000008'
+[36m[2025-09-05 09:59:47 DEBUG] [actions:176][39m Node '{n.metadata.name}' deleted
+[36m[2025-09-05 09:59:47 DEBUG] [activity:260][39m   => succeeded with '['aks-nodepool1-39725355-vmss000008']'
+[36m[2025-09-05 09:59:47 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[36m[2025-09-05 09:59:47 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[32m[2025-09-05 09:59:47 INFO] [run:1072][39m Let's rollback...
+[36m[2025-09-05 09:59:47 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-05 09:59:47 INFO] [rollback:33][39m No declared rollbacks, let's move on.
+[36m[2025-09-05 09:59:47 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-05 09:59:47 INFO] [run:598][39m Experiment ended with status: completed
+[36m[2025-09-05 09:59:47 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[36m[2025-09-05 09:59:47 DEBUG] [__init__:106][39m Cleaning up controls
+[36m[2025-09-05 09:59:47 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-05 10:44:13 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2025-09-05 10:44:13 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2025-09-05 10:44:13 DEBUG] [__init__:106][39m Using settings file '/home/azureuser/.chaostoolkit/settings.yaml'
+[36m[2025-09-05 10:44:14 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/home/azureuser/.chaostoolkit/settings.yaml'.
+[36m[2025-09-05 10:44:14 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-05 10:44:14 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2025-09-05 10:44:14 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-05 10:44:14 DEBUG] [caching:35][39m Cached 1 activities
+[32m[2025-09-05 10:44:14 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2025-09-05 10:44:14 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-05 10:44:14 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-05 10:44:14 DEBUG] [secret:104][39m Done loading secrets
+[32m[2025-09-05 10:44:14 INFO] [experiment:112][39m Experiment looks valid
+[36m[2025-09-05 10:44:14 DEBUG] [caching:42][39m Clearing activities cache
+[36m[2025-09-05 10:44:14 DEBUG] [run:224][39m Runtime strategies: hypothesis - default / rollbacks - default
+[36m[2025-09-05 10:44:14 DEBUG] [caching:24][39m Building activity cache...
+[36m[2025-09-05 10:44:14 DEBUG] [caching:35][39m Cached 1 activities
+[36m[2025-09-05 10:44:14 DEBUG] [configuration:64][39m Loading configuration...
+[36m[2025-09-05 10:44:14 DEBUG] [secret:79][39m Loading secrets...
+[36m[2025-09-05 10:44:14 DEBUG] [secret:104][39m Done loading secrets
+[36m[2025-09-05 10:44:14 DEBUG] [configuration:161][39m Loading dynamic configuration...
+[32m[2025-09-05 10:44:14 INFO] [run:440][39m Running experiment: Delete Specific Count of Nodes
+[36m[2025-09-05 10:44:14 DEBUG] [__init__:67][39m Initializing controls
+[32m[2025-09-05 10:44:14 INFO] [run:471][39m Steady-state strategy: default
+[32m[2025-09-05 10:44:14 INFO] [run:477][39m Rollbacks strategy: default
+[32m[2025-09-05 10:44:14 INFO] [run:485][39m No steady state hypothesis defined. That's ok, just exploring.
+[36m[2025-09-05 10:44:14 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[32m[2025-09-05 10:44:14 INFO] [run:778][39m Playing your experiment's method now...
+[36m[2025-09-05 10:44:14 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[36m[2025-09-05 10:44:14 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[32m[2025-09-05 10:44:14 INFO] [activity:232][39m Action: delete-count-nodes
+[36m[2025-09-05 10:44:14 DEBUG] [python:33][39m Activity 'delete-count-nodes' loaded from '/home/azureuser/.local/share/pipx/venvs/chaostoolkit/lib/python3.12/site-packages/chaosk8s/node/actions.py'
+[36m[2025-09-05 10:44:14 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-05 10:44:14 DEBUG] [__init__:79][39m Using Kubernetes context 'default' from config '/home/azureuser/.kube/config'
+[36m[2025-09-05 10:44:14 DEBUG] [actions:62][39m Filtering nodes by label agentpool=nodepool1
+[36m[2025-09-05 10:44:14 DEBUG] [actions:64][39m Found 1 nodes
+[36m[2025-09-05 10:44:14 DEBUG] [actions:100][39m Picked nodes 'aks-nodepool1-39725355-vmss000009'
+[36m[2025-09-05 10:44:14 DEBUG] [actions:176][39m Node '{n.metadata.name}' deleted
+[36m[2025-09-05 10:44:14 DEBUG] [activity:260][39m   => succeeded with '['aks-nodepool1-39725355-vmss000009']'
+[36m[2025-09-05 10:44:14 DEBUG] [__init__:472][39m No controls to apply on 'activity'
+[36m[2025-09-05 10:44:14 DEBUG] [__init__:472][39m No controls to apply on 'method'
+[32m[2025-09-05 10:44:14 INFO] [run:1072][39m Let's rollback...
+[36m[2025-09-05 10:44:14 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-05 10:44:14 INFO] [rollback:33][39m No declared rollbacks, let's move on.
+[36m[2025-09-05 10:44:14 DEBUG] [__init__:472][39m No controls to apply on 'rollback'
+[32m[2025-09-05 10:44:14 INFO] [run:598][39m Experiment ended with status: completed
+[36m[2025-09-05 10:44:14 DEBUG] [__init__:472][39m No controls to apply on 'experiment'
+[36m[2025-09-05 10:44:14 DEBUG] [__init__:106][39m Cleaning up controls
+[36m[2025-09-05 10:44:14 DEBUG] [caching:42][39m Clearing activities cache
