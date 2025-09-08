@@ -22,8 +22,7 @@ RUN pip install --no-cache-dir \
         chaostoolkit-kubernetes \
         kubernetes
 
-# Create chaos experiments folder (if not mounted from host)
-RUN mkdir -p /opt/airflow/chaos_experiments
+# Create src directory structure (if not mounted from host)
+RUN mkdir -p /opt/airflow/src/pod /opt/airflow/src/node
 
-# Copy your Python chaos code
-COPY --chown=airflow:airflow chaos_experiments/continuous_pod_restart.py /opt/airflow/chaos_experiments/
+# Note: Python chaos code will be mounted from host via volume mounts
