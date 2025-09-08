@@ -1,0 +1,16 @@
+{
+    "version": "1.0.0",
+    "title": "Test Kubernetes Connection",
+    "description": "Simple test to verify Kubernetes API connectivity from Docker container",
+    "method": [
+        {
+            "name": "test-k8s-connection",
+            "type": "action",
+            "provider": {
+                "type": "process",
+                "path": "python3",
+                "arguments": ["test_k8s_connection.py"]
+            }
+        }
+    ]
+}
