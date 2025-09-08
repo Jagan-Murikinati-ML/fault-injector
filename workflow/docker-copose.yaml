@@ -19,7 +19,7 @@ x-airflow-common: &airflow-common
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
-    - ./chaos_experiments:/opt/airflow/chaos_experiments
+    - ../src:/opt/airflow/src  # Updated to mount the src directory
     - ./airflow-minikube:/opt/airflow/airflow-minikube
     - /var/run/docker.sock:/var/run/docker.sock
     - ~/.kube/config:/root/.kube/config
