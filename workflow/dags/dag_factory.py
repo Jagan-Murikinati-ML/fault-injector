@@ -6,12 +6,17 @@ from airflow import DAG
 from airflow.providers.docker.operators.docker import DockerOperator
 from docker.types import Mount
 
-CONTAINER_CHAOS_DIR = "/opt/airflow/chaos_experiments"
+# Updated paths to match new codebase structure
+CONTAINER_SRC_DIR = "/opt/airflow/src"
 DOCKER_IMAGE = "airflow_chaos:latest"
 
-json_files = glob.glob(os.path.join(CONTAINER_CHAOS_DIR, "*.json"))
+# Look for JSON files in both pod and node directories
+pod_json_files = glob.glob(os.path.join(CONTAINER_SRC_DIR, "pod", "*.json"))
+node_json_files = glob.glob(os.path.join(CONTAINER_SRC_DIR, "node", "*.json"))
+json_files = pod_json_files + node_json_files
+
 if not json_files:
-    print(f"No JSON experiments found in {CONTAINER_CHAOS_DIR}")
+    print(f"No JSON experiments found in {CONTAINER_SRC_DIR}/pod or {CONTAINER_SRC_DIR}/node")
 
 for json_file_path in json_files:
     experiment_name = os.path.splitext(os.path.basename(json_file_path))[0]
@@ -32,21 +37,38 @@ for json_file_path in json_files:
         tags=["chaos"],
     )
 
+    # Determine the correct subdirectory and file path
+    if json_file_path.find("/pod/") != -1:
+        experiment_subdir = "pod"
+        container_experiment_path = f"{CONTAINER_SRC_DIR}/pod/{experiment_name}.json"
+        pythonpath_dir = f"{CONTAINER_SRC_DIR}/pod"
+    else:
+        experiment_subdir = "node"
+        container_experiment_path = f"{CONTAINER_SRC_DIR}/node/{experiment_name}.json"
+        pythonpath_dir = f"{CONTAINER_SRC_DIR}/node"
+
     run_experiment = DockerOperator(
         task_id=f"run_{experiment_name}",
         image=DOCKER_IMAGE,
         api_version="auto",
         auto_remove=True,
         command=(
-            f"bash -c 'export PYTHONPATH={CONTAINER_CHAOS_DIR}:$PYTHONPATH && "
+            f"bash -c '"
+            f"export PYTHONPATH={pythonpath_dir}:$PYTHONPATH && "
             f"export KUBECONFIG=/opt/airflow/airflow-minikube/config && "
-            f"chaos run {CONTAINER_CHAOS_DIR}/{experiment_name}.json'"
+            f"cd {pythonpath_dir} && "
+            f"chaos run {container_experiment_path}'"
         ),
         docker_url="unix://var/run/docker.sock",
         network_mode="host",
+        environment={
+            'KUBECONFIG': '/opt/airflow/airflow-minikube/config'
+        },
         mounts=[
-            Mount("/home/priyanshupatel/airflow-fresh/chaos_experiments",
-                  CONTAINER_CHAOS_DIR,
+            # Mount the entire src directory to preserve structure
+            # Use relative path from current working directory
+            Mount(os.path.abspath("../src"),
+                  CONTAINER_SRC_DIR,
                   type="bind"),
             Mount("/home/priyanshupatel/airflow-minikube",
                   "/opt/airflow/airflow-minikube",
