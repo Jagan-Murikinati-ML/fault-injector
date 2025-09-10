@@ -1,0 +1,10 @@
+# Logs
+*.log
+
+# Journals
+journal.json
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.swp

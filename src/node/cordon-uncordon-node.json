@@ -21,7 +21,7 @@
             "provider": {
                 "type": "process",
                 "path": "sleep",
-                "arguments": ["60"]
+                "arguments": ["260"]
             }
         },
         {

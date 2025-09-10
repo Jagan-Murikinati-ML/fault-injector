@@ -13,11 +13,11 @@
         "arguments": {
           "name": "memory-stress-database",
           "workers": 1,
-          "size": "25GB",
-          "duration": "180s",
+          "size": "20GB",
+          "duration": "300s",
           "ns": "default",
           "label_selectors": "app=demo-db",
-          "mode": "one"
+          "mode": "all"
         }
       }
     },
@@ -27,7 +27,7 @@
       "provider": {
         "type": "process",
         "path": "sleep",
-        "arguments": "185"
+        "arguments": "305"
       }
     }
   ],

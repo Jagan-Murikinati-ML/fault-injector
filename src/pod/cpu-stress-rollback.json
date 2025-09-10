@@ -13,11 +13,11 @@
         "arguments": {
           "name": "cpu-stress-database",
           "workers": 8,
-          "load": 100,
-          "duration": "180s",
+          "load": 80,
+          "duration": "300s",
           "ns": "default",
           "label_selectors": "app=demo-db",
-          "mode": "one"
+          "mode": "all"
         }
       }
     },
@@ -27,7 +27,7 @@
       "provider": {
         "type": "process",
         "path": "sleep",
-        "arguments": "185"
+        "arguments": "305"
       }
     }
   ],
