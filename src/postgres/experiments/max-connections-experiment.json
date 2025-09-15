@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "title": "Change max_connections setting",
+  "description": "Just update the max_connections and restart Postgres.",
+  "tags": ["postgresql", "custom-action"],
+  "method": [
+    {
+      "name": "change-max-connections",
+      "type": "action",
+      "provider": {
+        "type": "python",
+        "module": "chaosfiles.actions",
+        "func": "update_max_connections",
+        "arguments": {
+          "new_max_connection_value": 30
+        }
+      }
+    }
+  ]
+}
