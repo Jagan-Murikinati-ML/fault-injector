@@ -1,0 +1,37 @@
+[2025-09-16T07:41:34.444+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-09-16T07:41:34.458+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Redis_Memory_Stress_Test.apply_redis_memory_stress manual__2025-09-16T07:41:33.633247+00:00 [queued]>
+[2025-09-16T07:41:34.468+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Redis_Memory_Stress_Test.apply_redis_memory_stress manual__2025-09-16T07:41:33.633247+00:00 [queued]>
+[2025-09-16T07:41:34.469+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-09-16T07:41:34.482+0000] {taskinstance.py:2888} INFO - Executing <Task(DockerOperator): apply_redis_memory_stress> on 2025-09-16 07:41:33.633247+00:00
+[2025-09-16T07:41:34.486+0000] {standard_task_runner.py:72} INFO - Started process 52 to run task
+[2025-09-16T07:41:34.492+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'Redis_Memory_Stress_Test', 'apply_redis_memory_stress', 'manual__2025-09-16T07:41:33.633247+00:00', '--job-id', '174', '--raw', '--subdir', 'DAGS_FOLDER/dag_factory.py', '--cfg-path', '/tmp/tmpe9wz62ff']
+[2025-09-16T07:41:34.493+0000] {standard_task_runner.py:105} INFO - Job 174: Subtask apply_redis_memory_stress
+[2025-09-16T07:41:34.548+0000] {task_command.py:467} INFO - Running <TaskInstance: Redis_Memory_Stress_Test.apply_redis_memory_stress manual__2025-09-16T07:41:33.633247+00:00 [running]> on host BNXL-80508-WL.India.XoriantCorp.com
+[2025-09-16T07:41:34.629+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Redis_Memory_Stress_Test' AIRFLOW_CTX_TASK_ID='apply_redis_memory_stress' AIRFLOW_CTX_EXECUTION_DATE='2025-09-16T07:41:33.633247+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-16T07:41:33.633247+00:00'
+[2025-09-16T07:41:34.630+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-09-16T07:41:34.681+0000] {docker.py:367} INFO - Starting docker container from image ***_chaos:latest
+[2025-09-16T07:41:34.915+0000] {docker.py:438} INFO - The container is run as root user. For security, consider using a regular user account.
+[2025-09-16T07:41:40.788+0000] {docker.py:438} INFO - 
+[2025-09-16T07:41:41.792+0000] {docker.py:438} INFO - [32m[2025-09-16 07:41:41 INFO] Validating the experiment's syntax
+[2025-09-16T07:41:41.921+0000] {docker.py:438} INFO - [32m[2025-09-16 07:41:41 INFO] Experiment looks valid
+[2025-09-16T07:41:41.922+0000] {docker.py:438} INFO - [32m[2025-09-16 07:41:41 INFO] Running experiment: Local Redis Memory Stress Test
+[2025-09-16T07:41:41.924+0000] {docker.py:438} INFO - [32m[2025-09-16 07:41:41 INFO] Steady-state strategy: default
+[2025-09-16T07:41:41.924+0000] {docker.py:438} INFO - [32m[2025-09-16 07:41:41 INFO] Rollbacks strategy: default
+[2025-09-16T07:41:41.925+0000] {docker.py:438} INFO - [32m[2025-09-16 07:41:41 INFO] No steady state hypothesis defined. That's ok, just exploring.
+[2025-09-16T07:41:41.925+0000] {docker.py:438} INFO - [32m[2025-09-16 07:41:41 INFO] Playing your experiment's method now...
+[2025-09-16T07:41:41.925+0000] {docker.py:438} INFO - [32m[2025-09-16 07:41:41 INFO] Action: redis-memory-stress-complete
+[2025-09-16T07:51:44.425+0000] {docker.py:438} INFO - [32m[2025-09-16 07:51:44 INFO] Let's rollback...
+[2025-09-16T07:51:44.427+0000] {docker.py:438} INFO - [32m[2025-09-16 07:51:44 INFO] Rollback: reset-redis-memory
+[2025-09-16T07:51:44.427+0000] {docker.py:438} INFO - [32m[2025-09-16 07:51:44 INFO] Action: reset-redis-memory
+[2025-09-16T07:51:45.467+0000] {docker.py:438} INFO - [32m[2025-09-16 07:51:45 INFO] Experiment ended with status: completed
+[2025-09-16T07:51:45.469+0000] {docker.py:438} INFO - [INFO] Set maxmemory=1KB, policy=noeviction
+[2025-09-16T07:51:45.470+0000] {docker.py:438} INFO - [INFO] Redis used memory: 1.13M
+[2025-09-16T07:51:45.470+0000] {docker.py:438} INFO - [INFO] Keys evicted: 266
+[2025-09-16T07:51:45.470+0000] {docker.py:438} INFO - [INFO] Holding stress for 600 seconds...
+[2025-09-16T07:51:45.470+0000] {docker.py:438} INFO - [INFO] Redis maxmemory reset to unlimited, policy reset to noeviction
+[2025-09-16T07:51:45.471+0000] {docker.py:438} INFO - [INFO] Redis maxmemory reset to unlimited, policy reset to noeviction
+[2025-09-16T07:51:45.728+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-09-16T07:51:45.728+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=Redis_Memory_Stress_Test, task_id=apply_redis_memory_stress, run_id=manual__2025-09-16T07:41:33.633247+00:00, execution_date=20250916T074133, start_date=20250916T074134, end_date=20250916T075145
+[2025-09-16T07:51:45.752+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-09-16T07:51:45.771+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-16T07:51:45.774+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

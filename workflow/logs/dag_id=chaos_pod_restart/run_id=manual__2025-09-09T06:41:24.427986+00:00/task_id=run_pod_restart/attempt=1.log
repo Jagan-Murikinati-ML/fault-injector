@@ -1,0 +1,101 @@
+[2025-09-09T06:41:26.447+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-09-09T06:41:26.469+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: chaos_pod_restart.run_pod_restart manual__2025-09-09T06:41:24.427986+00:00 [queued]>
+[2025-09-09T06:41:26.479+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: chaos_pod_restart.run_pod_restart manual__2025-09-09T06:41:24.427986+00:00 [queued]>
+[2025-09-09T06:41:26.479+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-09-09T06:41:26.494+0000] {taskinstance.py:2888} INFO - Executing <Task(DockerOperator): run_pod_restart> on 2025-09-09 06:41:24.427986+00:00
+[2025-09-09T06:41:26.501+0000] {standard_task_runner.py:72} INFO - Started process 50 to run task
+[2025-09-09T06:41:26.510+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'chaos_pod_restart', 'run_pod_restart', 'manual__2025-09-09T06:41:24.427986+00:00', '--job-id', '67', '--raw', '--subdir', 'DAGS_FOLDER/dag_factory.py', '--cfg-path', '/tmp/tmpeluhubxx']
+[2025-09-09T06:41:26.513+0000] {standard_task_runner.py:105} INFO - Job 67: Subtask run_pod_restart
+[2025-09-09T06:41:26.591+0000] {task_command.py:467} INFO - Running <TaskInstance: chaos_pod_restart.run_pod_restart manual__2025-09-09T06:41:24.427986+00:00 [running]> on host BNXL-80508-WL.India.XoriantCorp.com
+[2025-09-09T06:41:26.706+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='chaos_pod_restart' AIRFLOW_CTX_TASK_ID='run_pod_restart' AIRFLOW_CTX_EXECUTION_DATE='2025-09-09T06:41:24.427986+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-09T06:41:24.427986+00:00'
+[2025-09-09T06:41:26.707+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-09-09T06:41:26.817+0000] {docker.py:367} INFO - Starting docker container from image ***_chaos:latest
+[2025-09-09T06:41:27.100+0000] {docker.py:438} INFO - The container is run as root user. For security, consider using a regular user account.
+[2025-09-09T06:41:34.846+0000] {docker.py:438} INFO - 
+[2025-09-09T06:41:35.881+0000] {docker.py:438} INFO - [32m[2025-09-09 06:41:35 INFO] Validating the experiment's syntax
+[2025-09-09T06:41:36.110+0000] {docker.py:438} INFO - [32m[2025-09-09 06:41:36 INFO] Experiment looks valid
+[2025-09-09T06:41:36.111+0000] {docker.py:438} INFO - [32m[2025-09-09 06:41:36 INFO] Running experiment: Continuous Pod Restart Experiment
+[2025-09-09T06:41:36.113+0000] {docker.py:438} INFO - [32m[2025-09-09 06:41:36 INFO] Steady-state strategy: default
+[2025-09-09T06:41:36.114+0000] {docker.py:438} INFO - [32m[2025-09-09 06:41:36 INFO] Rollbacks strategy: default
+[2025-09-09T06:41:36.114+0000] {docker.py:438} INFO - [32m[2025-09-09 06:41:36 INFO] No steady state hypothesis defined. That's ok, just exploring.
+[2025-09-09T06:41:36.114+0000] {docker.py:438} INFO - [32m[2025-09-09 06:41:36 INFO] Playing your experiment's method now...
+[2025-09-09T06:41:36.114+0000] {docker.py:438} INFO - [32m[2025-09-09 06:41:36 INFO] Action: continuous-restart
+[2025-09-09T06:45:43.763+0000] {docker.py:438} INFO - [32m[2025-09-09 06:45:43 INFO] Let's rollback...
+[2025-09-09T06:45:43.764+0000] {docker.py:438} INFO - [32m[2025-09-09 06:45:43 INFO] No declared rollbacks, let's move on.
+[2025-09-09T06:45:43.764+0000] {docker.py:438} INFO - [32m[2025-09-09 06:45:43 INFO] Experiment ended with status: completed
+[2025-09-09T06:45:43.765+0000] {docker.py:438} INFO - 🚀 Starting continuous pod restart experiment
+[2025-09-09T06:45:43.765+0000] {docker.py:438} INFO - 📅 Interval: 60 seconds
+[2025-09-09T06:45:43.765+0000] {docker.py:438} INFO - ⏱️  Duration: 300 seconds
+[2025-09-09T06:45:43.765+0000] {docker.py:438} INFO - 🎯 Target: app=dummy
+[2025-09-09T06:45:43.765+0000] {docker.py:438} INFO - 📍 Namespace: default
+[2025-09-09T06:45:43.766+0000] {docker.py:438} INFO - 
+[2025-09-09T06:45:43.767+0000] {docker.py:438} INFO - ==================================================
+[2025-09-09T06:45:43.767+0000] {docker.py:438} INFO - 🔄 Restart #1 at 2025-09-09 06:41:36
+[2025-09-09T06:45:43.767+0000] {docker.py:438} INFO - ==================================================
+[2025-09-09T06:45:43.767+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-09T06:45:43.768+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=dummy
+[2025-09-09T06:45:43.768+0000] {docker.py:438} INFO - Found 0 pods initially
+[2025-09-09T06:45:43.768+0000] {docker.py:438} INFO - No pods found matching criteria
+[2025-09-09T06:45:43.768+0000] {docker.py:438} INFO - Deleted 0 pods: []
+[2025-09-09T06:45:43.768+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: []
+[2025-09-09T06:45:43.768+0000] {docker.py:438} INFO - ⏳ Waiting 60 seconds until next restart...
+[2025-09-09T06:45:43.768+0000] {docker.py:438} INFO - 📊 Time remaining: 298 seconds
+[2025-09-09T06:45:43.769+0000] {docker.py:438} INFO - 
+[2025-09-09T06:45:43.769+0000] {docker.py:438} INFO - ==================================================
+[2025-09-09T06:45:43.769+0000] {docker.py:438} INFO - 🔄 Restart #2 at 2025-09-09 06:42:37
+[2025-09-09T06:45:43.769+0000] {docker.py:438} INFO - ==================================================
+[2025-09-09T06:45:43.769+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-09T06:45:43.769+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=dummy
+[2025-09-09T06:45:43.769+0000] {docker.py:438} INFO - Found 0 pods initially
+[2025-09-09T06:45:43.770+0000] {docker.py:438} INFO - No pods found matching criteria
+[2025-09-09T06:45:43.770+0000] {docker.py:438} INFO - Deleted 0 pods: []
+[2025-09-09T06:45:43.770+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: []
+[2025-09-09T06:45:43.770+0000] {docker.py:438} INFO - ⏳ Waiting 60 seconds until next restart...
+[2025-09-09T06:45:43.770+0000] {docker.py:438} INFO - 📊 Time remaining: 237 seconds
+[2025-09-09T06:45:43.770+0000] {docker.py:438} INFO - 
+[2025-09-09T06:45:43.770+0000] {docker.py:438} INFO - ==================================================
+[2025-09-09T06:45:43.771+0000] {docker.py:438} INFO - 🔄 Restart #3 at 2025-09-09 06:43:39
+[2025-09-09T06:45:43.771+0000] {docker.py:438} INFO - ==================================================
+[2025-09-09T06:45:43.771+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-09T06:45:43.771+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=dummy
+[2025-09-09T06:45:43.771+0000] {docker.py:438} INFO - Found 0 pods initially
+[2025-09-09T06:45:43.771+0000] {docker.py:438} INFO - No pods found matching criteria
+[2025-09-09T06:45:43.771+0000] {docker.py:438} INFO - Deleted 0 pods: []
+[2025-09-09T06:45:43.772+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: []
+[2025-09-09T06:45:43.772+0000] {docker.py:438} INFO - ⏳ Waiting 60 seconds until next restart...
+[2025-09-09T06:45:43.772+0000] {docker.py:438} INFO - 📊 Time remaining: 175 seconds
+[2025-09-09T06:45:43.772+0000] {docker.py:438} INFO - 
+[2025-09-09T06:45:43.772+0000] {docker.py:438} INFO - ==================================================
+[2025-09-09T06:45:43.772+0000] {docker.py:438} INFO - 🔄 Restart #4 at 2025-09-09 06:44:40
+[2025-09-09T06:45:43.772+0000] {docker.py:438} INFO - ==================================================
+[2025-09-09T06:45:43.773+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-09T06:45:43.773+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=dummy
+[2025-09-09T06:45:43.773+0000] {docker.py:438} INFO - Found 0 pods initially
+[2025-09-09T06:45:43.773+0000] {docker.py:438} INFO - No pods found matching criteria
+[2025-09-09T06:45:43.773+0000] {docker.py:438} INFO - Deleted 0 pods: []
+[2025-09-09T06:45:43.773+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: []
+[2025-09-09T06:45:43.773+0000] {docker.py:438} INFO - ⏳ Waiting 60 seconds until next restart...
+[2025-09-09T06:45:43.774+0000] {docker.py:438} INFO - 📊 Time remaining: 114 seconds
+[2025-09-09T06:45:43.774+0000] {docker.py:438} INFO - 
+[2025-09-09T06:45:43.774+0000] {docker.py:438} INFO - ==================================================
+[2025-09-09T06:45:43.774+0000] {docker.py:438} INFO - 🔄 Restart #5 at 2025-09-09 06:45:42
+[2025-09-09T06:45:43.774+0000] {docker.py:438} INFO - ==================================================
+[2025-09-09T06:45:43.774+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-09T06:45:43.775+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=dummy
+[2025-09-09T06:45:43.775+0000] {docker.py:438} INFO - Found 0 pods initially
+[2025-09-09T06:45:43.775+0000] {docker.py:438} INFO - No pods found matching criteria
+[2025-09-09T06:45:43.775+0000] {docker.py:438} INFO - Deleted 0 pods: []
+[2025-09-09T06:45:43.775+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: []
+[2025-09-09T06:45:43.775+0000] {docker.py:438} INFO - ⏰ Less than 60 seconds remaining, stopping experiment
+[2025-09-09T06:45:43.775+0000] {docker.py:438} INFO - 
+[2025-09-09T06:45:43.776+0000] {docker.py:438} INFO - ==================================================
+[2025-09-09T06:45:43.776+0000] {docker.py:438} INFO - 🏁 Experiment Completed!
+[2025-09-09T06:45:43.776+0000] {docker.py:438} INFO - ==================================================
+[2025-09-09T06:45:43.776+0000] {docker.py:438} INFO - 📈 Total restarts performed: 5
+[2025-09-09T06:45:43.776+0000] {docker.py:438} INFO - ⏱️  Total duration: 248 seconds
+[2025-09-09T06:45:43.776+0000] {docker.py:438} INFO - 📊 Average interval: 49.5 seconds
+[2025-09-09T06:45:44.090+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-09-09T06:45:44.091+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=chaos_pod_restart, task_id=run_pod_restart, run_id=manual__2025-09-09T06:41:24.427986+00:00, execution_date=20250909T064124, start_date=20250909T064126, end_date=20250909T064544
+[2025-09-09T06:45:44.150+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-09-09T06:45:44.172+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-09T06:45:44.174+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

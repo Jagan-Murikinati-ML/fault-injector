@@ -1,0 +1,443 @@
+[2025-09-10T07:38:53.625+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-09-10T07:38:53.643+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Combined_Parallel_Test.apply-pod-restart scheduled__2025-01-10T00:00:00+00:00 [queued]>
+[2025-09-10T07:38:53.650+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Combined_Parallel_Test.apply-pod-restart scheduled__2025-01-10T00:00:00+00:00 [queued]>
+[2025-09-10T07:38:53.650+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-09-10T07:38:53.664+0000] {taskinstance.py:2888} INFO - Executing <Task(DockerOperator): apply-pod-restart> on 2025-01-10 00:00:00+00:00
+[2025-09-10T07:38:53.669+0000] {standard_task_runner.py:72} INFO - Started process 73 to run task
+[2025-09-10T07:38:53.673+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'Combined_Parallel_Test', 'apply-pod-restart', 'scheduled__2025-01-10T00:00:00+00:00', '--job-id', '99', '--raw', '--subdir', 'DAGS_FOLDER/dag_factory.py', '--cfg-path', '/tmp/tmpl07tmnel']
+[2025-09-10T07:38:53.674+0000] {standard_task_runner.py:105} INFO - Job 99: Subtask apply-pod-restart
+[2025-09-10T07:38:53.727+0000] {task_command.py:467} INFO - Running <TaskInstance: Combined_Parallel_Test.apply-pod-restart scheduled__2025-01-10T00:00:00+00:00 [running]> on host BNXL-80508-WL.India.XoriantCorp.com
+[2025-09-10T07:38:53.816+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Combined_Parallel_Test' AIRFLOW_CTX_TASK_ID='apply-pod-restart' AIRFLOW_CTX_EXECUTION_DATE='2025-01-10T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-10T00:00:00+00:00'
+[2025-09-10T07:38:53.817+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-09-10T07:38:53.873+0000] {docker.py:367} INFO - Starting docker container from image ***_chaos:latest
+[2025-09-10T07:38:54.094+0000] {docker.py:438} INFO - The container is run as root user. For security, consider using a regular user account.
+[2025-09-10T07:39:01.804+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:03.809+0000] {docker.py:438} INFO - [32m[2025-09-10 07:39:03 INFO] Validating the experiment's syntax
+[2025-09-10T07:39:04.217+0000] {docker.py:438} INFO - [32m[2025-09-10 07:39:04 INFO] Experiment looks valid
+[2025-09-10T07:39:04.217+0000] {docker.py:438} INFO - [32m[2025-09-10 07:39:04 INFO] Running experiment: Continuous Pod Restart Experiment
+[2025-09-10T07:39:04.220+0000] {docker.py:438} INFO - [32m[2025-09-10 07:39:04 INFO] Steady-state strategy: default
+[2025-09-10T07:39:04.221+0000] {docker.py:438} INFO - [32m[2025-09-10 07:39:04 INFO] Rollbacks strategy: default
+[2025-09-10T07:39:04.221+0000] {docker.py:438} INFO - [32m[2025-09-10 07:39:04 INFO] No steady state hypothesis defined. That's ok, just exploring.
+[2025-09-10T07:39:04.221+0000] {docker.py:438} INFO - [32m[2025-09-10 07:39:04 INFO] Playing your experiment's method now...
+[2025-09-10T07:39:04.221+0000] {docker.py:438} INFO - [32m[2025-09-10 07:39:04 INFO] Action: continuous-restart
+[2025-09-10T07:39:57.343+0000] {docker.py:438} INFO - 🚀 Starting continuous pod restart experiment
+[2025-09-10T07:39:57.344+0000] {docker.py:438} INFO - 📅 Interval: 2 seconds
+[2025-09-10T07:39:57.345+0000] {docker.py:438} INFO - ⏱️  Duration: 120 seconds
+[2025-09-10T07:39:57.345+0000] {docker.py:438} INFO - 🎯 Target: app=petclinic
+[2025-09-10T07:39:57.345+0000] {docker.py:438} INFO - 📍 Namespace: default
+[2025-09-10T07:39:57.345+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.346+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.346+0000] {docker.py:438} INFO - 🔄 Restart #1 at 2025-09-10 07:39:04
+[2025-09-10T07:39:57.346+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.346+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:39:57.347+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:39:57.347+0000] {docker.py:438} INFO - Found 1 pods initially
+[2025-09-10T07:39:57.347+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:39:57.347+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-g4zqd
+[2025-09-10T07:39:57.347+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-g4zqd']
+[2025-09-10T07:39:57.348+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-g4zqd']
+[2025-09-10T07:39:57.348+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:39:57.348+0000] {docker.py:438} INFO - 📊 Time remaining: 118 seconds
+[2025-09-10T07:39:57.348+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.349+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.349+0000] {docker.py:438} INFO - 🔄 Restart #2 at 2025-09-10 07:39:08
+[2025-09-10T07:39:57.349+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.349+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:39:57.349+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:39:57.350+0000] {docker.py:438} INFO - Found 1 pods initially
+[2025-09-10T07:39:57.350+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:39:57.350+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-kcp5f
+[2025-09-10T07:39:57.350+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-kcp5f']
+[2025-09-10T07:39:57.351+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-kcp5f']
+[2025-09-10T07:39:57.351+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:39:57.351+0000] {docker.py:438} INFO - 📊 Time remaining: 114 seconds
+[2025-09-10T07:39:57.351+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.352+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.352+0000] {docker.py:438} INFO - 🔄 Restart #3 at 2025-09-10 07:39:12
+[2025-09-10T07:39:57.352+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.352+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:39:57.353+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:39:57.353+0000] {docker.py:438} INFO - Found 2 pods initially
+[2025-09-10T07:39:57.353+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:39:57.353+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-kcp5f
+[2025-09-10T07:39:57.354+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-kcp5f']
+[2025-09-10T07:39:57.354+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-kcp5f']
+[2025-09-10T07:39:57.354+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:39:57.355+0000] {docker.py:438} INFO - 📊 Time remaining: 110 seconds
+[2025-09-10T07:39:57.355+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.355+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.356+0000] {docker.py:438} INFO - 🔄 Restart #4 at 2025-09-10 07:39:16
+[2025-09-10T07:39:57.356+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.358+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:39:57.359+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:39:57.359+0000] {docker.py:438} INFO - Found 1 pods initially
+[2025-09-10T07:39:57.360+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:39:57.360+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-hd5lt
+[2025-09-10T07:39:57.360+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-hd5lt']
+[2025-09-10T07:39:57.360+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-hd5lt']
+[2025-09-10T07:39:57.361+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:39:57.361+0000] {docker.py:438} INFO - 📊 Time remaining: 106 seconds
+[2025-09-10T07:39:57.362+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.362+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.362+0000] {docker.py:438} INFO - 🔄 Restart #5 at 2025-09-10 07:39:19
+[2025-09-10T07:39:57.362+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.363+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:39:57.363+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:39:57.363+0000] {docker.py:438} INFO - Found 1 pods initially
+[2025-09-10T07:39:57.363+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:39:57.364+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-jhml5
+[2025-09-10T07:39:57.364+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-jhml5']
+[2025-09-10T07:39:57.364+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-jhml5']
+[2025-09-10T07:39:57.364+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:39:57.364+0000] {docker.py:438} INFO - 📊 Time remaining: 103 seconds
+[2025-09-10T07:39:57.365+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.365+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.365+0000] {docker.py:438} INFO - 🔄 Restart #6 at 2025-09-10 07:39:23
+[2025-09-10T07:39:57.365+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.365+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:39:57.366+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:39:57.366+0000] {docker.py:438} INFO - Found 2 pods initially
+[2025-09-10T07:39:57.366+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:39:57.366+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-xzjs4
+[2025-09-10T07:39:57.367+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-xzjs4']
+[2025-09-10T07:39:57.367+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-xzjs4']
+[2025-09-10T07:39:57.367+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:39:57.367+0000] {docker.py:438} INFO - 📊 Time remaining: 99 seconds
+[2025-09-10T07:39:57.368+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.368+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.368+0000] {docker.py:438} INFO - 🔄 Restart #7 at 2025-09-10 07:39:27
+[2025-09-10T07:39:57.368+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.368+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:39:57.369+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:39:57.369+0000] {docker.py:438} INFO - Found 2 pods initially
+[2025-09-10T07:39:57.369+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:39:57.369+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-qkhjv
+[2025-09-10T07:39:57.370+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-qkhjv']
+[2025-09-10T07:39:57.370+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-qkhjv']
+[2025-09-10T07:39:57.370+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:39:57.370+0000] {docker.py:438} INFO - 📊 Time remaining: 95 seconds
+[2025-09-10T07:39:57.370+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.371+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.371+0000] {docker.py:438} INFO - 🔄 Restart #8 at 2025-09-10 07:39:31
+[2025-09-10T07:39:57.371+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.371+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:39:57.372+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:39:57.372+0000] {docker.py:438} INFO - Found 3 pods initially
+[2025-09-10T07:39:57.372+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:39:57.372+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-xzjs4
+[2025-09-10T07:39:57.372+0000] {docker.py:438} INFO - ❌ Error during restart #8: (404)
+[2025-09-10T07:39:57.373+0000] {docker.py:438} INFO - Reason: Not Found
+[2025-09-10T07:39:57.373+0000] {docker.py:438} INFO - HTTP response headers: HTTPHeaderDict({'Audit-Id': '2cd24272-2a69-4e91-b29f-a4bd65c31673', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'X-Kubernetes-Pf-Flowschema-Uid': '3ce3a861-ad19-42ae-966e-c0edf24771d3', 'X-Kubernetes-Pf-Prioritylevel-Uid': '82039e11-5662-42aa-b8fe-a56e9aaf5ede', 'Date': 'Wed, 10 Sep 2025 07:39:33 GMT', 'Content-Length': '220'})
+[2025-09-10T07:39:57.374+0000] {docker.py:438} INFO - HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"pods \"petclinic-54c586fc9f-xzjs4\" not found","reason":"NotFound","details":{"name":"petclinic-54c586fc9f-xzjs4","kind":"pods"},"code":404}
+[2025-09-10T07:39:57.375+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.375+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.375+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:39:57.376+0000] {docker.py:438} INFO - 📊 Time remaining: 91 seconds
+[2025-09-10T07:39:57.376+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.376+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.377+0000] {docker.py:438} INFO - 🔄 Restart #9 at 2025-09-10 07:39:35
+[2025-09-10T07:39:57.377+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.377+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:39:57.377+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:39:57.377+0000] {docker.py:438} INFO - Found 2 pods initially
+[2025-09-10T07:39:57.378+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:39:57.378+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-xd65z
+[2025-09-10T07:39:57.378+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-xd65z']
+[2025-09-10T07:39:57.378+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-xd65z']
+[2025-09-10T07:39:57.379+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:39:57.379+0000] {docker.py:438} INFO - 📊 Time remaining: 87 seconds
+[2025-09-10T07:39:57.379+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.379+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.380+0000] {docker.py:438} INFO - 🔄 Restart #10 at 2025-09-10 07:39:39
+[2025-09-10T07:39:57.380+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.380+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:39:57.380+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:39:57.380+0000] {docker.py:438} INFO - Found 2 pods initially
+[2025-09-10T07:39:57.381+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:39:57.381+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-xd65z
+[2025-09-10T07:39:57.381+0000] {docker.py:438} INFO - ❌ Error during restart #10: (404)
+[2025-09-10T07:39:57.381+0000] {docker.py:438} INFO - Reason: Not Found
+[2025-09-10T07:39:57.381+0000] {docker.py:438} INFO - HTTP response headers: HTTPHeaderDict({'Audit-Id': '8a421f51-f75b-42d8-beea-b671c60a1ac2', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'X-Kubernetes-Pf-Flowschema-Uid': '3ce3a861-ad19-42ae-966e-c0edf24771d3', 'X-Kubernetes-Pf-Prioritylevel-Uid': '82039e11-5662-42aa-b8fe-a56e9aaf5ede', 'Date': 'Wed, 10 Sep 2025 07:39:41 GMT', 'Content-Length': '220'})
+[2025-09-10T07:39:57.382+0000] {docker.py:438} INFO - HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"pods \"petclinic-54c586fc9f-xd65z\" not found","reason":"NotFound","details":{"name":"petclinic-54c586fc9f-xd65z","kind":"pods"},"code":404}
+[2025-09-10T07:39:57.382+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.382+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.382+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:39:57.382+0000] {docker.py:438} INFO - 📊 Time remaining: 83 seconds
+[2025-09-10T07:39:57.383+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.383+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.384+0000] {docker.py:438} INFO - 🔄 Restart #11 at 2025-09-10 07:39:43
+[2025-09-10T07:39:57.384+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.384+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:39:57.384+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:39:57.384+0000] {docker.py:438} INFO - Found 1 pods initially
+[2025-09-10T07:39:57.385+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:39:57.385+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-5stzd
+[2025-09-10T07:39:57.385+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-5stzd']
+[2025-09-10T07:39:57.385+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-5stzd']
+[2025-09-10T07:39:57.385+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:39:57.386+0000] {docker.py:438} INFO - 📊 Time remaining: 79 seconds
+[2025-09-10T07:39:57.386+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.386+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.386+0000] {docker.py:438} INFO - 🔄 Restart #12 at 2025-09-10 07:39:47
+[2025-09-10T07:39:57.387+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.387+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:39:57.387+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:39:57.387+0000] {docker.py:438} INFO - Found 1 pods initially
+[2025-09-10T07:39:57.387+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:39:57.388+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-62wkj
+[2025-09-10T07:39:57.388+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-62wkj']
+[2025-09-10T07:39:57.388+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-62wkj']
+[2025-09-10T07:39:57.388+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:39:57.389+0000] {docker.py:438} INFO - 📊 Time remaining: 75 seconds
+[2025-09-10T07:39:57.389+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.389+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.389+0000] {docker.py:438} INFO - 🔄 Restart #13 at 2025-09-10 07:39:51
+[2025-09-10T07:39:57.390+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.390+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:39:57.391+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:39:57.391+0000] {docker.py:438} INFO - Found 2 pods initially
+[2025-09-10T07:39:57.392+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:39:57.392+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-62wkj
+[2025-09-10T07:39:57.392+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-62wkj']
+[2025-09-10T07:39:57.393+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-62wkj']
+[2025-09-10T07:39:57.393+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:39:57.393+0000] {docker.py:438} INFO - 📊 Time remaining: 70 seconds
+[2025-09-10T07:39:57.393+0000] {docker.py:438} INFO - 
+[2025-09-10T07:39:57.393+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.394+0000] {docker.py:438} INFO - 🔄 Restart #14 at 2025-09-10 07:39:55
+[2025-09-10T07:39:57.394+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:39:57.394+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:39:57.394+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:39:57.394+0000] {docker.py:438} INFO - Found 1 pods initially
+[2025-09-10T07:39:57.395+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:00.745+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-xsrtm
+[2025-09-10T07:41:00.747+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-xsrtm']
+[2025-09-10T07:41:00.747+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-xsrtm']
+[2025-09-10T07:41:00.747+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:41:00.748+0000] {docker.py:438} INFO - 📊 Time remaining: 67 seconds
+[2025-09-10T07:41:00.748+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.748+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.749+0000] {docker.py:438} INFO - 🔄 Restart #15 at 2025-09-10 07:39:59
+[2025-09-10T07:41:00.749+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.749+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:41:00.749+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:41:00.749+0000] {docker.py:438} INFO - Found 1 pods initially
+[2025-09-10T07:41:00.750+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:00.750+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-vx2fd
+[2025-09-10T07:41:00.750+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-vx2fd']
+[2025-09-10T07:41:00.750+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-vx2fd']
+[2025-09-10T07:41:00.751+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:41:00.751+0000] {docker.py:438} INFO - 📊 Time remaining: 63 seconds
+[2025-09-10T07:41:00.751+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.751+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.752+0000] {docker.py:438} INFO - 🔄 Restart #16 at 2025-09-10 07:40:03
+[2025-09-10T07:41:00.752+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.752+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:41:00.753+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:41:00.753+0000] {docker.py:438} INFO - Found 2 pods initially
+[2025-09-10T07:41:00.753+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:00.753+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-dc5st
+[2025-09-10T07:41:00.753+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-dc5st']
+[2025-09-10T07:41:00.754+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-dc5st']
+[2025-09-10T07:41:00.756+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:41:00.756+0000] {docker.py:438} INFO - 📊 Time remaining: 58 seconds
+[2025-09-10T07:41:00.757+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.758+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.758+0000] {docker.py:438} INFO - 🔄 Restart #17 at 2025-09-10 07:40:08
+[2025-09-10T07:41:00.758+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.758+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:41:00.759+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:41:00.759+0000] {docker.py:438} INFO - Found 2 pods initially
+[2025-09-10T07:41:00.759+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:00.759+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-7gc86
+[2025-09-10T07:41:00.760+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-7gc86']
+[2025-09-10T07:41:00.760+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-7gc86']
+[2025-09-10T07:41:00.760+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:41:00.760+0000] {docker.py:438} INFO - 📊 Time remaining: 54 seconds
+[2025-09-10T07:41:00.760+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.761+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.761+0000] {docker.py:438} INFO - 🔄 Restart #18 at 2025-09-10 07:40:12
+[2025-09-10T07:41:00.761+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.761+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:41:00.761+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:41:00.762+0000] {docker.py:438} INFO - Found 2 pods initially
+[2025-09-10T07:41:00.762+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:00.762+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-d4xv5
+[2025-09-10T07:41:00.762+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-d4xv5']
+[2025-09-10T07:41:00.763+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-d4xv5']
+[2025-09-10T07:41:00.763+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:41:00.763+0000] {docker.py:438} INFO - 📊 Time remaining: 50 seconds
+[2025-09-10T07:41:00.763+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.764+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.764+0000] {docker.py:438} INFO - 🔄 Restart #19 at 2025-09-10 07:40:16
+[2025-09-10T07:41:00.764+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.764+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:41:00.764+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:41:00.765+0000] {docker.py:438} INFO - Found 2 pods initially
+[2025-09-10T07:41:00.765+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:00.765+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-dmwl6
+[2025-09-10T07:41:00.766+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-dmwl6']
+[2025-09-10T07:41:00.766+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-dmwl6']
+[2025-09-10T07:41:00.766+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:41:00.766+0000] {docker.py:438} INFO - 📊 Time remaining: 45 seconds
+[2025-09-10T07:41:00.767+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.767+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.767+0000] {docker.py:438} INFO - 🔄 Restart #20 at 2025-09-10 07:40:20
+[2025-09-10T07:41:00.767+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.767+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:41:00.768+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:41:00.768+0000] {docker.py:438} INFO - Found 2 pods initially
+[2025-09-10T07:41:00.768+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:00.768+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-dmwl6
+[2025-09-10T07:41:00.768+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-dmwl6']
+[2025-09-10T07:41:00.769+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-dmwl6']
+[2025-09-10T07:41:00.769+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:41:00.769+0000] {docker.py:438} INFO - 📊 Time remaining: 41 seconds
+[2025-09-10T07:41:00.769+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.770+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.770+0000] {docker.py:438} INFO - 🔄 Restart #21 at 2025-09-10 07:40:25
+[2025-09-10T07:41:00.770+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.773+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:41:00.774+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:41:00.775+0000] {docker.py:438} INFO - Found 1 pods initially
+[2025-09-10T07:41:00.775+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:00.775+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-x99h7
+[2025-09-10T07:41:00.775+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-x99h7']
+[2025-09-10T07:41:00.776+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-x99h7']
+[2025-09-10T07:41:00.776+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:41:00.776+0000] {docker.py:438} INFO - 📊 Time remaining: 37 seconds
+[2025-09-10T07:41:00.777+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.777+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.777+0000] {docker.py:438} INFO - 🔄 Restart #22 at 2025-09-10 07:40:29
+[2025-09-10T07:41:00.777+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.777+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:41:00.778+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:41:00.778+0000] {docker.py:438} INFO - Found 1 pods initially
+[2025-09-10T07:41:00.778+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:00.778+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-cgcwp
+[2025-09-10T07:41:00.779+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-cgcwp']
+[2025-09-10T07:41:00.779+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-cgcwp']
+[2025-09-10T07:41:00.779+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:41:00.779+0000] {docker.py:438} INFO - 📊 Time remaining: 32 seconds
+[2025-09-10T07:41:00.780+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.780+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.780+0000] {docker.py:438} INFO - 🔄 Restart #23 at 2025-09-10 07:40:34
+[2025-09-10T07:41:00.780+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.780+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:41:00.781+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:41:00.781+0000] {docker.py:438} INFO - Found 2 pods initially
+[2025-09-10T07:41:00.781+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:00.781+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-cgcwp
+[2025-09-10T07:41:00.782+0000] {docker.py:438} INFO - ❌ Error during restart #23: (404)
+[2025-09-10T07:41:00.782+0000] {docker.py:438} INFO - Reason: Not Found
+[2025-09-10T07:41:00.782+0000] {docker.py:438} INFO - HTTP response headers: HTTPHeaderDict({'Audit-Id': '4e021c18-63f2-42f2-ae82-8a44632701be', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'X-Kubernetes-Pf-Flowschema-Uid': '3ce3a861-ad19-42ae-966e-c0edf24771d3', 'X-Kubernetes-Pf-Prioritylevel-Uid': '82039e11-5662-42aa-b8fe-a56e9aaf5ede', 'Date': 'Wed, 10 Sep 2025 07:40:36 GMT', 'Content-Length': '220'})
+[2025-09-10T07:41:00.783+0000] {docker.py:438} INFO - HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"pods \"petclinic-54c586fc9f-cgcwp\" not found","reason":"NotFound","details":{"name":"petclinic-54c586fc9f-cgcwp","kind":"pods"},"code":404}
+[2025-09-10T07:41:00.783+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.783+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.783+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:41:00.783+0000] {docker.py:438} INFO - 📊 Time remaining: 28 seconds
+[2025-09-10T07:41:00.784+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.784+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.784+0000] {docker.py:438} INFO - 🔄 Restart #24 at 2025-09-10 07:40:38
+[2025-09-10T07:41:00.785+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.785+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:41:00.785+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:41:00.785+0000] {docker.py:438} INFO - Found 1 pods initially
+[2025-09-10T07:41:00.785+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:00.786+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-p8w5p
+[2025-09-10T07:41:00.786+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-p8w5p']
+[2025-09-10T07:41:00.786+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-p8w5p']
+[2025-09-10T07:41:00.786+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:41:00.787+0000] {docker.py:438} INFO - 📊 Time remaining: 24 seconds
+[2025-09-10T07:41:00.787+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.787+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.787+0000] {docker.py:438} INFO - 🔄 Restart #25 at 2025-09-10 07:40:42
+[2025-09-10T07:41:00.788+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.788+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:41:00.789+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:41:00.789+0000] {docker.py:438} INFO - Found 1 pods initially
+[2025-09-10T07:41:00.790+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:00.791+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-jtdd9
+[2025-09-10T07:41:00.792+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-jtdd9']
+[2025-09-10T07:41:00.792+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-jtdd9']
+[2025-09-10T07:41:00.792+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:41:00.793+0000] {docker.py:438} INFO - 📊 Time remaining: 20 seconds
+[2025-09-10T07:41:00.793+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.793+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.793+0000] {docker.py:438} INFO - 🔄 Restart #26 at 2025-09-10 07:40:46
+[2025-09-10T07:41:00.793+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.794+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:41:00.794+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:41:00.794+0000] {docker.py:438} INFO - Found 2 pods initially
+[2025-09-10T07:41:00.794+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:00.794+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-jt2mf
+[2025-09-10T07:41:00.794+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-jt2mf']
+[2025-09-10T07:41:00.795+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-jt2mf']
+[2025-09-10T07:41:00.795+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:41:00.795+0000] {docker.py:438} INFO - 📊 Time remaining: 16 seconds
+[2025-09-10T07:41:00.796+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.796+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.796+0000] {docker.py:438} INFO - 🔄 Restart #27 at 2025-09-10 07:40:50
+[2025-09-10T07:41:00.796+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.797+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:41:00.797+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:41:00.798+0000] {docker.py:438} INFO - Found 2 pods initially
+[2025-09-10T07:41:00.798+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:00.798+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-jt2mf
+[2025-09-10T07:41:00.798+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-jt2mf']
+[2025-09-10T07:41:00.799+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-jt2mf']
+[2025-09-10T07:41:00.799+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:41:00.799+0000] {docker.py:438} INFO - 📊 Time remaining: 11 seconds
+[2025-09-10T07:41:00.799+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.799+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.800+0000] {docker.py:438} INFO - 🔄 Restart #28 at 2025-09-10 07:40:55
+[2025-09-10T07:41:00.800+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.800+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:41:00.800+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:41:00.800+0000] {docker.py:438} INFO - Found 1 pods initially
+[2025-09-10T07:41:00.801+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:00.801+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-tq2tn
+[2025-09-10T07:41:00.801+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-tq2tn']
+[2025-09-10T07:41:00.801+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-tq2tn']
+[2025-09-10T07:41:00.801+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:41:00.802+0000] {docker.py:438} INFO - 📊 Time remaining: 7 seconds
+[2025-09-10T07:41:00.802+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:00.802+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.802+0000] {docker.py:438} INFO - 🔄 Restart #29 at 2025-09-10 07:40:59
+[2025-09-10T07:41:00.802+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:00.803+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:41:00.803+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:41:00.803+0000] {docker.py:438} INFO - Found 1 pods initially
+[2025-09-10T07:41:05.577+0000] {docker.py:438} INFO - [32m[2025-09-10 07:41:05 INFO] Let's rollback...
+[2025-09-10T07:41:05.578+0000] {docker.py:438} INFO - [32m[2025-09-10 07:41:05 INFO] No declared rollbacks, let's move on.
+[2025-09-10T07:41:05.579+0000] {docker.py:438} INFO - [32m[2025-09-10 07:41:05 INFO] Experiment ended with status: completed
+[2025-09-10T07:41:05.581+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:05.581+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-9pln4
+[2025-09-10T07:41:05.582+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-9pln4']
+[2025-09-10T07:41:05.583+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-9pln4']
+[2025-09-10T07:41:05.583+0000] {docker.py:438} INFO - ⏳ Waiting 2 seconds until next restart...
+[2025-09-10T07:41:05.584+0000] {docker.py:438} INFO - 📊 Time remaining: 3 seconds
+[2025-09-10T07:41:05.584+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:05.584+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:05.584+0000] {docker.py:438} INFO - 🔄 Restart #30 at 2025-09-10 07:41:03
+[2025-09-10T07:41:05.584+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:05.585+0000] {docker.py:438} INFO - Hello world - terminate function started!
+[2025-09-10T07:41:05.585+0000] {docker.py:438} INFO - Selecting pods with label_selector: app=petclinic
+[2025-09-10T07:41:05.585+0000] {docker.py:438} INFO - Found 2 pods initially
+[2025-09-10T07:41:05.586+0000] {docker.py:438} INFO - Random selection: 1 pods
+[2025-09-10T07:41:05.586+0000] {docker.py:438} INFO - Deleting pod: petclinic-54c586fc9f-vpdt2
+[2025-09-10T07:41:05.588+0000] {docker.py:438} INFO - Deleted 1 pods: ['petclinic-54c586fc9f-vpdt2']
+[2025-09-10T07:41:05.591+0000] {docker.py:438} INFO - ✅ Successfully restarted pods: ['petclinic-54c586fc9f-vpdt2']
+[2025-09-10T07:41:05.593+0000] {docker.py:438} INFO - ⏰ Less than 2 seconds remaining, stopping experiment
+[2025-09-10T07:41:05.593+0000] {docker.py:438} INFO - 
+[2025-09-10T07:41:05.594+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:05.594+0000] {docker.py:438} INFO - 🏁 Experiment Completed!
+[2025-09-10T07:41:05.595+0000] {docker.py:438} INFO - ==================================================
+[2025-09-10T07:41:05.595+0000] {docker.py:438} INFO - 📈 Total restarts performed: 30
+[2025-09-10T07:41:05.595+0000] {docker.py:438} INFO - ⏱️  Total duration: 121 seconds
+[2025-09-10T07:41:05.596+0000] {docker.py:438} INFO - 📊 Average interval: 4.0 seconds
+[2025-09-10T07:41:06.129+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-09-10T07:41:06.130+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=Combined_Parallel_Test, task_id=apply-pod-restart, run_id=scheduled__2025-01-10T00:00:00+00:00, execution_date=20250110T000000, start_date=20250910T073853, end_date=20250910T074106
+[2025-09-10T07:41:06.181+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-09-10T07:41:06.224+0000] {taskinstance.py:3900} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-09-10T07:41:06.228+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

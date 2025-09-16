@@ -1,0 +1,32 @@
+[2025-09-10T07:49:31.950+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-09-10T07:49:31.972+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Combined_Parallel_Test.apply-api-latency manual__2025-09-10T07:49:30.824264+00:00 [queued]>
+[2025-09-10T07:49:31.981+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Combined_Parallel_Test.apply-api-latency manual__2025-09-10T07:49:30.824264+00:00 [queued]>
+[2025-09-10T07:49:31.982+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-09-10T07:49:32.005+0000] {taskinstance.py:2888} INFO - Executing <Task(DockerOperator): apply-api-latency> on 2025-09-10 07:49:30.824264+00:00
+[2025-09-10T07:49:32.011+0000] {standard_task_runner.py:72} INFO - Started process 88 to run task
+[2025-09-10T07:49:32.022+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'Combined_Parallel_Test', 'apply-api-latency', 'manual__2025-09-10T07:49:30.824264+00:00', '--job-id', '104', '--raw', '--subdir', 'DAGS_FOLDER/dag_factory.py', '--cfg-path', '/tmp/tmpltic9ii_']
+[2025-09-10T07:49:32.024+0000] {standard_task_runner.py:105} INFO - Job 104: Subtask apply-api-latency
+[2025-09-10T07:49:32.122+0000] {task_command.py:467} INFO - Running <TaskInstance: Combined_Parallel_Test.apply-api-latency manual__2025-09-10T07:49:30.824264+00:00 [running]> on host BNXL-80508-WL.India.XoriantCorp.com
+[2025-09-10T07:49:32.237+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Combined_Parallel_Test' AIRFLOW_CTX_TASK_ID='apply-api-latency' AIRFLOW_CTX_EXECUTION_DATE='2025-09-10T07:49:30.824264+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-10T07:49:30.824264+00:00'
+[2025-09-10T07:49:32.238+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-09-10T07:49:32.290+0000] {docker.py:367} INFO - Starting docker container from image ***_chaos:latest
+[2025-09-10T07:49:32.544+0000] {docker.py:438} INFO - The container is run as root user. For security, consider using a regular user account.
+[2025-09-10T07:49:40.920+0000] {docker.py:438} INFO - 
+[2025-09-10T07:49:42.376+0000] {docker.py:438} INFO - [32m[2025-09-10 07:49:42 INFO] Validating the experiment's syntax
+[2025-09-10T07:49:42.888+0000] {docker.py:438} INFO - [32m[2025-09-10 07:49:42 INFO] Experiment looks valid
+[2025-09-10T07:49:42.889+0000] {docker.py:438} INFO - [32m[2025-09-10 07:49:42 INFO] Running experiment: CPU Stress Test - Database Pod with Timed Rollback
+[2025-09-10T07:49:42.893+0000] {docker.py:438} INFO - [32m[2025-09-10 07:49:42 INFO] Steady-state strategy: default
+[2025-09-10T07:49:42.893+0000] {docker.py:438} INFO - [32m[2025-09-10 07:49:42 INFO] Rollbacks strategy: default
+[2025-09-10T07:49:42.894+0000] {docker.py:438} INFO - [32m[2025-09-10 07:49:42 INFO] No steady state hypothesis defined. That's ok, just exploring.
+[2025-09-10T07:49:42.894+0000] {docker.py:438} INFO - [32m[2025-09-10 07:49:42 INFO] Playing your experiment's method now...
+[2025-09-10T07:49:42.894+0000] {docker.py:438} INFO - [32m[2025-09-10 07:49:42 INFO] Action: apply-database-cpu-stress
+[2025-09-10T07:49:44.532+0000] {docker.py:438} INFO - [32m[2025-09-10 07:49:44 INFO] Probe: wait-for-stress-duration
+[2025-09-10T07:52:49.541+0000] {docker.py:438} INFO - [32m[2025-09-10 07:52:49 INFO] Let's rollback...
+[2025-09-10T07:52:49.542+0000] {docker.py:438} INFO - [32m[2025-09-10 07:52:49 INFO] Rollback: cleanup-database-stress
+[2025-09-10T07:52:49.543+0000] {docker.py:438} INFO - [32m[2025-09-10 07:52:49 INFO] Action: cleanup-database-stress
+[2025-09-10T07:52:51.081+0000] {docker.py:438} INFO - [32m[2025-09-10 07:52:51 INFO] Experiment ended with status: completed
+[2025-09-10T07:52:51.344+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-09-10T07:52:51.345+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=Combined_Parallel_Test, task_id=apply-api-latency, run_id=manual__2025-09-10T07:49:30.824264+00:00, execution_date=20250910T074930, start_date=20250910T074931, end_date=20250910T075251
+[2025-09-10T07:52:51.382+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-09-10T07:52:51.398+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-10T07:52:51.400+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
