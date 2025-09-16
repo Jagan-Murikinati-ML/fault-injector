@@ -3,10 +3,10 @@ FROM apache/airflow:2.10.2-python3.11
 
 USER root
 
-# Install curl and other dependencies + PostgreSQL client tools
+# Install curl and other dependencies + PostgreSQL client tools + iproute2 for tc
 RUN apt-get update && \
     apt-get install -y curl ca-certificates apt-transport-https lsb-release gnupg tar \
-    postgresql-client postgresql-contrib sudo && \
+    postgresql-client postgresql-contrib sudo iproute2 && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Azure CLI

@@ -1,0 +1,20 @@
+[2025-09-16T14:39:49.810+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-09-16T14:39:49.836+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Redis_K6_Parallel_Test.final_validation scheduled__2025-01-10T00:00:00+00:00 [queued]>
+[2025-09-16T14:39:49.849+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Redis_K6_Parallel_Test.final_validation scheduled__2025-01-10T00:00:00+00:00 [queued]>
+[2025-09-16T14:39:49.849+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-09-16T14:39:49.863+0000] {taskinstance.py:2888} INFO - Executing <Task(DockerOperator): final_validation> on 2025-01-10 00:00:00+00:00
+[2025-09-16T14:39:49.870+0000] {standard_task_runner.py:72} INFO - Started process 56 to run task
+[2025-09-16T14:39:49.873+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'Redis_K6_Parallel_Test', 'final_validation', 'scheduled__2025-01-10T00:00:00+00:00', '--job-id', '182', '--raw', '--subdir', 'DAGS_FOLDER/dag_factory.py', '--cfg-path', '/tmp/tmp0k3i3cnw']
+[2025-09-16T14:39:49.874+0000] {standard_task_runner.py:105} INFO - Job 182: Subtask final_validation
+[2025-09-16T14:39:49.925+0000] {task_command.py:467} INFO - Running <TaskInstance: Redis_K6_Parallel_Test.final_validation scheduled__2025-01-10T00:00:00+00:00 [running]> on host BNXL-80508-WL.India.XoriantCorp.com
+[2025-09-16T14:39:50.009+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Redis_K6_Parallel_Test' AIRFLOW_CTX_TASK_ID='final_validation' AIRFLOW_CTX_EXECUTION_DATE='2025-01-10T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-10T00:00:00+00:00'
+[2025-09-16T14:39:50.010+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-09-16T14:39:50.084+0000] {docker.py:367} INFO - Starting docker container from image ***_chaos:latest
+[2025-09-16T14:39:50.407+0000] {docker.py:438} INFO - The container is run as root user. For security, consider using a regular user account.
+[2025-09-16T14:39:55.913+0000] {docker.py:438} INFO - 
+[2025-09-16T14:39:55.916+0000] {docker.py:438} INFO - Both Redis stress and k6 load test completed - validating results
+[2025-09-16T14:39:56.122+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-09-16T14:39:56.122+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=Redis_K6_Parallel_Test, task_id=final_validation, run_id=scheduled__2025-01-10T00:00:00+00:00, execution_date=20250110T000000, start_date=20250916T143949, end_date=20250916T143956
+[2025-09-16T14:39:56.170+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-09-16T14:39:56.188+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-16T14:39:56.191+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
