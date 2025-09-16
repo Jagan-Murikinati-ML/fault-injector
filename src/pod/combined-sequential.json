@@ -1,0 +1,133 @@
+{
+  "version": "1.0.0",
+  "title": "Combined Pod Experiments - Sequential Execution",
+  "description": "Execute pod restart on petclinic pods followed by CPU stress on demo-db pods with proper dependencies",
+  "steady-state-hypothesis": {
+    "title": "Both target pods must exist",
+    "probes": [
+      {
+        "name": "petclinic-pods-available",
+        "type": "probe",
+        "provider": {
+          "type": "python",
+          "module": "chaosk8s.pod.probes",
+          "func": "count_pods",
+          "arguments": {
+            "label_selector": "app=petclinic",
+            "ns": "default",
+            "phase": "Running"
+          }
+        },
+        "tolerance": {
+          "type": "range",
+          "range": [1, 10]
+        }
+      },
+      {
+        "name": "demo-db-pods-available",
+        "type": "probe",
+        "provider": {
+          "type": "python",
+          "module": "chaosk8s.pod.probes",
+          "func": "count_pods",
+          "arguments": {
+            "label_selector": "app=demo-db",
+            "ns": "default",
+            "phase": "Running"
+          }
+        },
+        "tolerance": {
+          "type": "range",
+          "range": [1, 10]
+        }
+      }
+    ]
+  },
+  "method": [
+    {
+      "name": "phase-1-continuous-pod-restart",
+      "type": "action",
+      "provider": {
+        "type": "python",
+        "module": "pod_restart",
+        "func": "restart_pods_continuous",
+        "arguments": {
+          "label_selector": "app=petclinic",
+          "qty": 1,
+          "rand": true,
+          "ns": "default",
+          "interval": 60,
+          "duration": 180
+        }
+      }
+    },
+    {
+      "name": "phase-1-completion-wait",
+      "type": "probe",
+      "provider": {
+        "type": "process",
+        "path": "sleep",
+        "arguments": "30"
+      }
+    },
+    {
+      "name": "phase-2-apply-cpu-stress",
+      "type": "action",
+      "provider": {
+        "type": "python",
+        "module": "chaosk8s.chaosmesh.stress.actions",
+        "func": "stress_cpu",
+        "arguments": {
+          "name": "cpu-stress-sequential",
+          "workers": 8,
+          "load": 100,
+          "duration": "180s",
+          "ns": "default",
+          "label_selectors": "app=demo-db",
+          "mode": "one"
+        }
+      }
+    },
+    {
+      "name": "phase-2-stress-duration-wait",
+      "type": "probe",
+      "provider": {
+        "type": "process",
+        "path": "sleep",
+        "arguments": "185"
+      }
+    },
+    {
+      "name": "final-validation",
+      "type": "probe",
+      "provider": {
+        "type": "python",
+        "module": "chaosk8s.pod.probes",
+        "func": "count_pods",
+        "arguments": {
+          "label_selector": "app=petclinic",
+          "ns": "default"
+        }
+      },
+      "tolerance": {
+        "type": "range",
+        "range": [1, 10]
+      }
+    }
+  ],
+  "rollbacks": [
+    {
+      "name": "cleanup-cpu-stress-resources",
+      "type": "action",
+      "provider": {
+        "type": "python",
+        "module": "chaosk8s.chaosmesh.stress.actions",
+        "func": "delete_stressor",
+        "arguments": {
+          "name": "cpu-stress-sequential",
+          "ns": "default"
+        }
+      }
+    }
+  ]
+}

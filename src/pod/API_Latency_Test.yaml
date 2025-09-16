@@ -1,0 +1,37 @@
+API_Latency_Test:
+  schedule: "@once"
+  start_date: "2025-01-10"
+  description: "Inject latency on API pod with automatic cleanup after duration"
+  default_view: "graph"
+  orientation: "LR"
+  catchup: false
+  tasks:
+    - task_id: apply-api-latency
+      operator: airflow.providers.docker.operators.docker.DockerOperator
+      image: "airflow_chaos:latest"
+      command: >
+        bash -c '
+        export PYTHONPATH=/opt/airflow/src/pod:$PYTHONPATH && 
+        export KUBECONFIG=/root/.kube/config && 
+        cd /opt/airflow/src/pod && 
+        chaos run /opt/airflow/src/pod/API_Latency.json'
+      container_name: "apply_api_latency"
+
+    - task_id: wait-for-latency-duration
+      operator: airflow.providers.docker.operators.docker.DockerOperator
+      image: "alpine:latest"
+      command: "sleep 185"
+      container_name: "wait_latency"
+      dependencies: [apply-api-latency]
+      auto_remove: true
+      network_mode: "host"
+
+    - task_id: cleanup-api-latency
+      operator: airflow.providers.docker.operators.docker.DockerOperator
+      image: "airflow_chaos:latest"
+      command: >
+        bash -c '
+        export KUBECONFIG=/root/.kube/config && 
+        echo "Cleanup completed - experiment finished"'
+      container_name: "cleanup_api_latency"
+      dependencies: [wait-for-latency-duration]

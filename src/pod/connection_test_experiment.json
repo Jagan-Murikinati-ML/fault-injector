@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "title": "PostgreSQL max connections test",
+  "description": "Test opening multiple concurrent PostgreSQL connections without sudo.",
+  "tags": ["postgresql", "connections", "test"],
+  "method": [
+    {
+      "name": "run-connection-test",
+      "type": "action",
+      "provider": {
+        "type": "python",
+        "module": "postgres_actions",
+        "func": "connection_test",
+        "arguments": {
+            "number_of_connections": 100
+        }
+      }
+    }
+  ]
+}

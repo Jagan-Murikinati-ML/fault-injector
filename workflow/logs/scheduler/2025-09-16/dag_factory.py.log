@@ -9156,3 +9156,79 @@
 [2025-09-16T09:30:44.206+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:30:44.206+0000] {dag.py:4180} INFO - Setting next_dagrun for Combined_Parallel_Test to 2025-09-16 09:20:00+00:00, run_after=2025-09-16 09:30:00+00:00
 [2025-09-16T09:30:44.207+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:30:44.207+0000] {dag.py:4180} INFO - Setting next_dagrun for Redis_Memory_Stress_Test to None, run_after=None
 [2025-09-16T09:30:44.237+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag_factory.py took 0.260 seconds
+[2025-09-16T09:31:14.490+0000] {processor.py:186} INFO - Started process (PID=37) to work on /opt/airflow/dags/dag_factory.py
+[2025-09-16T09:31:14.501+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag_factory.py for tasks to queue
+[2025-09-16T09:31:14.503+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:14.503+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag_factory.py
+[2025-09-16T09:31:14.505+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:14.505+0000] {dagfactory.py:303} INFO - Loading DAGs from /opt/airflow/src/pod
+[2025-09-16T09:31:14.506+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:14.506+0000] {dagfactory.py:319} INFO - Loading /opt/airflow/src/pod/Combined_Parallel_Test.yaml
+[2025-09-16T09:31:14.568+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:14.568+0000] {dagfactory.py:326} INFO - DAG loaded: /opt/airflow/src/pod/Combined_Parallel_Test.yaml
+[2025-09-16T09:31:14.569+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:14.568+0000] {dagfactory.py:319} INFO - Loading /opt/airflow/src/pod/redis_memory_stress.yaml
+[2025-09-16T09:31:14.573+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:14.573+0000] {dagfactory.py:326} INFO - DAG loaded: /opt/airflow/src/pod/redis_memory_stress.yaml
+[2025-09-16T09:31:14.573+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:14.573+0000] {dagfactory.py:319} INFO - Loading /opt/airflow/src/pod/API_Timeout_Test.yaml
+[2025-09-16T09:31:14.578+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:14.578+0000] {dagfactory.py:326} INFO - DAG loaded: /opt/airflow/src/pod/API_Timeout_Test.yaml
+[2025-09-16T09:31:14.578+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:14.578+0000] {dagfactory.py:319} INFO - Loading /opt/airflow/src/pod/API_Latency_Test.yaml
+[2025-09-16T09:31:14.584+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:14.584+0000] {dagfactory.py:326} INFO - DAG loaded: /opt/airflow/src/pod/API_Latency_Test.yaml
+[2025-09-16T09:31:14.587+0000] {processor.py:925} INFO - DAG(s) 'Combined_Parallel_Test', 'Redis_Memory_Stress_Test', 'API_Latency_Test', 'API_Timeout_Test' retrieved from /opt/airflow/dags/dag_factory.py
+[2025-09-16T09:31:14.621+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:14.621+0000] {dag.py:3239} INFO - Sync 4 DAGs
+[2025-09-16T09:31:14.650+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:14.650+0000] {dag.py:4180} INFO - Setting next_dagrun for API_Latency_Test to None, run_after=None
+[2025-09-16T09:31:14.654+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:14.654+0000] {dag.py:4180} INFO - Setting next_dagrun for API_Timeout_Test to None, run_after=None
+[2025-09-16T09:31:14.659+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:14.658+0000] {dag.py:4180} INFO - Setting next_dagrun for Combined_Parallel_Test to 2025-09-16 09:20:00+00:00, run_after=2025-09-16 09:30:00+00:00
+[2025-09-16T09:31:14.661+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:14.661+0000] {dag.py:4180} INFO - Setting next_dagrun for Redis_Memory_Stress_Test to None, run_after=None
+[2025-09-16T09:31:14.684+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag_factory.py took 0.199 seconds
+[2025-09-16T09:31:44.740+0000] {processor.py:186} INFO - Started process (PID=38) to work on /opt/airflow/dags/dag_factory.py
+[2025-09-16T09:31:44.752+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag_factory.py for tasks to queue
+[2025-09-16T09:31:44.756+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:44.756+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag_factory.py
+[2025-09-16T09:31:44.760+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:44.759+0000] {dagfactory.py:303} INFO - Loading DAGs from /opt/airflow/src/pod
+[2025-09-16T09:31:44.762+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:44.762+0000] {dagfactory.py:319} INFO - Loading /opt/airflow/src/pod/Combined_Parallel_Test.yaml
+[2025-09-16T09:31:44.871+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:44.871+0000] {dagfactory.py:326} INFO - DAG loaded: /opt/airflow/src/pod/Combined_Parallel_Test.yaml
+[2025-09-16T09:31:44.872+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:44.872+0000] {dagfactory.py:319} INFO - Loading /opt/airflow/src/pod/redis_memory_stress.yaml
+[2025-09-16T09:31:44.879+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:44.879+0000] {dagfactory.py:326} INFO - DAG loaded: /opt/airflow/src/pod/redis_memory_stress.yaml
+[2025-09-16T09:31:44.880+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:44.880+0000] {dagfactory.py:319} INFO - Loading /opt/airflow/src/pod/API_Timeout_Test.yaml
+[2025-09-16T09:31:44.886+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:44.886+0000] {dagfactory.py:326} INFO - DAG loaded: /opt/airflow/src/pod/API_Timeout_Test.yaml
+[2025-09-16T09:31:44.886+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:44.886+0000] {dagfactory.py:319} INFO - Loading /opt/airflow/src/pod/API_Latency_Test.yaml
+[2025-09-16T09:31:44.896+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:44.896+0000] {dagfactory.py:326} INFO - DAG loaded: /opt/airflow/src/pod/API_Latency_Test.yaml
+[2025-09-16T09:31:44.900+0000] {processor.py:925} INFO - DAG(s) 'API_Timeout_Test', 'Combined_Parallel_Test', 'API_Latency_Test', 'Redis_Memory_Stress_Test' retrieved from /opt/airflow/dags/dag_factory.py
+[2025-09-16T09:31:44.963+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:44.963+0000] {dag.py:3239} INFO - Sync 4 DAGs
+[2025-09-16T09:31:45.002+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:45.001+0000] {dag.py:4180} INFO - Setting next_dagrun for API_Latency_Test to None, run_after=None
+[2025-09-16T09:31:45.010+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:45.009+0000] {dag.py:4180} INFO - Setting next_dagrun for API_Timeout_Test to None, run_after=None
+[2025-09-16T09:31:45.016+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:45.016+0000] {dag.py:4180} INFO - Setting next_dagrun for Combined_Parallel_Test to 2025-09-16 09:20:00+00:00, run_after=2025-09-16 09:30:00+00:00
+[2025-09-16T09:31:45.017+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:31:45.017+0000] {dag.py:4180} INFO - Setting next_dagrun for Redis_Memory_Stress_Test to None, run_after=None
+[2025-09-16T09:31:45.053+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag_factory.py took 0.320 seconds
+[2025-09-16T09:32:15.182+0000] {processor.py:186} INFO - Started process (PID=39) to work on /opt/airflow/dags/dag_factory.py
+[2025-09-16T09:32:15.184+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag_factory.py for tasks to queue
+[2025-09-16T09:32:15.193+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:15.192+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag_factory.py
+[2025-09-16T09:32:15.198+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:15.198+0000] {dagfactory.py:303} INFO - Loading DAGs from /opt/airflow/src/pod
+[2025-09-16T09:32:15.200+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:15.200+0000] {dagfactory.py:319} INFO - Loading /opt/airflow/src/pod/Combined_Parallel_Test.yaml
+[2025-09-16T09:32:15.419+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:15.419+0000] {dagfactory.py:326} INFO - DAG loaded: /opt/airflow/src/pod/Combined_Parallel_Test.yaml
+[2025-09-16T09:32:15.420+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:15.420+0000] {dagfactory.py:319} INFO - Loading /opt/airflow/src/pod/redis_memory_stress.yaml
+[2025-09-16T09:32:15.431+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:15.430+0000] {dagfactory.py:326} INFO - DAG loaded: /opt/airflow/src/pod/redis_memory_stress.yaml
+[2025-09-16T09:32:15.431+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:15.431+0000] {dagfactory.py:319} INFO - Loading /opt/airflow/src/pod/API_Timeout_Test.yaml
+[2025-09-16T09:32:15.438+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:15.437+0000] {dagfactory.py:326} INFO - DAG loaded: /opt/airflow/src/pod/API_Timeout_Test.yaml
+[2025-09-16T09:32:15.439+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:15.438+0000] {dagfactory.py:319} INFO - Loading /opt/airflow/src/pod/API_Latency_Test.yaml
+[2025-09-16T09:32:15.449+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:15.449+0000] {dagfactory.py:326} INFO - DAG loaded: /opt/airflow/src/pod/API_Latency_Test.yaml
+[2025-09-16T09:32:15.460+0000] {processor.py:925} INFO - DAG(s) 'Redis_Memory_Stress_Test', 'Combined_Parallel_Test', 'API_Latency_Test', 'API_Timeout_Test' retrieved from /opt/airflow/dags/dag_factory.py
+[2025-09-16T09:32:15.545+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:15.545+0000] {dag.py:3239} INFO - Sync 4 DAGs
+[2025-09-16T09:32:15.612+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:15.611+0000] {dag.py:4180} INFO - Setting next_dagrun for API_Latency_Test to None, run_after=None
+[2025-09-16T09:32:15.619+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:15.618+0000] {dag.py:4180} INFO - Setting next_dagrun for API_Timeout_Test to None, run_after=None
+[2025-09-16T09:32:15.629+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:15.629+0000] {dag.py:4180} INFO - Setting next_dagrun for Combined_Parallel_Test to 2025-09-16 09:20:00+00:00, run_after=2025-09-16 09:30:00+00:00
+[2025-09-16T09:32:15.632+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:15.631+0000] {dag.py:4180} INFO - Setting next_dagrun for Redis_Memory_Stress_Test to None, run_after=None
+[2025-09-16T09:32:15.687+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag_factory.py took 0.517 seconds
+[2025-09-16T09:32:45.938+0000] {processor.py:186} INFO - Started process (PID=40) to work on /opt/airflow/dags/dag_factory.py
+[2025-09-16T09:32:45.951+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag_factory.py for tasks to queue
+[2025-09-16T09:32:45.962+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:45.962+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag_factory.py
+[2025-09-16T09:32:45.968+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:45.968+0000] {dagfactory.py:303} INFO - Loading DAGs from /opt/airflow/src/pod
+[2025-09-16T09:32:45.971+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:45.971+0000] {dagfactory.py:319} INFO - Loading /opt/airflow/src/pod/Combined_Parallel_Test.yaml
+[2025-09-16T09:32:46.116+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:46.115+0000] {dagfactory.py:326} INFO - DAG loaded: /opt/airflow/src/pod/Combined_Parallel_Test.yaml
+[2025-09-16T09:32:46.117+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:46.116+0000] {dagfactory.py:319} INFO - Loading /opt/airflow/src/pod/redis_memory_stress.yaml
+[2025-09-16T09:32:46.125+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:46.124+0000] {dagfactory.py:326} INFO - DAG loaded: /opt/airflow/src/pod/redis_memory_stress.yaml
+[2025-09-16T09:32:46.125+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:46.125+0000] {dagfactory.py:319} INFO - Loading /opt/airflow/src/pod/API_Timeout_Test.yaml
+[2025-09-16T09:32:46.132+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:46.131+0000] {dagfactory.py:326} INFO - DAG loaded: /opt/airflow/src/pod/API_Timeout_Test.yaml
+[2025-09-16T09:32:46.132+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:46.132+0000] {dagfactory.py:319} INFO - Loading /opt/airflow/src/pod/API_Latency_Test.yaml
+[2025-09-16T09:32:46.145+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:46.145+0000] {dagfactory.py:326} INFO - DAG loaded: /opt/airflow/src/pod/API_Latency_Test.yaml
+[2025-09-16T09:32:46.149+0000] {processor.py:925} INFO - DAG(s) 'Combined_Parallel_Test', 'API_Latency_Test', 'Redis_Memory_Stress_Test', 'API_Timeout_Test' retrieved from /opt/airflow/dags/dag_factory.py
+[2025-09-16T09:32:46.212+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:46.212+0000] {dag.py:3239} INFO - Sync 4 DAGs
+[2025-09-16T09:32:46.258+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:46.258+0000] {dag.py:4180} INFO - Setting next_dagrun for API_Latency_Test to None, run_after=None
+[2025-09-16T09:32:46.263+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:46.263+0000] {dag.py:4180} INFO - Setting next_dagrun for API_Timeout_Test to None, run_after=None
+[2025-09-16T09:32:46.268+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:46.268+0000] {dag.py:4180} INFO - Setting next_dagrun for Combined_Parallel_Test to 2025-09-16 09:20:00+00:00, run_after=2025-09-16 09:30:00+00:00
+[2025-09-16T09:32:46.270+0000] {logging_mixin.py:190} INFO - [2025-09-16T09:32:46.270+0000] {dag.py:4180} INFO - Setting next_dagrun for Redis_Memory_Stress_Test to None, run_after=None
+[2025-09-16T09:32:46.300+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag_factory.py took 0.380 seconds

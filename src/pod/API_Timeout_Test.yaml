@@ -1,0 +1,37 @@
+API_Timeout_Test:
+  schedule: "@once"
+  start_date: "2025-01-10"
+  description: "Continuous pod restart experiment with timeout testing"
+  default_view: "graph"
+  orientation: "LR"
+  catchup: false
+  tasks:
+    - task_id: apply-pod-restart
+      operator: airflow.providers.docker.operators.docker.DockerOperator
+      image: "airflow_chaos:latest"
+      command: >
+        bash -c '
+        export PYTHONPATH=/opt/airflow/src/pod:$PYTHONPATH && 
+        export KUBECONFIG=/root/.kube/config && 
+        cd /opt/airflow/src/pod && 
+        chaos run /opt/airflow/src/pod/API_Timeout.json'
+      container_name: "apply_pod_restart"
+
+    - task_id: wait-for-restart-duration
+      operator: airflow.providers.docker.operators.docker.DockerOperator
+      image: "alpine:latest"
+      command: "sleep 125"
+      container_name: "wait_restart"
+      dependencies: [apply-pod-restart]
+      auto_remove: true
+      network_mode: "host"
+
+    - task_id: validate-experiment
+      operator: airflow.providers.docker.operators.docker.DockerOperator
+      image: "airflow_chaos:latest"
+      command: >
+        bash -c '
+        export KUBECONFIG=/root/.kube/config && 
+        echo "Pod restart experiment completed - validating cluster state"'
+      container_name: "validate_experiment"
+      dependencies: [wait-for-restart-duration]

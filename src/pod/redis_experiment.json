@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "title": "Local Redis Memory Stress Test",
+  "description": "Apply memory pressure to local Redis instance with eviction testing",
+  "method": [
+    {
+      "name": "redis-memory-stress-complete",
+      "type": "action",
+      "provider": {
+        "type": "python",
+        "module": "redis_config_faults",
+        "func": "redis_memory_stress_test",
+        "arguments": {
+          "host": "4.246.16.132",
+          "port": 6379,
+          "limit_in_kb": 1,
+          "eviction_policy": "noeviction",
+          "duration": 600
+        }
+      }
+    }
+  ],
+  "rollbacks": [
+    {
+      "name": "reset-redis-memory",
+      "type": "action",
+      "provider": {
+        "type": "python",
+        "module": "redis_config_faults",
+        "func": "reset_maxmemory",
+        "arguments": {
+          "host": "4.246.16.132",
+          "port": 6379
+        }
+      }
+    }
+  ]
+}

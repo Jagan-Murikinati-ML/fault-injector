@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "title": "MongoDB Network Latency Injection",
+  "description": "Inject network latency to local MongoDB using tc/netem",
+  "tags": ["mongodb", "latency", "network", "chaos"],
+  "configuration": {},
+  "method": [
+    {
+      "name": "Inject latency to local MongoDB",
+      "type": "action",
+      "provider": {
+        "type": "python",
+        "module": "mongodb_network_latency",
+        "func": "inject_latency",
+        "arguments": {
+          "interface": "lo",
+          "delay_ms": 200,
+          "duration_s": 30
+        }
+      }
+    }
+  ],
+  "rollbacks": []
+}

@@ -1,0 +1,69 @@
+{
+  "chaoslib-version": "1.44.0",
+  "platform": "Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+  "node": "BNXL-80508-WL",
+  "experiment": {
+    "version": "1.0.0",
+    "title": "MongoDB Network Latency Injection",
+    "description": "Inject network latency to local MongoDB using tc/netem",
+    "tags": [
+      "mongodb",
+      "latency",
+      "network",
+      "chaos"
+    ],
+    "configuration": {},
+    "method": [
+      {
+        "name": "Inject latency to local MongoDB",
+        "type": "action",
+        "provider": {
+          "type": "python",
+          "module": "mongodb_network_latency",
+          "func": "inject_latency",
+          "arguments": {
+            "interface": "lo",
+            "delay_ms": 200,
+            "duration_s": 30
+          }
+        }
+      }
+    ],
+    "rollbacks": [],
+    "dry": null
+  },
+  "start": "2025-09-16T09:19:33.784422+00:00",
+  "status": "completed",
+  "deviated": false,
+  "steady_states": {
+    "before": null,
+    "after": null,
+    "during": []
+  },
+  "run": [
+    {
+      "activity": {
+        "name": "Inject latency to local MongoDB",
+        "type": "action",
+        "provider": {
+          "type": "python",
+          "module": "mongodb_network_latency",
+          "func": "inject_latency",
+          "arguments": {
+            "interface": "lo",
+            "delay_ms": 200,
+            "duration_s": 30
+          }
+        }
+      },
+      "output": false,
+      "start": "2025-09-16T09:19:33.789099+00:00",
+      "status": "succeeded",
+      "end": "2025-09-16T09:19:33.863244+00:00",
+      "duration": 0.074145
+    }
+  ],
+  "rollbacks": [],
+  "end": "2025-09-16T09:19:33.864489+00:00",
+  "duration": 0.08374762535095215
+}

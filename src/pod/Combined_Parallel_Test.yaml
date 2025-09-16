@@ -1,0 +1,77 @@
+Combined_Parallel_Test:
+  schedule: "*/10 * * * *"   # cron expression for every 10 minutes
+  start_date: "2025-09-10"
+  description: "Run API Latency and Timeout experiments in parallel every 10 minutes"
+  default_view: "graph"
+  orientation: "LR"
+  catchup: false
+  default_args:
+    owner: "airflow"
+    depends_on_past: false
+    retries: 0
+  tasks:
+    # Parallel Branch 1: API Latency
+    - task_id: apply_api_latency
+      operator: airflow.providers.docker.operators.docker.DockerOperator
+      image: "airflow_chaos:latest"
+      api_version: "auto"
+      auto_remove: true
+      user: "root"
+      mount_tmp_dir: false
+      docker_url: "unix://var/run/docker.sock"
+      network_mode: "host"
+      mounts:
+        - source: "/home/priyanshupatel/fault-injector/src/pod"
+          target: "/opt/airflow/src/pod"
+          type: "bind"
+        - source: "/home/priyanshupatel/.kube/config"
+          target: "/root/.kube/config"
+          type: "bind"
+          read_only: true
+      environment:
+        KUBECONFIG: "/root/.kube/config"
+      command: >
+        bash -c '
+        cd /opt/airflow/src/pod &&
+        chaos run API_Latency.json'
+
+    # Parallel Branch 2: API Timeout
+    - task_id: apply_pod_restart
+      operator: airflow.providers.docker.operators.docker.DockerOperator
+      image: "airflow_chaos:latest"
+      api_version: "auto"
+      auto_remove: true
+      user: "root"
+      mount_tmp_dir: false
+      docker_url: "unix://var/run/docker.sock"
+      network_mode: "host"
+      mounts:
+        - source: "/home/priyanshupatel/fault-injector/src/pod"
+          target: "/opt/airflow/src/pod"
+          type: "bind"
+        - source: "/home/priyanshupatel/.kube/config"
+          target: "/root/.kube/config"
+          type: "bind"
+          read_only: true
+      environment:
+        KUBECONFIG: "/root/.kube/config"
+      command: >
+        bash -c '
+        cd /opt/airflow/src/pod &&
+        chaos run API_Timeout.json'
+
+    # Final validation after both complete
+    - task_id: final_validation
+      operator: airflow.providers.docker.operators.docker.DockerOperator
+      image: "airflow_chaos:latest"
+      api_version: "auto"
+      auto_remove: true
+      user: "root"
+      mount_tmp_dir: false
+      docker_url: "unix://var/run/docker.sock"
+      network_mode: "host"
+      environment:
+        KUBECONFIG: "/root/.kube/config"
+      command: >
+        bash -c 'echo "Both experiments completed - validating cluster state"'
+      dependencies: [apply_api_latency, apply_pod_restart]
