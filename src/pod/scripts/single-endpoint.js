@@ -12,14 +12,17 @@ export default function () {
         fail("❌ No CHAOS_K6_URL provided");
     }
 
+    const method = __ENV.CHAOS_K6_METHOD || "GET";
+    const body = __ENV.CHAOS_K6_BODY || null;
+
     const token = __ENV.CHAOS_K6_LOGIN_TOKEN;
     let params = { headers: {} };
 
     if (token) {
         params.headers['Cookie'] = `login_token=${token}`;
+        console.log(`🔑 Using JWT token: ${token}`); // ✅ print inside k6 run
     }
 
-    // Optional: add additional headers
     if (__ENV.CHAOS_K6_HEADERS) {
         try {
             const extraHeaders = JSON.parse(__ENV.CHAOS_K6_HEADERS);
@@ -29,7 +32,15 @@ export default function () {
         }
     }
 
-    const res = http.get(url, params);
+    let res;
+    if (method === "POST") {
+        if (!params.headers['Content-Type']) {
+            params.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        }
+        res = http.post(url, body, params);
+    } else {
+        res = http.get(url, params);
+    }
 
     const success = check(res, {
         "status is 200": (r) => r.status === 200,

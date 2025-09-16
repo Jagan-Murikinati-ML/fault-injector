@@ -4,6 +4,7 @@ from pathlib import Path
 import requests
 from logzero import logger
 from typing import Optional
+import json  # missing earlier
 
 __all__ = ["stress_endpoint"]
 
@@ -29,14 +30,19 @@ def _run_process_and_wait(cmd, env=None, stdout_to_file: Optional[str] = None, d
         return False
 
 def stress_endpoint(endpoint: str, vus: int = 1, duration: str = "10s",
-                    username: str = None, password: str = None, log_file: str = None, debug: bool = False):
+                    username: str = None, password: str = None,
+                    log_file: str = "k6_output.log", summary_file: str = "k6_summary.json",
+                    debug: bool = False,
+                    method: str = "GET", body: str = None,
+                    headers: Optional[dict] = None):
     """
     Stress a single endpoint using k6 and JWT login.
+    Captures k6 summary (requests, avg, p95, errors, etc.)
     """
+
     env = dict(os.environ)
 
-    # 1️⃣ Perform login to get JWT token
-    token = None
+    # Login for JWT token
     if username and password:
         login_url = "http://4.154.253.199:8080/api/user/login"
         resp = requests.post(login_url, data={"username": username, "password": password}, allow_redirects=False)
@@ -45,25 +51,51 @@ def stress_endpoint(endpoint: str, vus: int = 1, duration: str = "10s",
             logger.error("❌ Login failed, cannot get token")
             return False
         env["CHAOS_K6_LOGIN_TOKEN"] = token
+        logger.info(f"✅ Obtained login_token (JWT): {token}")
 
+    # Pass runtime config to k6
     env["CHAOS_K6_URL"] = endpoint
     env["CHAOS_K6_VUS"] = str(vus)
     env["CHAOS_K6_DURATION"] = str(duration)
+    env["CHAOS_K6_METHOD"] = method.upper()
+    if body:
+        env["CHAOS_K6_BODY"] = body
+    if headers:
+        env["CHAOS_K6_HEADERS"] = json.dumps(headers)
 
     script_path = str(Path(__file__).parent / "scripts" / "single-endpoint.js")
     if not Path(script_path).exists():
         logger.error("k6 script not found at %s", script_path)
         return False
 
-    cmd = ["k6", "run", script_path, "--vus", str(vus), "--duration", str(duration)]
-    if not debug:
-        cmd.insert(2, "--quiet")
+    # k6 command with summary export
+    cmd = [
+        "k6", "run",
+        "--summary-export", summary_file,   # ✅ save machine-readable results
+        "--vus", str(vus),
+        "--duration", str(duration),
+        script_path
+    ]
 
+    # Save stdout (raw logs + metrics) to a file
     success = _run_process_and_wait(cmd, env=env, stdout_to_file=log_file, debug=debug)
+
     if success:
         logger.info("✅ Stress test completed successfully")
+        logger.info(f"📊 k6 summary saved to {summary_file}")
+        try:
+            with open(summary_file) as f:
+                summary = json.load(f)
+                http_reqs = summary["metrics"]["http_reqs"]["count"]
+                avg_time = summary["metrics"]["http_req_duration"]["avg"]
+                p95_time = summary["metrics"]["http_req_duration"]["p(95)"]
+                logger.info(f"📈 Requests: {http_reqs}, Avg: {avg_time:.2f} ms, P95: {p95_time:.2f} ms")
+        except Exception as e:
+            logger.warning(f"⚠️ Could not parse summary file: {e}")
     else:
         logger.error("❌ Stress test failed")
+
     if log_file:
-        logger.info("k6 output logged to %s", log_file)
+        logger.info(f"k6 full output logged to {log_file}")
+
     return success

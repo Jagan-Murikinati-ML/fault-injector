@@ -1,0 +1,77 @@
+Redis_K6_Parallel_Test:
+  schedule: "@once"
+  start_date: "2025-01-10"
+  description: "Run Redis memory stress and k6 API load test in parallel"
+  default_view: "graph"
+  orientation: "LR"
+  catchup: false
+  default_args:
+    owner: "airflow"
+    depends_on_past: false
+    retries: 0
+  tasks:
+    # Parallel Branch 1: Redis Memory Stress
+    - task_id: apply_redis_memory_stress
+      operator: airflow.providers.docker.operators.docker.DockerOperator
+      image: "airflow_chaos:latest"
+      api_version: "auto"
+      auto_remove: true
+      user: "root"
+      mount_tmp_dir: false
+      docker_url: "unix://var/run/docker.sock"
+      network_mode: "host"
+      mounts:
+        - source: "/home/priyanshupatel/fault-injector/src/pod"
+          target: "/opt/airflow/src/pod"
+          type: "bind"
+        - source: "/home/priyanshupatel/.kube/config"
+          target: "/root/.kube/config"
+          type: "bind"
+          read_only: true
+      environment:
+        KUBECONFIG: "/root/.kube/config"
+      command: >
+        bash -c '
+        cd /opt/airflow/src/pod &&
+        chaos run redis_experiment.json'
+
+    # Parallel Branch 2: k6 API Load Test
+    - task_id: apply_k6_load_test
+      operator: airflow.providers.docker.operators.docker.DockerOperator
+      image: "airflow_chaos:latest"
+      api_version: "auto"
+      auto_remove: true
+      user: "root"
+      mount_tmp_dir: false
+      docker_url: "unix://var/run/docker.sock"
+      network_mode: "host"
+      mounts:
+        - source: "/home/priyanshupatel/fault-injector/src/pod"
+          target: "/opt/airflow/src/pod"
+          type: "bind"
+        - source: "/home/priyanshupatel/.kube/config"
+          target: "/root/.kube/config"
+          type: "bind"
+          read_only: true
+      environment:
+        KUBECONFIG: "/root/.kube/config"
+      command: >
+        bash -c '
+        cd /opt/airflow/src/pod &&
+        chaos run load_test.json'
+
+    # Final validation after both complete
+    - task_id: final_validation
+      operator: airflow.providers.docker.operators.docker.DockerOperator
+      image: "airflow_chaos:latest"
+      api_version: "auto"
+      auto_remove: true
+      user: "root"
+      mount_tmp_dir: false
+      docker_url: "unix://var/run/docker.sock"
+      network_mode: "host"
+      environment:
+        KUBECONFIG: "/root/.kube/config"
+      command: >
+        bash -c 'echo "Both Redis stress and k6 load test completed - validating results"'
+      dependencies: [apply_redis_memory_stress, apply_k6_load_test]

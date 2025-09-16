@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "title": "GET API Load Test Example with JWT Auth",
-  "description": "Load test a GET API endpoint using k6 via Chaos Toolkit with JWT authentication.",
-  "tags": ["load-test", "GET", "k6", "jwt-auth"],
+  "title": "POST API Load Test Example with JWT Auth",
+  "description": "Load test a POST API endpoint using k6 via Chaos Toolkit with JWT authentication.",
+  "tags": ["load-test", "POST", "k6", "jwt-auth"],
   "configuration": {
     "env": {
       "CHAOS_K6_USER": "priyanshu01ce",
@@ -11,19 +11,21 @@
   },
   "method": [
     {
-      "name": "Load test GET API with JWT",
+      "name": "Load test POST API with JWT",
       "type": "action",
       "provider": {
         "type": "python",
         "module": "chaosk6_actions",
         "func": "stress_endpoint",
         "arguments": {
-          "endpoint": "http://4.154.253.199:8080/api/user-timeline/read?start=0&stop=100",
-          "vus": 20,
-          "duration": "30s",
+          "endpoint": "http://4.154.253.199:8080/api/post/compose",
+          "vus": 5,
+          "duration": "120s",
           "username": "priyanshu01ce",
           "password": "patel",
-          "log_file": "k6_get_api.log"
+          "log_file": "k6_post_api.log",
+          "method": "POST",
+          "body": "post_type=0&text=hello Jagan and Priyanshu"
         }
       }
     }

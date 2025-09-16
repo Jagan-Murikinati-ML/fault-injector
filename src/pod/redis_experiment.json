@@ -15,7 +15,7 @@
           "port": 6379,
           "limit_in_kb": 1,
           "eviction_policy": "noeviction",
-          "duration": 600
+          "duration": 180
         }
       }
     }

@@ -4,27 +4,37 @@
   "node": "BNXL-80508-WL",
   "experiment": {
     "version": "1.0.0",
-    "title": "MongoDB Network Latency Injection",
-    "description": "Inject network latency to local MongoDB using tc/netem",
+    "title": "POST API Load Test Example with JWT Auth",
+    "description": "Load test a POST API endpoint using k6 via Chaos Toolkit with JWT authentication.",
     "tags": [
-      "mongodb",
-      "latency",
-      "network",
-      "chaos"
+      "load-test",
+      "POST",
+      "k6",
+      "jwt-auth"
     ],
-    "configuration": {},
+    "configuration": {
+      "env": {
+        "CHAOS_K6_USER": "priyanshu01ce",
+        "CHAOS_K6_PASS": "patel"
+      }
+    },
     "method": [
       {
-        "name": "Inject latency to local MongoDB",
+        "name": "Load test POST API with JWT",
         "type": "action",
         "provider": {
           "type": "python",
-          "module": "mongodb_network_latency",
-          "func": "inject_latency",
+          "module": "chaosk6_actions",
+          "func": "stress_endpoint",
           "arguments": {
-            "interface": "lo",
-            "delay_ms": 200,
-            "duration_s": 30
+            "endpoint": "http://4.154.253.199:8080/api/post/compose",
+            "vus": 5,
+            "duration": "120s",
+            "username": "priyanshu01ce",
+            "password": "patel",
+            "log_file": "k6_post_api.log",
+            "method": "POST",
+            "body": "post_type=0&text=hello Jagan and Priyanshu"
           }
         }
       }
@@ -32,7 +42,7 @@
     "rollbacks": [],
     "dry": null
   },
-  "start": "2025-09-16T09:19:33.784422+00:00",
+  "start": "2025-09-16T17:10:24.344049+00:00",
   "status": "completed",
   "deviated": false,
   "steady_states": {
@@ -43,27 +53,32 @@
   "run": [
     {
       "activity": {
-        "name": "Inject latency to local MongoDB",
+        "name": "Load test POST API with JWT",
         "type": "action",
         "provider": {
           "type": "python",
-          "module": "mongodb_network_latency",
-          "func": "inject_latency",
+          "module": "chaosk6_actions",
+          "func": "stress_endpoint",
           "arguments": {
-            "interface": "lo",
-            "delay_ms": 200,
-            "duration_s": 30
+            "endpoint": "http://4.154.253.199:8080/api/post/compose",
+            "vus": 5,
+            "duration": "120s",
+            "username": "priyanshu01ce",
+            "password": "patel",
+            "log_file": "k6_post_api.log",
+            "method": "POST",
+            "body": "post_type=0&text=hello Jagan and Priyanshu"
           }
         }
       },
-      "output": false,
-      "start": "2025-09-16T09:19:33.789099+00:00",
+      "output": true,
+      "start": "2025-09-16T17:10:24.344963+00:00",
       "status": "succeeded",
-      "end": "2025-09-16T09:19:33.863244+00:00",
-      "duration": 0.074145
+      "end": "2025-09-16T17:12:29.447953+00:00",
+      "duration": 125.10299
     }
   ],
   "rollbacks": [],
-  "end": "2025-09-16T09:19:33.864489+00:00",
-  "duration": 0.08374762535095215
+  "end": "2025-09-16T17:12:29.448556+00:00",
+  "duration": 125.10586929321289
 }
