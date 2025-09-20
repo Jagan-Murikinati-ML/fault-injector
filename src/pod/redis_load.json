@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "title": "GET API Load Test - User Timeline with JWT Auth",
+  "description": "Load test GET user timeline endpoint using k6 via Chaos Toolkit with JWT authentication.",
+  "tags": ["load-test", "GET", "k6", "jwt-auth", "timeline"],
+  "configuration": {
+    "env": {
+      "CHAOS_K6_USER": "priyanshu01ce",
+      "CHAOS_K6_PASS": "patel"
+    }
+  },
+  "method": [
+    {
+      "name": "Load test GET user timeline API with JWT",
+      "type": "action",
+      "provider": {
+        "type": "python",
+        "module": "chaosk6_actions",
+        "func": "stress_endpoint",
+        "arguments": {
+          "endpoint": "http://4.154.253.199:8080/api/user-timeline/read?start=0&stop=100",
+          "vus": 500,
+          "duration": "180s",
+          "username": "jagan",
+          "password": "maplelabs",
+          "log_file": "k6_timeline_api.log",
+          "method": "GET"
+        }
+      }
+    }
+  ],
+  "rollbacks": []
+}

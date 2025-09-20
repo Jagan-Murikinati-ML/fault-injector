@@ -1,0 +1,92 @@
+{
+  "version": "1.0.0",
+  "title": "MongoDB maxIncomingConnections Sequential Experiment",
+  "description": "Experiment with probes before and after chaos steps",
+  "tags": ["mongodb", "config", "kubernetes"],
+
+  "steady-state-hypothesis": {
+    "title": "MongoDB baseline check before chaos",
+    "probes": [
+      {
+        "name": "baseline-max-conn-probe",
+        "type": "probe",
+        "tolerance": true,
+        "provider": {
+          "type": "python",
+          "module": "mongodb_probes",
+          "func": "probe_max_connections"
+        }
+      }
+    ]
+  },
+
+  "method": [
+    {
+      "name": "post-pre-chaos-probe",
+      "type": "probe",
+      "provider": {
+        "type": "python",
+        "module": "mongodb_probes",
+        "func": "probe_max_connections"
+      }
+    },
+    {
+      "name": "update-mongo-max-connection-file",
+      "type": "action",
+      "provider": {
+        "type": "python",
+        "module": "mongodb_actions",
+        "func": "update_mongodb_max_connections",
+        "arguments": {
+          "new_max_connections": 7
+        }
+      }
+    },
+    {
+      "name": "post-first-chaos-probe",
+      "type": "probe",
+      "tolerance": true,
+      "provider": {
+        "type": "python",
+        "module": "mongodb_probes",
+        "func": "probe_max_connections",
+        "arguments": {
+          "expected_connections": 20
+        }
+      }
+    },
+    {
+      "name": "exhaust-mongo-connections",
+      "type": "action",
+      "provider": {
+        "type": "python",
+        "module": "mongodb_actions",
+        "func": "exhaust_mongo_connections",
+        "arguments": {
+          "max_connections": 50,
+          "hold_until_rollback": true
+        }
+      }
+    },
+    {
+      "name": "wait-before-rollback",
+      "type": "probe",
+      "provider": {
+        "type": "process",
+        "path": "sleep",
+        "arguments": "120"
+      }
+    }
+  ],
+  "rollbacks": [
+    {
+      "name": "rollback-mongodb-config",
+      "type": "action",
+      "provider": {
+        "type": "python",
+        "module": "mongodb_actions",
+        "func": "rollback_mongodb_max_connections"
+      }
+    }
+  ]
+}

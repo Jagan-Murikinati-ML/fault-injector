@@ -1,0 +1,34 @@
+[2025-09-18T07:18:28.768+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-09-18T07:18:28.792+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Redis_Memory_Stress_Test.apply_redis_memory_stress manual__2025-09-18T07:18:26.978063+00:00 [queued]>
+[2025-09-18T07:18:28.802+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Redis_Memory_Stress_Test.apply_redis_memory_stress manual__2025-09-18T07:18:26.978063+00:00 [queued]>
+[2025-09-18T07:18:28.803+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-09-18T07:18:28.820+0000] {taskinstance.py:2888} INFO - Executing <Task(DockerOperator): apply_redis_memory_stress> on 2025-09-18 07:18:26.978063+00:00
+[2025-09-18T07:18:28.825+0000] {standard_task_runner.py:72} INFO - Started process 113 to run task
+[2025-09-18T07:18:28.830+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'Redis_Memory_Stress_Test', 'apply_redis_memory_stress', 'manual__2025-09-18T07:18:26.978063+00:00', '--job-id', '214', '--raw', '--subdir', 'DAGS_FOLDER/dag_factory.py', '--cfg-path', '/tmp/tmp1m7i0btq']
+[2025-09-18T07:18:28.832+0000] {standard_task_runner.py:105} INFO - Job 214: Subtask apply_redis_memory_stress
+[2025-09-18T07:18:28.895+0000] {task_command.py:467} INFO - Running <TaskInstance: Redis_Memory_Stress_Test.apply_redis_memory_stress manual__2025-09-18T07:18:26.978063+00:00 [running]> on host BNXL-80508-WL.India.XoriantCorp.com
+[2025-09-18T07:18:28.994+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Redis_Memory_Stress_Test' AIRFLOW_CTX_TASK_ID='apply_redis_memory_stress' AIRFLOW_CTX_EXECUTION_DATE='2025-09-18T07:18:26.978063+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-18T07:18:26.978063+00:00'
+[2025-09-18T07:18:28.995+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-09-18T07:18:29.078+0000] {docker.py:367} INFO - Starting docker container from image ***_chaos:latest
+[2025-09-18T07:18:29.395+0000] {docker.py:438} INFO - The container is run as root user. For security, consider using a regular user account.
+[2025-09-18T07:18:37.809+0000] {docker.py:438} INFO - 
+[2025-09-18T07:18:38.960+0000] {docker.py:438} INFO - [32m[2025-09-18 07:18:38 INFO] Validating the experiment's syntax
+[2025-09-18T07:18:38.962+0000] {docker.py:438} INFO - [32m[2025-09-18 07:18:38 INFO] Experiment looks valid
+[2025-09-18T07:18:38.963+0000] {docker.py:438} INFO - [32m[2025-09-18 07:18:38 INFO] Running experiment: GET API Load Test - User Timeline with JWT Auth
+[2025-09-18T07:18:38.966+0000] {docker.py:438} INFO - [32m[2025-09-18 07:18:38 INFO] Steady-state strategy: default
+[2025-09-18T07:18:38.966+0000] {docker.py:438} INFO - [32m[2025-09-18 07:18:38 INFO] Rollbacks strategy: default
+[2025-09-18T07:18:38.967+0000] {docker.py:438} INFO - [32m[2025-09-18 07:18:38 INFO] No steady state hypothesis defined. That's ok, just exploring.
+[2025-09-18T07:18:38.967+0000] {docker.py:438} INFO - [32m[2025-09-18 07:18:38 INFO] Playing your experiment's method now...
+[2025-09-18T07:18:38.967+0000] {docker.py:438} INFO - [32m[2025-09-18 07:18:38 INFO] Action: Load test GET user timeline API with JWT
+[2025-09-18T07:18:39.705+0000] {docker.py:438} INFO - [32m[2025-09-18 07:18:39 INFO] ✅ Obtained login_token (JWT): eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOiIxNzU4MTc5OTE4IiwidHRsIjoiMzYwMCIsInVzZXJfaWQiOiI1ODU1Njc0MTEwNjYzMTU5ODA4IiwidXNlcm5hbWUiOiJqYWdhbiJ9.scPAeIdA_xwdmK5OLvlzCYTSsZfodZz9_9UX1UYG6mE
+[2025-09-18T07:22:04.535+0000] {docker.py:438} INFO - [32m[2025-09-18 07:22:04 INFO] ✅ Stress test completed successfully
+[2025-09-18T07:22:04.538+0000] {docker.py:438} INFO - [32m[2025-09-18 07:22:04 INFO] 📊 k6 summary saved to k6_summary.json
+[2025-09-18T07:22:04.539+0000] {docker.py:438} INFO - [32m[2025-09-18 07:22:04 INFO] 📈 Requests: 3772, Avg: 22510.98 ms, P95: 56303.09 ms
+[2025-09-18T07:22:04.539+0000] {docker.py:438} INFO - [32m[2025-09-18 07:22:04 INFO] k6 full output logged to k6_timeline_api.log
+[2025-09-18T07:22:04.540+0000] {docker.py:438} INFO - [32m[2025-09-18 07:22:04 INFO] Let's rollback...
+[2025-09-18T07:22:04.540+0000] {docker.py:438} INFO - [32m[2025-09-18 07:22:04 INFO] No declared rollbacks, let's move on.
+[2025-09-18T07:22:04.540+0000] {docker.py:438} INFO - [32m[2025-09-18 07:22:04 INFO] Experiment ended with status: completed
+[2025-09-18T07:22:04.895+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-09-18T07:22:04.896+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=Redis_Memory_Stress_Test, task_id=apply_redis_memory_stress, run_id=manual__2025-09-18T07:18:26.978063+00:00, execution_date=20250918T071826, start_date=20250918T071828, end_date=20250918T072204
+[2025-09-18T07:22:05.812+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-09-18T07:22:05.823+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

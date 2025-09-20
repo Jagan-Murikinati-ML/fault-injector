@@ -19,10 +19,10 @@
         "func": "stress_endpoint",
         "arguments": {
           "endpoint": "http://4.154.253.199:8080/api/post/compose",
-          "vus": 5,
-          "duration": "120s",
-          "username": "priyanshu01ce",
-          "password": "patel",
+          "vus": 1,
+          "duration": "180s",
+          "username": "jagan",
+          "password": "maplelabs",
           "log_file": "k6_post_api.log",
           "method": "POST",
           "body": "post_type=0&text=hello Jagan and Priyanshu"

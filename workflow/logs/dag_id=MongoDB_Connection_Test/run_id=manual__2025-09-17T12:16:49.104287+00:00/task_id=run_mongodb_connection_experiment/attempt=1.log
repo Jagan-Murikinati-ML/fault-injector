@@ -1,0 +1,67 @@
+[2025-09-17T12:16:50.766+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-09-17T12:16:50.785+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: MongoDB_Connection_Test.run_mongodb_connection_experiment manual__2025-09-17T12:16:49.104287+00:00 [queued]>
+[2025-09-17T12:16:50.797+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: MongoDB_Connection_Test.run_mongodb_connection_experiment manual__2025-09-17T12:16:49.104287+00:00 [queued]>
+[2025-09-17T12:16:50.797+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-09-17T12:16:50.812+0000] {taskinstance.py:2888} INFO - Executing <Task(DockerOperator): run_mongodb_connection_experiment> on 2025-09-17 12:16:49.104287+00:00
+[2025-09-17T12:16:50.816+0000] {standard_task_runner.py:72} INFO - Started process 56 to run task
+[2025-09-17T12:16:50.822+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'MongoDB_Connection_Test', 'run_mongodb_connection_experiment', 'manual__2025-09-17T12:16:49.104287+00:00', '--job-id', '195', '--raw', '--subdir', 'DAGS_FOLDER/dag_factory.py', '--cfg-path', '/tmp/tmp6clqocad']
+[2025-09-17T12:16:50.823+0000] {standard_task_runner.py:105} INFO - Job 195: Subtask run_mongodb_connection_experiment
+[2025-09-17T12:16:50.885+0000] {task_command.py:467} INFO - Running <TaskInstance: MongoDB_Connection_Test.run_mongodb_connection_experiment manual__2025-09-17T12:16:49.104287+00:00 [running]> on host BNXL-80508-WL.India.XoriantCorp.com
+[2025-09-17T12:16:51.002+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='MongoDB_Connection_Test' AIRFLOW_CTX_TASK_ID='run_mongodb_connection_experiment' AIRFLOW_CTX_EXECUTION_DATE='2025-09-17T12:16:49.104287+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-17T12:16:49.104287+00:00'
+[2025-09-17T12:16:51.003+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-09-17T12:16:51.083+0000] {docker.py:367} INFO - Starting docker container from image ***_chaos:latest
+[2025-09-17T12:16:51.395+0000] {docker.py:438} INFO - The container is run as root user. For security, consider using a regular user account.
+[2025-09-17T12:17:00.749+0000] {docker.py:438} INFO - 
+[2025-09-17T12:17:00.754+0000] {docker.py:438} INFO - Starting MongoDB connection exhaustion experiment...
+[2025-09-17T12:17:01.628+0000] {docker.py:438} INFO - [32m[2025-09-17 12:17:01 INFO] Validating the experiment's syntax
+[2025-09-17T12:17:01.719+0000] {docker.py:438} INFO - [32m[2025-09-17 12:17:01 INFO] Experiment looks valid
+[2025-09-17T12:17:01.720+0000] {docker.py:438} INFO - [32m[2025-09-17 12:17:01 INFO] Running experiment: MongoDB maxIncomingConnections Sequential Experiment
+[2025-09-17T12:17:01.724+0000] {docker.py:438} INFO - [32m[2025-09-17 12:17:01 INFO] Steady-state strategy: default
+[2025-09-17T12:17:01.724+0000] {docker.py:438} INFO - [32m[2025-09-17 12:17:01 INFO] Rollbacks strategy: default
+[2025-09-17T12:17:01.725+0000] {docker.py:438} INFO - [32m[2025-09-17 12:17:01 INFO] Steady state hypothesis: MongoDB baseline check before chaos
+[2025-09-17T12:17:01.725+0000] {docker.py:438} INFO - [32m[2025-09-17 12:17:01 INFO] Probe: baseline-max-conn-probe
+[2025-09-17T12:17:04.451+0000] {docker.py:438} INFO - [32m[2025-09-17 12:17:04 INFO] Steady state hypothesis is met!
+[2025-09-17T12:17:04.452+0000] {docker.py:438} INFO - [32m[2025-09-17 12:17:04 INFO] Playing your experiment's method now...
+[2025-09-17T12:17:04.453+0000] {docker.py:438} INFO - [32m[2025-09-17 12:17:04 INFO] Probe: post-pre-chaos-probe
+[2025-09-17T12:17:07.011+0000] {docker.py:438} INFO - [32m[2025-09-17 12:17:07 INFO] Action: update-mongo-max-connection-file
+[2025-09-17T12:17:15.820+0000] {docker.py:438} INFO - deployment.apps/user-mongodb restarted
+[2025-09-17T12:17:18.388+0000] {docker.py:438} INFO - deployment "user-mongodb" successfully rolled out
+[2025-09-17T12:17:28.684+0000] {docker.py:438} INFO - [32m[2025-09-17 12:17:28 INFO] Probe: post-first-chaos-probe
+[2025-09-17T12:17:31.301+0000] {docker.py:438} INFO - [32m[2025-09-17 12:17:31 INFO] Action: exhaust-mongo-connections
+[2025-09-17T12:17:44.409+0000] {docker.py:438} INFO - [32m[2025-09-17 12:17:44 INFO] Probe: wait-before-rollback
+[2025-09-17T12:19:44.431+0000] {docker.py:438} INFO - [32m[2025-09-17 12:19:44 INFO] Steady state hypothesis: MongoDB baseline check before chaos
+[2025-09-17T12:19:44.432+0000] {docker.py:438} INFO - [32m[2025-09-17 12:19:44 INFO] Probe: baseline-max-conn-probe
+[2025-09-17T12:19:46.451+0000] {docker.py:438} INFO - [32m[2025-09-17 12:19:46 INFO] Steady state hypothesis is met!
+[2025-09-17T12:19:46.452+0000] {docker.py:438} INFO - [32m[2025-09-17 12:19:46 INFO] Let's rollback...
+[2025-09-17T12:19:46.452+0000] {docker.py:438} INFO - [32m[2025-09-17 12:19:46 INFO] Rollback: rollback-mongodb-config
+[2025-09-17T12:19:46.453+0000] {docker.py:438} INFO - [32m[2025-09-17 12:19:46 INFO] Action: rollback-mongodb-config
+[2025-09-17T12:19:49.213+0000] {docker.py:438} INFO - configmap/user-mongodb configured
+[2025-09-17T12:19:51.377+0000] {docker.py:438} INFO - deployment.apps/user-mongodb restarted
+[2025-09-17T12:19:53.262+0000] {docker.py:438} INFO - deployment "user-mongodb" successfully rolled out
+[2025-09-17T12:20:03.507+0000] {docker.py:438} INFO - [32m[2025-09-17 12:20:03 INFO] Experiment ended with status: completed
+[2025-09-17T12:20:03.509+0000] {docker.py:438} INFO - Mongo connections: current=7, available=838853
+[2025-09-17T12:20:03.510+0000] {docker.py:438} INFO - Mongo connections: current=7, available=838853
+[2025-09-17T12:20:03.510+0000] {docker.py:438} INFO - Updating MongoDB maxIncomingConnections to 20...
+[2025-09-17T12:20:03.510+0000] {docker.py:438} INFO - ConfigMap updated successfully
+[2025-09-17T12:20:03.510+0000] {docker.py:438} INFO - Deployment restart initiated...
+[2025-09-17T12:20:03.511+0000] {docker.py:438} INFO - MongoDB restarted with maxIncomingConnections: 20
+[2025-09-17T12:20:03.511+0000] {docker.py:438} INFO - Mongo connections: current=7, available=13
+[2025-09-17T12:20:03.511+0000] {docker.py:438} INFO - Expected at least 20, found 13
+[2025-09-17T12:20:03.511+0000] {docker.py:438} INFO - Opened connection #1
+[2025-09-17T12:20:03.512+0000] {docker.py:438} INFO - Opened connection #2
+[2025-09-17T12:20:03.513+0000] {docker.py:438} INFO - Opened connection #3
+[2025-09-17T12:20:03.513+0000] {docker.py:438} INFO - Opened connection #4
+[2025-09-17T12:20:03.514+0000] {docker.py:438} INFO - Opened connection #5
+[2025-09-17T12:20:03.514+0000] {docker.py:438} INFO - Opened connection #6
+[2025-09-17T12:20:03.514+0000] {docker.py:438} INFO - Connection failed after 6 successful connections: 4.149.182.40:27017: connection closed (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 2.0s, Topology Description: <TopologyDescription id: 68caa6e43c3a38cde294e3fa, topology_type: Unknown, servers: [<ServerDescription ('4.149.182.40', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('4.149.182.40:27017: connection closed (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+[2025-09-17T12:20:03.515+0000] {docker.py:438} INFO - Closing 6 connections...
+[2025-09-17T12:20:03.515+0000] {docker.py:438} INFO - All connections closed.
+[2025-09-17T12:20:03.516+0000] {docker.py:438} INFO - Mongo connections: current=9, available=11
+[2025-09-17T12:20:03.516+0000] {docker.py:438} INFO - Rolling back MongoDB configuration...
+[2025-09-17T12:20:03.516+0000] {docker.py:438} INFO - MongoDB configuration rolled back successfully
+[2025-09-17T12:20:03.597+0000] {docker.py:438} INFO - MongoDB experiment completed successfully
+[2025-09-17T12:20:03.834+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-09-17T12:20:03.835+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=MongoDB_Connection_Test, task_id=run_mongodb_connection_experiment, run_id=manual__2025-09-17T12:16:49.104287+00:00, execution_date=20250917T121649, start_date=20250917T121650, end_date=20250917T122003
+[2025-09-17T12:20:03.885+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-09-17T12:20:03.916+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-17T12:20:03.919+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

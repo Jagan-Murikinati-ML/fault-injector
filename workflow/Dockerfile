@@ -32,7 +32,8 @@ RUN pip install --no-cache-dir \
         kubernetes \
         dag-factory \
         psycopg2-binary \
-        redis
+        redis \
+        pymongo
 
 # Create src directory structure (if not mounted from host)
 RUN mkdir -p /opt/airflow/src/pod /opt/airflow/src/node

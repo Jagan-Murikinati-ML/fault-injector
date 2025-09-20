@@ -1,0 +1,32 @@
+[2025-09-20T09:44:31.869+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-09-20T09:44:31.884+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Continuous_Load_Test.run_continuous_multi_endpoint_load_test manual__2025-09-20T09:44:28.885139+00:00 [queued]>
+[2025-09-20T09:44:31.892+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Continuous_Load_Test.run_continuous_multi_endpoint_load_test manual__2025-09-20T09:44:28.885139+00:00 [queued]>
+[2025-09-20T09:44:31.893+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-09-20T09:44:31.908+0000] {taskinstance.py:2888} INFO - Executing <Task(DockerOperator): run_continuous_multi_endpoint_load_test> on 2025-09-20 09:44:28.885139+00:00
+[2025-09-20T09:44:31.913+0000] {standard_task_runner.py:72} INFO - Started process 269 to run task
+[2025-09-20T09:44:31.916+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'Continuous_Load_Test', 'run_continuous_multi_endpoint_load_test', 'manual__2025-09-20T09:44:28.885139+00:00', '--job-id', '266', '--raw', '--subdir', 'DAGS_FOLDER/dag_factory.py', '--cfg-path', '/tmp/tmp8dl8__nw']
+[2025-09-20T09:44:31.918+0000] {standard_task_runner.py:105} INFO - Job 266: Subtask run_continuous_multi_endpoint_load_test
+[2025-09-20T09:44:31.984+0000] {task_command.py:467} INFO - Running <TaskInstance: Continuous_Load_Test.run_continuous_multi_endpoint_load_test manual__2025-09-20T09:44:28.885139+00:00 [running]> on host BNXL-80508-WL.India.XoriantCorp.com
+[2025-09-20T09:44:32.075+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Continuous_Load_Test' AIRFLOW_CTX_TASK_ID='run_continuous_multi_endpoint_load_test' AIRFLOW_CTX_EXECUTION_DATE='2025-09-20T09:44:28.885139+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-20T09:44:28.885139+00:00'
+[2025-09-20T09:44:32.076+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-09-20T09:44:32.250+0000] {docker.py:367} INFO - Starting docker container from image ***_chaos:latest
+[2025-09-20T09:44:32.603+0000] {docker.py:438} INFO - The container is run as root user. For security, consider using a regular user account.
+[2025-09-20T09:44:38.635+0000] {docker.py:438} INFO - 
+[2025-09-20T09:44:38.636+0000] {docker.py:438} INFO - Starting Continuous Multi-Endpoint Load Test...
+[2025-09-20T09:44:39.531+0000] {docker.py:438} INFO - [32m[2025-09-20 09:44:39 INFO] Validating the experiment's syntax
+[2025-09-20T09:44:39.536+0000] {docker.py:438} INFO - [32m[2025-09-20 09:44:39 INFO] Experiment looks valid
+[2025-09-20T09:44:39.537+0000] {docker.py:438} INFO - [32m[2025-09-20 09:44:39 INFO] Running experiment: Continuous Load Test - POST Compose & GET Timeline APIs
+[2025-09-20T09:44:39.539+0000] {docker.py:438} INFO - [32m[2025-09-20 09:44:39 INFO] Steady-state strategy: default
+[2025-09-20T09:44:39.540+0000] {docker.py:438} INFO - [32m[2025-09-20 09:44:39 INFO] Rollbacks strategy: default
+[2025-09-20T09:44:39.540+0000] {docker.py:438} INFO - [32m[2025-09-20 09:44:39 INFO] No steady state hypothesis defined. That's ok, just exploring.
+[2025-09-20T09:44:39.540+0000] {docker.py:438} INFO - [32m[2025-09-20 09:44:39 INFO] Playing your experiment's method now...
+[2025-09-20T09:44:39.541+0000] {docker.py:438} INFO - [32m[2025-09-20 09:44:39 INFO] Action: Continuous multi-endpoint load test
+[2025-09-20T09:44:40.104+0000] {docker.py:438} INFO - [32m[2025-09-20 09:44:40 INFO] ✅ Obtained login_token (JWT): eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOiIxNzU4MzYxNDc5IiwidHRsIjoiMzYwMCIsInVzZXJfaWQiOiI1ODU1Njc0MTEwNjYzMTU5ODA4IiwidXNlcm5hbWUiOiJqYWdhbiJ9.lxQ7UXG_HQCL_0v3sYNO03SYlqcDdgdqIIFxC0qmZ0c
+[2025-09-20T09:58:00.780+0000] {job.py:229} INFO - Heartbeat recovered after 471.03 seconds
+[2025-09-20T10:10:02.111+0000] {job.py:229} INFO - Heartbeat recovered after 10.98 seconds
+[2025-09-20T10:15:01.802+0000] {job.py:229} INFO - Heartbeat recovered after 10.74 seconds
+[2025-09-20T10:35:13.430+0000] {job.py:229} INFO - Heartbeat recovered after 1211.63 seconds
+[2025-09-20T11:58:39.085+0000] {job.py:229} INFO - Heartbeat recovered after 5000.63 seconds
+[2025-09-20T12:01:02.608+0000] {job.py:229} INFO - Heartbeat recovered after 22.13 seconds
+[2025-09-20T12:13:36.815+0000] {job.py:229} INFO - Heartbeat recovered after 597.78 seconds
+[2025-09-20T12:29:04.239+0000] {job.py:229} INFO - Heartbeat recovered after 725.69 seconds

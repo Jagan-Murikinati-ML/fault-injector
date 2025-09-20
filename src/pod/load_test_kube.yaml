@@ -1,0 +1,35 @@
+Load_Test_Kube:
+  schedule: "@once"
+  start_date: "2025-01-18"
+  description: "POST API Load Test with JWT Authentication using k6 - Kubernetes Pod"
+  default_view: "graph"
+  orientation: "LR"
+  catchup: false
+  default_args:
+    owner: "airflow"
+    depends_on_past: false
+    retries: 0
+  tasks:
+    - task_id: run_post_api_load_test_kube
+      operator: airflow.providers.cncf.kubernetes.operators.pod.KubernetesPodOperator
+      name: "post-api-load-test-k8s"
+      namespace: "chaos-platform"
+      image: "priyanshu01ce/airflow_chaos:latest"
+      get_logs: true
+      is_delete_operator_pod: true
+      in_cluster: true
+      cmds:
+        - bash
+        - -c
+      arguments:
+        - |
+          cd /opt/airflow/src/pod &&
+          ls -la &&
+          echo "Starting POST API Load Test with JWT Auth..." &&
+          chaos run load_test.json &&
+          echo "Load test completed successfully"
+      env_vars:
+        PYTHONPATH: "/opt/airflow/src/pod"
+      env_from:
+        - configMapRef:
+            name: chaos-experiments

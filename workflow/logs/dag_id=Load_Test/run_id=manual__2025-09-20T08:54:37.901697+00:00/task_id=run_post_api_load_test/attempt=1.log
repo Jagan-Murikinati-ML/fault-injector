@@ -1,0 +1,37 @@
+[2025-09-20T08:54:41.429+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-09-20T08:54:41.441+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Load_Test.run_post_api_load_test manual__2025-09-20T08:54:37.901697+00:00 [queued]>
+[2025-09-20T08:54:41.447+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Load_Test.run_post_api_load_test manual__2025-09-20T08:54:37.901697+00:00 [queued]>
+[2025-09-20T08:54:41.448+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-09-20T08:54:41.460+0000] {taskinstance.py:2888} INFO - Executing <Task(DockerOperator): run_post_api_load_test> on 2025-09-20 08:54:37.901697+00:00
+[2025-09-20T08:54:41.464+0000] {standard_task_runner.py:72} INFO - Started process 254 to run task
+[2025-09-20T08:54:41.468+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'Load_Test', 'run_post_api_load_test', 'manual__2025-09-20T08:54:37.901697+00:00', '--job-id', '261', '--raw', '--subdir', 'DAGS_FOLDER/dag_factory.py', '--cfg-path', '/tmp/tmp4hrpuvtz']
+[2025-09-20T08:54:41.468+0000] {standard_task_runner.py:105} INFO - Job 261: Subtask run_post_api_load_test
+[2025-09-20T08:54:41.520+0000] {task_command.py:467} INFO - Running <TaskInstance: Load_Test.run_post_api_load_test manual__2025-09-20T08:54:37.901697+00:00 [running]> on host BNXL-80508-WL.India.XoriantCorp.com
+[2025-09-20T08:54:41.601+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Load_Test' AIRFLOW_CTX_TASK_ID='run_post_api_load_test' AIRFLOW_CTX_EXECUTION_DATE='2025-09-20T08:54:37.901697+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-20T08:54:37.901697+00:00'
+[2025-09-20T08:54:41.602+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-09-20T08:54:41.661+0000] {docker.py:367} INFO - Starting docker container from image ***_chaos:latest
+[2025-09-20T08:54:41.895+0000] {docker.py:438} INFO - The container is run as root user. For security, consider using a regular user account.
+[2025-09-20T08:54:48.192+0000] {docker.py:438} INFO - 
+[2025-09-20T08:54:48.194+0000] {docker.py:438} INFO - Starting POST API Load Test with JWT Auth...
+[2025-09-20T08:54:49.234+0000] {docker.py:438} INFO - [32m[2025-09-20 08:54:49 INFO] Validating the experiment's syntax
+[2025-09-20T08:54:49.234+0000] {docker.py:438} INFO - [32m[2025-09-20 08:54:49 INFO] Experiment looks valid
+[2025-09-20T08:54:49.235+0000] {docker.py:438} INFO - [32m[2025-09-20 08:54:49 INFO] Running experiment: POST API Load Test Example with JWT Auth
+[2025-09-20T08:54:49.238+0000] {docker.py:438} INFO - [32m[2025-09-20 08:54:49 INFO] Steady-state strategy: default
+[2025-09-20T08:54:49.239+0000] {docker.py:438} INFO - [32m[2025-09-20 08:54:49 INFO] Rollbacks strategy: default
+[2025-09-20T08:54:49.239+0000] {docker.py:438} INFO - [32m[2025-09-20 08:54:49 INFO] No steady state hypothesis defined. That's ok, just exploring.
+[2025-09-20T08:54:49.239+0000] {docker.py:438} INFO - [32m[2025-09-20 08:54:49 INFO] Playing your experiment's method now...
+[2025-09-20T08:54:49.239+0000] {docker.py:438} INFO - [32m[2025-09-20 08:54:49 INFO] Action: Load test POST API with JWT
+[2025-09-20T08:54:50.187+0000] {docker.py:438} INFO - [32m[2025-09-20 08:54:50 INFO] ✅ Obtained login_token (JWT): eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOiIxNzU4MzU4NDg4IiwidHRsIjoiMzYwMCIsInVzZXJfaWQiOiI1ODU1Njc0MTEwNjYzMTU5ODA4IiwidXNlcm5hbWUiOiJqYWdhbiJ9.JKJAKgt9XML_61yOSEAkQFFMB0NbLNOLV54MsMx6u-E
+[2025-09-20T08:58:08.580+0000] {docker.py:438} INFO - [32m[2025-09-20 08:58:08 INFO] ✅ Stress test completed successfully
+[2025-09-20T08:58:08.582+0000] {docker.py:438} INFO - [32m[2025-09-20 08:58:08 INFO] 📊 k6 summary saved to k6_summary.json
+[2025-09-20T08:58:08.582+0000] {docker.py:438} INFO - [32m[2025-09-20 08:58:08 INFO] 📈 Requests: 20095, Avg: 2786.26 ms, P95: 7611.85 ms
+[2025-09-20T08:58:08.582+0000] {docker.py:438} INFO - [32m[2025-09-20 08:58:08 INFO] k6 full output logged to k6_post_api.log
+[2025-09-20T08:58:08.582+0000] {docker.py:438} INFO - [32m[2025-09-20 08:58:08 INFO] Let's rollback...
+[2025-09-20T08:58:08.583+0000] {docker.py:438} INFO - [32m[2025-09-20 08:58:08 INFO] No declared rollbacks, let's move on.
+[2025-09-20T08:58:08.583+0000] {docker.py:438} INFO - [32m[2025-09-20 08:58:08 INFO] Experiment ended with status: completed
+[2025-09-20T08:58:08.626+0000] {docker.py:438} INFO - Load test completed successfully
+[2025-09-20T08:58:08.778+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-09-20T08:58:08.779+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=Load_Test, task_id=run_post_api_load_test, run_id=manual__2025-09-20T08:54:37.901697+00:00, execution_date=20250920T085437, start_date=20250920T085441, end_date=20250920T085808
+[2025-09-20T08:58:08.819+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-09-20T08:58:08.835+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-20T08:58:08.837+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

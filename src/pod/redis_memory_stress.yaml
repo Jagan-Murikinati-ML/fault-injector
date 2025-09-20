@@ -32,5 +32,8 @@ Redis_Memory_Stress_Test:
       command: >
         bash -c '
         cd /opt/airflow/src/pod &&
-        chaos run redis_experiment.json'
+        chaos run redis_experiment.json &&
+        echo "Sleeping for 180 seconds..." &&
+        sleep 180 &&
+        echo "Redis memory stress test completed"'
       container_name: "redis_memory_stress"

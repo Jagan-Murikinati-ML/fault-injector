@@ -1,18 +1,18 @@
 {
   "version": "1.0.0",
-  "title": "Change max_connections setting",
-  "description": "Just update the max_connections and restart Postgres.",
-  "tags": ["postgresql", "custom-action"],
+  "title": "Change MongoDB maxIncomingConnections setting",
+  "description": "Update maxIncomingConnections and restart MongoDB pod in Kubernetes.",
+  "tags": ["mongodb", "chaos", "custom-action"],
   "method": [
     {
       "name": "change-max-connections",
       "type": "action",
       "provider": {
         "type": "python",
-        "module": "postgres_actions",
-        "func": "update_max_connections",
+        "module": "mongodb_actions",
+        "func": "update_mongodb_max_connections",
         "arguments": {
-          "new_max_connection_value": 30
+          "new_max_connections": 10
         }
       }
     }

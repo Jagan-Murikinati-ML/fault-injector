@@ -1,0 +1,35 @@
+[2025-09-18T07:31:15.463+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-09-18T07:31:15.487+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Redis_K6_Parallel_Test.apply_k6_load_test manual__2025-09-18T07:31:12.511998+00:00 [queued]>
+[2025-09-18T07:31:15.500+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Redis_K6_Parallel_Test.apply_k6_load_test manual__2025-09-18T07:31:12.511998+00:00 [queued]>
+[2025-09-18T07:31:15.500+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-09-18T07:31:15.518+0000] {taskinstance.py:2888} INFO - Executing <Task(DockerOperator): apply_k6_load_test> on 2025-09-18 07:31:12.511998+00:00
+[2025-09-18T07:31:15.524+0000] {standard_task_runner.py:72} INFO - Started process 119 to run task
+[2025-09-18T07:31:15.530+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'Redis_K6_Parallel_Test', 'apply_k6_load_test', 'manual__2025-09-18T07:31:12.511998+00:00', '--job-id', '216', '--raw', '--subdir', 'DAGS_FOLDER/dag_factory.py', '--cfg-path', '/tmp/tmpt0z2k1d3']
+[2025-09-18T07:31:15.531+0000] {standard_task_runner.py:105} INFO - Job 216: Subtask apply_k6_load_test
+[2025-09-18T07:31:15.599+0000] {task_command.py:467} INFO - Running <TaskInstance: Redis_K6_Parallel_Test.apply_k6_load_test manual__2025-09-18T07:31:12.511998+00:00 [running]> on host BNXL-80508-WL.India.XoriantCorp.com
+[2025-09-18T07:31:15.722+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Redis_K6_Parallel_Test' AIRFLOW_CTX_TASK_ID='apply_k6_load_test' AIRFLOW_CTX_EXECUTION_DATE='2025-09-18T07:31:12.511998+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-18T07:31:12.511998+00:00'
+[2025-09-18T07:31:15.725+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-09-18T07:31:15.824+0000] {docker.py:367} INFO - Starting docker container from image ***_chaos:latest
+[2025-09-18T07:31:16.184+0000] {docker.py:438} INFO - The container is run as root user. For security, consider using a regular user account.
+[2025-09-18T07:31:25.920+0000] {docker.py:438} INFO - 
+[2025-09-18T07:31:27.532+0000] {docker.py:438} INFO - [32m[2025-09-18 07:31:27 INFO] Validating the experiment's syntax
+[2025-09-18T07:31:27.533+0000] {docker.py:438} INFO - [32m[2025-09-18 07:31:27 INFO] Experiment looks valid
+[2025-09-18T07:31:27.534+0000] {docker.py:438} INFO - [32m[2025-09-18 07:31:27 INFO] Running experiment: GET API Load Test - User Timeline with JWT Auth
+[2025-09-18T07:31:27.538+0000] {docker.py:438} INFO - [32m[2025-09-18 07:31:27 INFO] Steady-state strategy: default
+[2025-09-18T07:31:27.539+0000] {docker.py:438} INFO - [32m[2025-09-18 07:31:27 INFO] Rollbacks strategy: default
+[2025-09-18T07:31:27.540+0000] {docker.py:438} INFO - [32m[2025-09-18 07:31:27 INFO] No steady state hypothesis defined. That's ok, just exploring.
+[2025-09-18T07:31:27.541+0000] {docker.py:438} INFO - [32m[2025-09-18 07:31:27 INFO] Playing your experiment's method now...
+[2025-09-18T07:31:27.541+0000] {docker.py:438} INFO - [32m[2025-09-18 07:31:27 INFO] Action: Load test GET user timeline API with JWT
+[2025-09-18T07:31:28.109+0000] {docker.py:438} INFO - [32m[2025-09-18 07:31:28 INFO] ✅ Obtained login_token (JWT): eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOiIxNzU4MTgwNjg3IiwidHRsIjoiMzYwMCIsInVzZXJfaWQiOiI1ODU1Njc0MTEwNjYzMTU5ODA4IiwidXNlcm5hbWUiOiJqYWdhbiJ9.sngX3i9huaJ6qZ5x0uS5pSHZlm7vMeni6qMMThJ0XXc
+[2025-09-18T07:34:52.807+0000] {docker.py:438} INFO - [32m[2025-09-18 07:34:52 INFO] ✅ Stress test completed successfully
+[2025-09-18T07:34:52.811+0000] {docker.py:438} INFO - [32m[2025-09-18 07:34:52 INFO] 📊 k6 summary saved to k6_summary.json
+[2025-09-18T07:34:52.812+0000] {docker.py:438} INFO - [32m[2025-09-18 07:34:52 INFO] 📈 Requests: 3456, Avg: 25884.58 ms, P95: 56186.77 ms
+[2025-09-18T07:34:52.813+0000] {docker.py:438} INFO - [32m[2025-09-18 07:34:52 INFO] k6 full output logged to k6_timeline_api.log
+[2025-09-18T07:34:52.814+0000] {docker.py:438} INFO - [32m[2025-09-18 07:34:52 INFO] Let's rollback...
+[2025-09-18T07:34:52.814+0000] {docker.py:438} INFO - [32m[2025-09-18 07:34:52 INFO] No declared rollbacks, let's move on.
+[2025-09-18T07:34:52.815+0000] {docker.py:438} INFO - [32m[2025-09-18 07:34:52 INFO] Experiment ended with status: completed
+[2025-09-18T07:34:53.245+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-09-18T07:34:53.245+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=Redis_K6_Parallel_Test, task_id=apply_k6_load_test, run_id=manual__2025-09-18T07:31:12.511998+00:00, execution_date=20250918T073112, start_date=20250918T073115, end_date=20250918T073453
+[2025-09-18T07:34:53.291+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-09-18T07:34:53.359+0000] {taskinstance.py:3900} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-09-18T07:34:53.362+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

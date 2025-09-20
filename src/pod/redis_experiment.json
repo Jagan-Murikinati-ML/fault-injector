@@ -13,7 +13,7 @@
         "arguments": {
           "host": "4.246.16.132",
           "port": 6379,
-          "limit_in_kb": 1,
+          "limit_in_kb": 100,
           "eviction_policy": "noeviction",
           "duration": 180
         }

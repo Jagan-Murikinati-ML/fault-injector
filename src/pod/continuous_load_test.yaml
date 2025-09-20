@@ -1,0 +1,38 @@
+version: "1.0.0"
+title: "Continuous Load Test - POST Compose & GET Timeline APIs"
+description: "Continuous load test with variable VUs (30-60) hitting both POST compose and GET timeline endpoints"
+tags: 
+  - "load-test"
+  - "continuous"
+  - "k6"
+  - "jwt-auth"
+  - "multi-endpoint"
+configuration:
+  env:
+    CHAOS_K6_USER: "priyanshu01ce"
+    CHAOS_K6_PASS: "patel"
+method:
+  - name: "Continuous multi-endpoint load test"
+    type: "action"
+    provider:
+      type: "python"
+      module: "chaosk6_actions"
+      func: "stress_continuous_multi_endpoint"
+      arguments:
+        endpoints:
+          - url: "http://4.154.253.199:8080/api/post/compose"
+            method: "POST"
+            body: "post_type=0&text=Continuous load test message"
+            weight: 40
+          - url: "http://4.154.253.199:8080/api/user-timeline/read?start=0&stop=100"
+            method: "GET"
+            weight: 60
+        min_vus: 20
+        max_vus: 40
+        ramp_duration: "2m"
+        steady_duration: "5m"
+        username: "jagan"
+        password: "maplelabs"
+        log_file: "k6_continuous_load.log"
+        continuous: true
+rollbacks: []

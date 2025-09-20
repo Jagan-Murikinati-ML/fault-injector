@@ -58,7 +58,7 @@ Redis_K6_Parallel_Test:
       command: >
         bash -c '
         cd /opt/airflow/src/pod &&
-        chaos run load_test.json'
+        chaos run redis_load.json'
 
     # Final validation after both complete
     - task_id: final_validation

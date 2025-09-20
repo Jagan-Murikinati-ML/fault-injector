@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "title": "Check MongoDB Runtime Parameters",
+  "description": "Check what parameters can be configured at runtime",
+  "method": [
+    {
+      "name": "check-runtime-params",
+      "type": "probe",
+      "provider": {
+        "type": "python",
+        "module": "mongodb_probes",
+        "func": "probe_runtime_parameters"
+      }
+    }
+  ]
+}
