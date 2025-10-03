@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+    meta.helm.sh/release-name: social-network
+    meta.helm.sh/release-namespace: default
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9121"
+  creationTimestamp: "2025-09-11T07:11:35Z"
+  generation: 2
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    service: social-graph-redis
+  name: social-graph-redis
+  namespace: social-network
+  resourceVersion: "47950"
+  uid: 00a715a4-dc9d-46a9-a8af-e9cfb3cb5ff3
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      service: social-graph-redis
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2025-09-11T09:37:16Z"
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9121"
+      creationTimestamp: null
+      labels:
+        app: social-graph-redis
+        service: social-graph-redis
+    spec:
+      containers:
+      - args:
+        - /social-network-microservices/config/redis.conf
+        image: docker.io/library/redis:6.2.4
+        imagePullPolicy: IfNotPresent
+        name: social-graph-redis
+        ports:
+        - containerPort: 6379
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 200m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /social-network-microservices/config/redis.conf
+          name: social-graph-redis-config
+          subPath: redis.conf
+      - name: redis-exporter
+        image: oliver006/redis_exporter:v1.48.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9121
+          protocol: TCP
+        env:
+        - name: REDIS_ADDR
+          value: "localhost:6379"
+        resources: {}
+      dnsPolicy: ClusterFirst
+      hostname: social-graph-redis
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: social-graph-redis
+        name: social-graph-redis-config
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2025-09-11T07:11:41Z"
+    lastUpdateTime: "2025-09-11T07:11:41Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2025-09-11T07:11:35Z"
+    lastUpdateTime: "2025-09-11T09:37:26Z"
+    message: ReplicaSet "social-graph-redis-7f755b87df" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
+

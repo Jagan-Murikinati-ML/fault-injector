@@ -1,0 +1,50 @@
+# Loki configuration
+loki:
+  enabled: true
+  persistence:
+    enabled: true
+    size: 10Gi
+  config:
+    table_manager:
+      retention_deletes_enabled: true
+      retention_period: 24h  # 1 day
+
+# Promtail configuration
+promtail:
+  enabled: true
+
+  # Fix positions file read-only issue
+  extraVolumes:
+    - name: positions
+      emptyDir: {}
+
+  extraVolumeMounts:
+    - name: positions
+      mountPath: /tmp
+
+  # Connect to Loki
+  clients:
+    - url: http://loki-stack:3100/loki/api/v1/push
+
+  # Scrape configs
+  scrape_configs:
+    - job_name: nginx
+      pipeline_stages:
+        - docker: {}
+      static_configs:
+        - targets:
+            - localhost
+          labels:
+            job: nginx
+            __path__: /var/log/pods/*/*/nginx-thrift/*.log
+
+    - job_name: redis
+      pipeline_stages:
+        - docker: {}
+      static_configs:
+        - targets:
+            - localhost
+          labels:
+            job: redis
+            __path__: /var/log/pods/*/*/user-timeline-redis/*.log
+
