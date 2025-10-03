@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    meta.helm.sh/release-name: social-network
+    meta.helm.sh/release-namespace: social-network
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    service: post-storage-mongodb
+  name: post-storage-mongodb
+  namespace: social-network
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      service: post-storage-mongodb
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2025-09-11T09:37:16Z"
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9216"
+        prometheus.io/path: "/metrics"
+      labels:
+        app: post-storage-mongodb
+        service: post-storage-mongodb
+    spec:
+      containers:
+      - args:
+        - --config
+        - /social-network-microservices/config/mongod.conf
+        image: docker.io/library/mongo:4.4.6
+        imagePullPolicy: IfNotPresent
+        name: post-storage-mongodb
+        ports:
+        - containerPort: 27017
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 200m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /social-network-microservices/config/mongod.conf
+          name: post-storage-mongodb-config
+          subPath: mongod.conf
+
+      # ---- MongoDB Exporter Sidecar ----
+      - name: mongodb-exporter
+        image: percona/mongodb_exporter:0.40.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9216
+          name: metrics
+          protocol: TCP
+        env:
+        - name: MONGODB_URI
+          value: "mongodb://post-storage-mongodb:27017/admin"   # <-- Replace with real URI or Secret
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+        args:
+        - --collect-all
+        - --compatible-mode
+
+      dnsPolicy: ClusterFirst
+      hostname: post-storage-mongodb
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: post-storage-mongodb
+        name: post-storage-mongodb-config
+

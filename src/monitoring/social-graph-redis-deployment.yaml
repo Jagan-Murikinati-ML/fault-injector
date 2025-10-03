@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: social-graph-redis
+  namespace: social-network
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    service: social-graph-redis
+  annotations:
+    meta.helm.sh/release-name: social-network
+    meta.helm.sh/release-namespace: social-network
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: social-graph-redis
+  template:
+    metadata:
+      labels:
+        app: social-graph-redis
+        service: social-graph-redis
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9121"
+    spec:
+      hostname: social-graph-redis
+      containers:
+      - name: social-graph-redis
+        image: docker.io/library/redis:6.2.4
+        imagePullPolicy: IfNotPresent
+        args:
+        - /social-network-microservices/config/redis.conf
+        ports:
+        - containerPort: 6379
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+        volumeMounts:
+        - name: social-graph-redis-config
+          mountPath: /social-network-microservices/config/redis.conf
+          subPath: redis.conf
+      - name: redis-exporter
+        image: oliver006/redis_exporter:v1.48.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9121
+          protocol: TCP
+        env:
+        - name: REDIS_ADDR
+          value: "localhost:6379"
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
+      volumes:
+      - name: social-graph-redis-config
+        configMap:
+          name: social-graph-redis

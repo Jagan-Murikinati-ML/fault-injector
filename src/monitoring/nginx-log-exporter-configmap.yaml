@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-log-exporter-config
+  namespace: social-network
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    service: nginx-thrift
+data:
+  config.yml: |
+    listen:
+      port: 4040
+      address: "0.0.0.0"
+
+    consul:
+      enable: false
+
+    namespaces:
+      - name: nginx
+        format: "$remote_addr - $remote_user [$time_local] \"$request\" $status $body_bytes_sent \"$http_referer\" \"$http_user_agent\" \"$http_x_forwarded_for\" $request_time"
+        source:
+          files:
+            - /var/log/nginx/access.log
+        labels:
+          service: "nginx-thrift"
+          environment: "production"
+        relabel_configs:
+          - source_labels: [request]
+            regex: '^(\w+)\s+([^\s]+)\s+.*'
+            target_label: method
+            replacement: '${1}'
+          - source_labels: [request]
+            regex: '^(\w+)\s+([^\s]+)\s+.*'
+            target_label: path
+            replacement: '${2}'

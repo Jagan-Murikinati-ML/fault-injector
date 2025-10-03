@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-timeline-redis
+  namespace: social-network
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    service: user-timeline-redis
+  annotations:
+    meta.helm.sh/release-name: social-network
+    meta.helm.sh/release-namespace: social-network
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: user-timeline-redis
+  template:
+    metadata:
+      labels:
+        app: user-timeline-redis
+        service: user-timeline-redis
+    spec:
+      hostname: user-timeline-redis
+      containers:
+      - name: user-timeline-redis
+        image: docker.io/library/redis:6.2.4
+        imagePullPolicy: IfNotPresent
+        args:
+        - /social-network-microservices/config/redis.conf
+        ports:
+        - containerPort: 6379
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+        volumeMounts:
+        - name: user-timeline-redis-config
+          mountPath: /social-network-microservices/config/redis.conf
+          subPath: redis.conf
+      - name: redis-exporter
+        image: oliver006/redis_exporter:v1.48.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9121
+          protocol: TCP
+        env:
+        - name: REDIS_ADDR
+          value: "localhost:6379"
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
+      volumes:
+      - name: user-timeline-redis-config
+        configMap:
+          name: user-timeline-redis
