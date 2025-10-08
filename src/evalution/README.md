@@ -29,10 +29,10 @@ pip install psycopg2-binary requests
 ```
 
 2️⃣ Test the Script
-# Test run
-python3 chaos-workflow.py
-```
+## Test run
 
+```
+python3 chaos-workflow.py
 ```
 
 🔧 Setup as a System Service
@@ -112,6 +112,7 @@ When working correctly, you should see logs similar to the following:
 📨 Processing notification: Memory_Stress_Test
 ✅ Created workflow: Memory_Stress_Test_manual__2025-10-08 (ID: 123)
 ```
+
 
 
 
