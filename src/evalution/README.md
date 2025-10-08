@@ -1,27 +1,41 @@
-🌀 Chaos Workflow Monitor
-📋 Overview
-This service monitors Airflow DAG workflows and automatically sends their status to the Chaos Workflow API for centralized tracking.
-Use Case: Automatically track chaos engineering experiments (e.g., Memory Stress, Container Restart, Node Cordon, etc.) from Airflow and sync them with external monitoring systems.
-________________________________________
-🚀 Quick Setup
-1. Create a Python Virtual Environment
-# Create virtual environment
+# 🌀 Chaos Workflow Monitor
+
+## 📋 Overview
+This service monitors **Airflow DAG workflows** and automatically sends their status to the **Chaos Workflow API** for centralized tracking.
+
+**Use Case:**  
+Automatically track chaos engineering experiments (e.g., **Memory Stress**, **Container Restart**, **Node Cordon**, etc.) from Airflow and sync them with external monitoring systems.
+
+---
+
+## 🚀 Quick Setup
+
+### 1️⃣ Create a Python Virtual Environment
+
+#### Create virtual environment
+```bash
 python3 -m venv chaos-workflow-env
-
-# Activate virtual environment
+Activate virtual environment
+bash
+Copy code
 source chaos-workflow-env/bin/activate
-
-# Install dependencies
+Install dependencies
+bash
+Copy code
 pip install psycopg2-binary requests
-________________________________________
-2. Test the Script
-# Test run
+2️⃣ Test the Script
+Test run
+bash
+Copy code
 python3 chaos-workflow.py
-________________________________________
 🔧 Setup as a System Service
-1. Create the Service File
+Create the Service File
+bash
+Copy code
 sudo nano /etc/systemd/system/chaos-workflow-monitor.service
 Paste the following content:
+ini
+Copy code
 [Unit]
 Description=Chaos Workflow Monitor Service
 After=network.target postgresql.service
@@ -41,49 +55,50 @@ Environment=PYTHONUNBUFFERED=1
 
 [Install]
 WantedBy=multi-user.target
-________________________________________
-2. Edit the Paths
-⚠️ IMPORTANT: Replace the placeholder values with your actual configuration.
-•	Replace your-username with your actual username (e.g., azureuser)
-•	Replace /path/to/your/project with your actual project path (e.g., /home/azureuser/fault-injector)
-________________________________________
-3. Enable and Start the Service
-# Reload systemd
+⚠️ Edit the Paths
+Replace the placeholders with your actual configuration:
+
+your-username → e.g., azureuser
+
+/path/to/your/project → e.g., /home/azureuser/fault-injector
+
+Enable and Start the Service
+Reload systemd
+bash
+Copy code
 sudo systemctl daemon-reload
-
-# Enable service (start on boot)
+Enable service (start on boot)
+bash
+Copy code
 sudo systemctl enable chaos-workflow-monitor.service
-
-# Start service
+Start service
+bash
+Copy code
 sudo systemctl start chaos-workflow-monitor.service
-________________________________________
-4. Check Service Status
+Check Service Status
+bash
+Copy code
 sudo systemctl status chaos-workflow-monitor.service
-________________________________________
-5. View Logs
-# Follow real-time logs
+View Logs
+Follow real-time logs
+bash
+Copy code
 sudo journalctl -u chaos-workflow-monitor.service -f
-________________________________________
 📊 Service Management
-# Start service
-sudo systemctl start chaos-workflow-monitor.service
+Action	Command
+Start service	sudo systemctl start chaos-workflow-monitor.service
+Stop service	sudo systemctl stop chaos-workflow-monitor.service
+Restart service	sudo systemctl restart chaos-workflow-monitor.service
+Check status	sudo systemctl status chaos-workflow-monitor.service
+View logs	sudo journalctl -u chaos-workflow-monitor.service -f
 
-# Stop service
-sudo systemctl stop chaos-workflow-monitor.service
-
-# Restart service
-sudo systemctl restart chaos-workflow-monitor.service
-
-# Check status
-sudo systemctl status chaos-workflow-monitor.service
-
-# View logs
-sudo journalctl -u chaos-workflow-monitor.service -f
-________________________________________
 ✅ Expected Output
 When working correctly, you should see logs similar to the following:
-✅ Database connected! Found X DAG runs
+
+yaml
+Copy code
+✅ Database connected!
+Found X DAG runs
 🎧 Listening for workflow changes...
 📨 Processing notification: Memory_Stress_Test
 ✅ Created workflow: Memory_Stress_Test_manual__2025-10-08 (ID: 123)
-
