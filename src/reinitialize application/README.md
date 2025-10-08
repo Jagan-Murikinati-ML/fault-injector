@@ -28,7 +28,9 @@ source k8s-actions-env/bin/activate
 
 # Install dependencies
 pip install kubernetes chaostoolkit chaostoolkit-kubernetes aiohttp
-2️⃣ Setup Kubernetes Access
+```
+### 2️⃣ Setup Kubernetes Access
+```
 bash
 Copy code
 # Ensure kubectl is configured
@@ -36,9 +38,10 @@ kubectl get pods
 
 # Or set KUBECONFIG if needed
 export KUBECONFIG=/path/to/your/kubeconfig
-3️⃣ Verify Dependencies
+```
+### 3️⃣ Verify Dependencies
 Make sure you have the required directory structure:
-
+```
 markdown
 Copy code
 project-root/
@@ -47,9 +50,10 @@ project-root/
 └── socialNetwork/
     └── scripts/
         └── init_social_graph.py
-🔧 Execution
+```
+### 🔧 Execution
 Run with Chaos Toolkit:
-
+```
 bash
 Copy code
 # Activate virtual environment
@@ -57,7 +61,9 @@ source k8s-actions-env/bin/activate
 
 # Execute the chaos experiment
 chaos run kubernetes_actions.json
-✅ Expected Output
+```
+### ✅ Expected Output
+```
 css
 Copy code
 [INFO] Starting full social network reset...
@@ -71,6 +77,7 @@ Copy code
 [INFO] Waiting 180 seconds for services to restart...
 [INFO] Reinitializing social network data...
 [INFO] Social network reinitialization completed successfully
+```
 🧩 Notes
 Ensure kubectl has access to your Kubernetes cluster.
 
