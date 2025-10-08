@@ -19,9 +19,6 @@ ________________________________________
 python3 chaos-workflow.py
 ________________________________________
 🔧 Setup as a System Service
-1. Create the Service File
-sudo nano /etc/systemd/system/chaos-workflow-monitor.service
-Paste the following content:
 [Unit]
 Description=Chaos Workflow Monitor Service
 After=network.target postgresql.service
@@ -86,4 +83,5 @@ When working correctly, you should see logs similar to the following:
 🎧 Listening for workflow changes...
 📨 Processing notification: Memory_Stress_Test
 ✅ Created workflow: Memory_Stress_Test_manual__2025-10-08 (ID: 123)
+
 
