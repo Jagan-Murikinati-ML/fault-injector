@@ -1,4 +1,3 @@
-Here’s a GitHub-ready README.md version of your Chaos Workflow Monitor guide — properly formatted in Markdown so it will render cleanly with emojis, headings, code blocks, and lists when pasted directly into GitHub 👇
 
 # 🌀 Chaos Workflow Monitor
 
@@ -97,3 +96,4 @@ When working correctly, you should see logs similar to the following:
 🎧 Listening for workflow changes...
 📨 Processing notification: Memory_Stress_Test
 ✅ Created workflow: Memory_Stress_Test_manual__2025-10-08 (ID: 123)
+
