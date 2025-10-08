@@ -1,41 +1,35 @@
-# 🌀 Chaos Workflow Monitor
+🌀 Chaos Workflow Monitor
 
-## 📋 Overview
-This service monitors **Airflow DAG workflows** and automatically sends their status to the **Chaos Workflow API** for centralized tracking.
+📋 Overview
+This service monitors Airflow DAG workflows and automatically sends their status to the Chaos Workflow API for centralized tracking.
 
-**Use Case:**  
-Automatically track chaos engineering experiments (e.g., **Memory Stress**, **Container Restart**, **Node Cordon**, etc.) from Airflow and sync them with external monitoring systems.
+Use Case:
+Automatically track chaos engineering experiments (e.g., Memory Stress, Container Restart, Node Cordon, etc.) from Airflow and sync them with external monitoring systems.
 
----
+🚀 Quick Setup
 
-## 🚀 Quick Setup
+1️⃣ Create a Python Virtual Environment
 
-### 1️⃣ Create a Python Virtual Environment
-
-#### Create virtual environment
-```bash
+Create virtual environment:
 python3 -m venv chaos-workflow-env
-Activate virtual environment
-bash
-Copy code
+
+Activate virtual environment:
 source chaos-workflow-env/bin/activate
-Install dependencies
-bash
-Copy code
+
+Install dependencies:
 pip install psycopg2-binary requests
+
 2️⃣ Test the Script
-Test run
-bash
-Copy code
+Run the script to verify:
 python3 chaos-workflow.py
+
 🔧 Setup as a System Service
-Create the Service File
-bash
-Copy code
+
+Create the Service File:
 sudo nano /etc/systemd/system/chaos-workflow-monitor.service
-Paste the following content:
-ini
-Copy code
+
+Paste the following:
+
 [Unit]
 Description=Chaos Workflow Monitor Service
 After=network.target postgresql.service
@@ -55,36 +49,27 @@ Environment=PYTHONUNBUFFERED=1
 
 [Install]
 WantedBy=multi-user.target
-⚠️ Edit the Paths
-Replace the placeholders with your actual configuration:
 
-your-username → e.g., azureuser
 
-/path/to/your/project → e.g., /home/azureuser/fault-injector
+⚠️ Edit the Paths:
 
-Enable and Start the Service
-Reload systemd
-bash
-Copy code
+Replace your-username → e.g., azureuser
+
+Replace /path/to/your/project → e.g., /home/azureuser/fault-injector
+
+▶️ Enable and Start the Service
+
+Reload systemd:
 sudo systemctl daemon-reload
-Enable service (start on boot)
-bash
-Copy code
+
+Enable service (start on boot):
 sudo systemctl enable chaos-workflow-monitor.service
-Start service
-bash
-Copy code
+
+Start service:
 sudo systemctl start chaos-workflow-monitor.service
-Check Service Status
-bash
-Copy code
-sudo systemctl status chaos-workflow-monitor.service
-View Logs
-Follow real-time logs
-bash
-Copy code
-sudo journalctl -u chaos-workflow-monitor.service -f
+
 📊 Service Management
+
 Action	Command
 Start service	sudo systemctl start chaos-workflow-monitor.service
 Stop service	sudo systemctl stop chaos-workflow-monitor.service
@@ -93,10 +78,9 @@ Check status	sudo systemctl status chaos-workflow-monitor.service
 View logs	sudo journalctl -u chaos-workflow-monitor.service -f
 
 ✅ Expected Output
-When working correctly, you should see logs similar to the following:
 
-yaml
-Copy code
+When working correctly, you’ll see logs like:
+
 ✅ Database connected!
 Found X DAG runs
 🎧 Listening for workflow changes...
