@@ -26,3 +26,7 @@ source chaos-workflow-env/bin/activate
 
 # Install dependencies
 pip install psycopg2-binary requests
+
+2️⃣ Test the Script
+# Test run
+python3 chaos-workflow.py
