@@ -26,19 +26,21 @@ source chaos-workflow-env/bin/activate
 
 # Install dependencies
 pip install psycopg2-binary requests
+```
 
 2️⃣ Test the Script
 # Test run
 python3 chaos-workflow.py
+```
 
 ```
 
 🔧 Setup as a System Service
-1️⃣ Create the Service File
+###1️⃣ Create the Service File
 ```
 sudo nano /etc/systemd/system/chaos-workflow-monitor.service
 ```
-Paste the following content:
+##Paste the following content:
 ```
 [Unit]
 Description=Chaos Workflow Monitor Service
@@ -60,12 +62,13 @@ Environment=PYTHONUNBUFFERED=1
 [Install]
 WantedBy=multi-user.target
 ```
-⚠️ Edit the Paths
+##⚠️ Edit the Paths
 
 Replace the placeholders with your actual configuration:
 
 your-username → e.g., azureuser
 
 /path/to/your/project → e.g., /home/azureuser/fault-injector
+
 
 
