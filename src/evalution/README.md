@@ -26,8 +26,8 @@ source chaos-workflow-env/bin/activate
 # Install dependencies
 pip install psycopg2-binary requests
 
-2️⃣ Test the Script
-# Test run
+###2️⃣ Test the Script
+## Test run
 python3 chaos-workflow.py
 
 🔧 Setup as a System Service
@@ -57,7 +57,7 @@ Environment=PYTHONUNBUFFERED=1
 [Install]
 WantedBy=multi-user.target
 
-2️⃣ Edit the Paths
+###2️⃣ Edit the Paths
 
 ⚠️ IMPORTANT: Replace the placeholders with your actual configuration.
 
@@ -96,4 +96,5 @@ When working correctly, you should see logs similar to the following:
 🎧 Listening for workflow changes...
 📨 Processing notification: Memory_Stress_Test
 ✅ Created workflow: Memory_Stress_Test_manual__2025-10-08 (ID: 123)
+
 
