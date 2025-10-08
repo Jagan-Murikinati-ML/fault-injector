@@ -28,15 +28,15 @@ source chaos-workflow-env/bin/activate
 pip install psycopg2-binary requests
 ```
 
-2️⃣ Test the Script
-## Test run
+## 2️⃣ Test the Script
+### Test run
 
 ```
 python3 chaos-workflow.py
 ```
 
-🔧 Setup as a System Service
-1️⃣ Create the Service File
+## 🔧 Setup as a System Service
+### 1️⃣ Create the Service File
 ```
 sudo nano /etc/systemd/system/chaos-workflow-monitor.service
 ```
@@ -70,7 +70,7 @@ your-username → e.g., azureuser
 
 /path/to/your/project → e.g., /home/azureuser/fault-injector
 
-3️⃣ Enable and Start the Service
+## 3️⃣ Enable and Start the Service
 ```
 # Reload systemd
 sudo systemctl daemon-reload
@@ -82,12 +82,12 @@ sudo systemctl enable chaos-workflow-monitor.service
 sudo systemctl start chaos-workflow-monitor.service
 
 ```
-4️⃣ Check Service Status
+## 4️⃣ Check Service Status
 ```
 sudo systemctl status chaos-workflow-monitor.service
 
 ```
-5️⃣ View Logs
+## 5️⃣ View Logs
 ```
 # Follow real-time logs
 sudo journalctl -u chaos-workflow-monitor.service -f
@@ -103,7 +103,7 @@ sudo journalctl -u chaos-workflow-monitor.service -f
 | 📜 View Logs       | `sudo journalctl -u chaos-workflow-monitor.service -f`  |
 
 ```
-✅ Expected Output
+## ✅ Expected Output
 
 When working correctly, you should see logs similar to the following:
 ```
@@ -112,6 +112,7 @@ When working correctly, you should see logs similar to the following:
 📨 Processing notification: Memory_Stress_Test
 ✅ Created workflow: Memory_Stress_Test_manual__2025-10-08 (ID: 123)
 ```
+
 
 
 
