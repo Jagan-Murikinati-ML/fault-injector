@@ -32,6 +32,9 @@ pip install psycopg2-binary requests
 python3 chaos-workflow.py
 
 ```
-###🔧 Setup as a System Service
+
+🔧 Setup as a System Service
 1️⃣ Create the Service File
+```
 sudo nano /etc/systemd/system/chaos-workflow-monitor.service
+
