@@ -1,49 +1,57 @@
-version: '3.9'
-
 x-airflow-common: &airflow-common
   build: .
-  image: apache/airflow:3.0.6
+  image: airflow_chaos:latest
   user: root
+  network_mode: "host"
   environment:
     AIRFLOW__CORE__EXECUTOR: CeleryExecutor
-    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
-    AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
-    AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@localhost:5433/airflow
+    AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@localhost:5433/airflow
+    AIRFLOW__CELERY__BROKER_URL: redis://:@localhost:6380/0
     AIRFLOW__CORE__FERNET_KEY: ''
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
     AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
-    KUBECONFIG: /opt/airflow/airflow-minikube/config
+    AIRFLOW__WEBSERVER__SECRET_KEY: 'your-secret-key'
+    AIRFLOW__WEBSERVER__CSRF_ENABLED: 'False'
+    WTF_CSRF_ENABLED: 'False'
+    KUBECONFIG: /root/.kube/config
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
-    - ../src:/opt/airflow/src  # Updated to mount the src directory
-    - ./airflow-minikube:/opt/airflow/airflow-minikube
+    - ../src:/opt/airflow/src
+    - ~/.kube/config:/root/.kube/config:ro
     - /var/run/docker.sock:/var/run/docker.sock
-    - ~/.kube/config:/root/.kube/config
+
+volumes:
+  postgres-db-volume:
 
 services:
   postgres:
     image: postgres:13
+    network_mode: "host"
     environment:
       POSTGRES_USER: airflow
       POSTGRES_PASSWORD: airflow
       POSTGRES_DB: airflow
+      PGPORT: 5433
     volumes:
       - postgres-db-volume:/var/lib/postgresql/data
     restart: always
 
   redis:
     image: redis:7.2
+    network_mode: "host"
+    command: redis-server --port 6380
     restart: always
 
   airflow-init:
     <<: *airflow-common
     entrypoint: >
       /bin/bash -c "
-      until pg_isready -h postgres -p 5432 -U airflow; do
+      until pg_isready -h localhost -p 5433 -U airflow; do
         echo 'Waiting for Postgres...'
         sleep 3
       done &&
@@ -56,9 +64,9 @@ services:
 
   airflow-webserver:
     <<: *airflow-common
-    command: webserver
-    ports:
-      - "8080:8080"
+    cap_add:
+    - NET_ADMIN
+    command: webserver --port 8080
     depends_on:
       - airflow-init
     restart: always
@@ -84,9 +92,3 @@ services:
       - airflow-init
     restart: always
 
-volumes:
-  postgres-db-volume:
-
-networks:
-  default:
-    name: airflow-fresh_default
