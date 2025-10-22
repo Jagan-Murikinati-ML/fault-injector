@@ -26,7 +26,7 @@
       "name": "complete-reset-and-reinit",
       "provider": {
         "type": "python",
-        "module": "kubernetes_actions",
+        "module": "reinit_target_application",
         "func": "complete_reset_and_reinit",
         "arguments": {
           "namespace": "${namespace}",
