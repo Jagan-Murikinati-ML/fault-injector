@@ -1,0 +1,29 @@
+{
+    "version": "1.0.0",
+    "title": "Continuous Memory Stress Experiment",
+    "description": "Apply memory stress continuously at specified intervals to trigger OOMKilled events",  
+    "method": [
+        {
+            "name": "continuous-memory-stress",
+            "type": "action",
+            "provider": {
+                "type": "python",
+                "module": "memory_stress",
+                "func": "stress_memory_continuous",
+                "arguments": {
+                    "name": "oom-stress",
+                    "workers": 1,
+                    "size": "512MB",
+                    "oom_score": 1000,
+                    "time_to_get_to_size": "1s",
+                    "label_selectors": "app=post-storage-service",
+                    "mode": "all",
+                    "ns": "default",
+                    "interval": 5,
+                    "duration": 300,
+                    "stress_duration": "3s"
+                }
+            }
+        }
+    ]
+}
