@@ -9,7 +9,7 @@
             "type": "action",
             "provider": {
                 "type": "python",
-                "module": "container",
+                "module": "container_restart",
                 "func": "restart_containers_continuous",
                 "arguments": {
                     "label_selector": "app=compose-post-service",
@@ -17,7 +17,7 @@
                     "rand": true,
                     "ns": "default",
                     "interval": 5,
-                    "duration": 200,
+                    "duration": 400,
                     "container_name": "compose-post-service"
                 }
             }
