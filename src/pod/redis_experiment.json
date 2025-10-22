@@ -1,0 +1,39 @@
+{
+  "version": "1.0.0",
+  "title": "Redis Pod Memory Stress Test",
+  "description": "Simulate Redis memory exhaustion and verify recovery",
+  "tags": ["redis", "kubernetes", "memory", "fault-injection"],
+  "method": [
+    {
+      "name": "redis-memory-stress-k8s",
+      "type": "action",
+      "provider": {
+        "type": "python",
+        "module": "redis_config_faults",
+        "func": "redis_memory_stress_test"
+      },
+      "arguments": {
+        "pod_label": "user-timeline-redis",
+        "namespace": "default",
+        "limit_in_kb": 100,
+        "eviction_policy": "noeviction",
+        "duration": 60
+      }
+    }
+  ],
+  "rollbacks": [
+    {
+      "name": "reset-redis-memory-k8s",
+      "type": "action",
+      "provider": {
+        "type": "python",
+        "module": "redis_config_faults",
+        "func": "reset_maxmemory"
+      },
+      "arguments": {
+        "pod_label": "user-timeline-redis",
+        "namespace": "default"
+      }
+    }
+  ]
+}
