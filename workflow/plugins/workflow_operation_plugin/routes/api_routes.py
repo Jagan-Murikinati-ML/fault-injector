@@ -7,46 +7,11 @@ import json
 import datetime
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel, Field
-from jinja2 import Environment, FileSystemLoader
-
-
- 
-print("WorkflowOperationPlugin FastAPI app loaded")
  
 app = FastAPI(title="WorkflowOperationPlugin", version="1.0.0")
- 
 
 
-print("WorkflowOperationPlugin FastAPI app loaded 21")
-# Load templates once at startup
-TEMPLATE_CONFIG_PATH = os.path.join(os.path.dirname(__file__), "../templates_config.yaml")
-try:
-    with open(TEMPLATE_CONFIG_PATH, "r") as f:
-        data = yaml.safe_load(f)
-        TEMPLATES = data.get("templates", [])
-except Exception as e:
-    TEMPLATES = []
-    print(f"Failed to load templates_config.yaml: {e}")
- 
-print("WorkflowOperationPlugin FastAPI app loaded 32") 
-
-
-
-# --- Configure Jinja template ---
-TEMPLATE_FILE = "dag_template.yaml.j2"  # your template file
 OUTPUT_DIR = "./generated_workflows"
-env = Environment(
-    loader=FileSystemLoader(
-        searchpath=os.path.join(os.path.dirname(__file__), "..")
-    )
-)
-
-def load_json_file(path):
-    if not os.path.exists(path):
-        raise FileNotFoundError(f"Template JSON not found: {path}")
-    with open(path, "r") as f:
-        return json.load(f)
-    
 
 
 @app.post("/user_operation")
@@ -59,8 +24,7 @@ async def user_operation(request: Request, filename: str = Query(..., descriptio
             raise HTTPException(status_code=400, detail=f"Invalid JSON: {str(e)}")
  
         # Ensure generated_workflows folder exists
-        folder = "./generated_workflows"
-        os.makedirs(folder, exist_ok=True)
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
  
         # Make filename safe and append .json
         safe_name = filename.lower().replace(" ", "_") + ".json"
@@ -89,8 +53,8 @@ class WorkflowRequest(BaseModel):
     description: str = Field("", description="Description of the workflow")
     schedule: str = Field("", description="Schedule for the workflow")
  
-@app.post("/workflow")
-def generate_user_workflow(payload: WorkflowRequest):
+@app.post("/fault")
+def generate_user_fault(payload: WorkflowRequest):
     """
     Save incoming workflow payload as JSON file in ./generated_workflow
     with filename based on dag_id only.
