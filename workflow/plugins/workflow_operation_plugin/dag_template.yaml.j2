@@ -1,0 +1,32 @@
+{{ workflow_name }}:
+  schedule: "@once"
+  start_date: "2025-01-18"
+  description: "Chaos Workflow DAG - Kubernetes Pod"
+  default_view: "graph"
+  orientation: "LR"
+  catchup: false
+  default_args:
+    owner: "airflow"
+    depends_on_past: false
+    retries: 0
+  tasks:
+{% for t in tasks %}
+    - task_id: "{{ t.task_id }}"
+      operator: airflow.providers.cncf.kubernetes.operators.pod.KubernetesPodOperator
+      name: "{{ t.name }}"
+      namespace: "{{ t.namespace | default('chaos-ops') }}"
+      image: "{{ t.image | default('airflow_chaos:latest') }}"
+      get_logs: true
+      is_delete_operator_pod: false
+      in_cluster: true
+      service_account_name: "{{ t.service_account_name | default('chaos-platform-sa') }}"
+      cmds:
+        - bash
+        - -c
+      arguments:
+        - |
+          cd /opt/airflow/src/pod
+          chaos run {{ t.json_file }}
+      env_vars:
+        KUBECONFIG: "/root/.kube/config"
+{% endfor %}
