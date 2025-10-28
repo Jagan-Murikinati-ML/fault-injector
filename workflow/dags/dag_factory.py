@@ -64,7 +64,7 @@ def create_dag_from_config(config_file_path):
         namespace=DEFAULT_NAMESPACE,
         image=DEFAULT_IMAGE,
         get_logs=True,
-        is_delete_operator_pod=False,
+        is_delete_operator_pod=True,
         in_cluster=True,
         service_account_name=DEFAULT_SERVICE_ACCOUNT,
         cmds=["bash", "-c"],
