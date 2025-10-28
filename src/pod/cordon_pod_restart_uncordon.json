@@ -1,11 +1,11 @@
 {
     "version": "1.0.0",
-    "title": "Cordon-Pod Restart-Uncordon Combined Experiment",
-    "description": "Cordon nodes, run continuous pod restarts, then uncordon nodes to test scheduling and resilience",
+    "title": "Cordon-Pod Restart Combined Experiment",
+    "description": "Cordon nodes, run continuous pod restarts during cordon period, with automatic uncordon in rollbacks",
     "tags": ["node-cordon", "pod-restart", "scheduling", "resilience", "chaos-engineering"],
     "method": [
         {
-            "name": "step-1-cordon-nodes",
+            "name": "cordon-nodes",
             "type": "action",
             "provider": {
                 "type": "python",
@@ -17,24 +17,7 @@
             }
         },
         {
-            "name": "step-2-verify-nodes-cordoned",
-            "type": "probe",
-            "provider": {
-                "type": "python",
-                "module": "chaosk8s.node.probes",
-                "func": "get_nodes",
-                "arguments": {
-                    "label_selector": "agentpool=agentpool"
-                }
-            },
-            "tolerance": {
-                "type": "jsonpath",
-                "path": "$[*].spec.unschedulable",
-                "expect": [true, true]
-            }
-        },
-        {
-            "name": "step-3-continuous-pod-restart-during-cordon",
+            "name": "continuous-pod-restart-during-cordon",
             "type": "action",
             "provider": {
                 "type": "python",
@@ -49,57 +32,16 @@
                     "duration": 300
                 }
             }
-        },
-        {
-            "name": "step-4-uncordon-nodes",
-            "type": "action",
-            "provider": {
-                "type": "python",
-                "module": "chaosk8s.node.actions",
-                "func": "uncordon_node",
-                "arguments": {
-                    "label_selector": "agentpool=agentpool"
-                }
-            }
-        },
-        {
-            "name": "step-5-verify-nodes-uncordoned",
-            "type": "probe",
-            "provider": {
-                "type": "python",
-                "module": "chaosk8s.node.probes",
-                "func": "get_nodes",
-                "arguments": {
-                    "label_selector": "agentpool=agentpool"
-                }
-            },
-            "tolerance": {
-                "type": "jsonpath",
-                "path": "$[*].spec.unschedulable",
-                "expect": [null, null]
-            }
         }
     ],
     "rollbacks": [
         {
-            "name": "emergency-uncordon-all-nodes",
+            "name": "uncordon-all-nodes",
             "type": "action",
             "provider": {
                 "type": "python",
                 "module": "chaosk8s.node.actions",
                 "func": "uncordon_node",
-                "arguments": {
-                    "label_selector": "agentpool=agentpool"
-                }
-            }
-        },
-        {
-            "name": "verify-rollback-complete",
-            "type": "probe",
-            "provider": {
-                "type": "python",
-                "module": "chaosk8s.node.probes",
-                "func": "get_nodes",
                 "arguments": {
                     "label_selector": "agentpool=agentpool"
                 }
