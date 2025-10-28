@@ -1,27 +1,29 @@
 {
     "version": "1.0.0",
-    "title": "Continuous Memory Stress Experiment",
-    "description": "Apply memory stress continuously at specified intervals to trigger OOMKilled events",  
+    "title": "Repeated Gradual Memory Stress Experiment",
+    "description": "Repeatedly perform gradual memory ramp to OOM over total duration",
     "method": [
         {
-            "name": "continuous-memory-stress",
+            "name": "repeated-gradual-memory-stress",
             "type": "action",
             "provider": {
                 "type": "python",
-                "module": "memory_stress",
-                "func": "stress_memory_continuous",
+                "module": "continuos_memory_stress",
+                "func": "stress_memory_gradual_cycles",
                 "arguments": {
-                    "name": "oom-stress",
+                    "name": "gradual-oom-stress",
                     "workers": 1,
-                    "size": "512MB",
+                    "start_size": "50MB",
+                    "max_size": "300MB",
+                    "increment_mb":80,
                     "oom_score": 1000,
-                    "time_to_get_to_size": "1s",
                     "label_selectors": "app=post-storage-service",
                     "mode": "all",
                     "ns": "default",
-                    "interval": 5,
-                    "duration": 300,
-                    "stress_duration": "3s"
+                    "interval": 10,
+                    "ramp_duration": 50,
+                    "total_duration": 300,
+                    "recovery_wait": 15
                 }
             }
         }
