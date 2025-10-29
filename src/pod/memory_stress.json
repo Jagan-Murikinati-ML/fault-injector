@@ -8,7 +8,7 @@
             "type": "action",
             "provider": {
                 "type": "python",
-                "module": "continuos_memory_stress",
+                "module": "memory_stress",
                 "func": "stress_memory_gradual_cycles",
                 "arguments": {
                     "name": "gradual-oom-stress",
