@@ -30,7 +30,6 @@ RUN pip install --no-cache-dir \
         chaostoolkit-kubernetes \
         chaostoolkit-k6 \
         kubernetes \
-        dag-factory \
         psycopg2-binary \
         redis \
         pymongo
