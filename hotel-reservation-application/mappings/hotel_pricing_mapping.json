@@ -1,0 +1,32 @@
+{
+  "mappings": {
+    "properties": {
+      "hotel_id": {"type": "keyword"},
+      "room_type": {"type": "keyword"},
+      "date": {"type": "date"},
+      "base_price": {"type": "float"},
+      "final_price": {"type": "float"},
+      "currency": {"type": "keyword"},
+      "season_type": {"type": "keyword"},
+      "demand_multiplier": {"type": "float"},
+      "discounts": {
+        "properties": {
+          "early_bird": {"type": "float"},
+          "loyalty": {"type": "float"},
+          "promo_code": {"type": "keyword"},
+          "promo_discount": {"type": "float"}
+        }
+      },
+      "taxes": {
+        "properties": {
+          "service_tax": {"type": "float"},
+          "gst": {"type": "float"},
+          "city_tax": {"type": "float"}
+        }
+      },
+      "pricing_rule_id": {"type": "keyword"},
+      "created_by": {"type": "keyword"},
+      "timestamp": {"type": "date"}
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "mappings": {
+    "properties": {
+      "id": {"type": "keyword"},
+      "name": {"type": "text"},
+      "description": {"type": "text"},
+      "city": {
+        "type": "text",
+        "fields": {"keyword": {"type": "keyword"}}
+      },
+      "address": {"type": "text"},
+      "phone": {"type": "keyword"},
+      "email": {"type": "keyword"},
+      "check_in_time": {"type": "keyword"},
+      "check_out_time": {"type": "keyword"},
+      "current_pricing": {
+        "properties": {
+          "min_price": {"type": "float"},
+          "max_price": {"type": "float"},
+          "currency": {"type": "keyword"}
+        }
+      },
+      "current_rating": {
+        "properties": {
+          "avg_rating": {"type": "float"},
+          "total_reviews": {"type": "integer"}
+        }
+      },
+      "hotel_policies": {
+        "properties": {
+          "free_cancellation": {"type": "boolean"},
+          "prepayment_needed": {"type": "boolean"},
+          "cancellation_hours": {"type": "integer"},
+          "pets_allowed": {"type": "boolean"}
+        }
+      },
+      "hotel_amenities": {
+        "properties": {
+          "complementary_breakfast": {"type": "boolean"},
+          "parking_available": {"type": "boolean"},
+          "wifi": {"type": "boolean"},
+          "pool": {"type": "boolean"},
+          "gym": {"type": "boolean"},
+          "restaurant": {"type": "boolean"},
+          "bar": {"type": "boolean"},
+          "room_service": {"type": "boolean"}
+        }
+      },
+      "room_types": {
+        "type": "nested",
+        "properties": {
+          "type": {"type": "keyword"},
+          "name": {"type": "text"},
+          "description": {"type": "text"},
+          "total_rooms": {"type": "integer"},
+          "price_per_night_per_room": {"type": "float"},
+          "max_occupancy": {"type": "integer"},
+          "size_sqft": {"type": "integer"},
+          "bed_configuration": {
+            "properties": {
+              "bed_type": {"type": "keyword"},
+              "bed_count": {"type": "integer"},
+              "bed_size": {"type": "keyword"},
+              "sofa_bed": {"type": "boolean"},
+              "extra_bed_available": {"type": "boolean"}
+            }
+          },
+          "room_amenities": {
+            "properties": {
+              "air_conditioning": {"type": "boolean"},
+              "wifi": {"type": "boolean"},
+              "tv": {"type": "boolean"},
+              "minibar": {"type": "boolean"},
+              "safe": {"type": "boolean"},
+              "balcony": {"type": "boolean"},
+              "kitchenette": {"type": "boolean"}
+            }
+          }
+        }
+      },
+      "is_sponsored": {"type": "boolean"},
+      "sponsorship": {
+        "properties": {
+          "priority": {"type": "integer"}
+        }
+      },
+      "last_updated": {"type": "date"}
+    }
+  }
+}
+

@@ -1,0 +1,99 @@
+services:
+  nodejs-bff:
+    build: ./src/backend/services/nodejs-bff
+    ports:
+      - "3000:3000"
+    environment:
+      - SEARCH_SERVICE_URL=http://search-service:8000
+      - AUTH_SERVICE_URL=http://authentication-service:9000
+      - JWT_SECRET=MyApp-Super-Secret-Key-2024-Docker
+    depends_on:
+      - search-service
+      - authentication-service
+    volumes:
+      - ./src/backend/services/nodejs-bff:/app
+      - /app/node_modules
+    networks:
+      - hotel_network
+
+  search-service:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - JWT_SECRET=MyApp-Super-Secret-Key-2024-Docker
+    depends_on:
+      - elasticsearch
+    volumes:
+      - .:/app
+    command: uvicorn src.backend.services.search_service.main:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - hotel_network
+
+  authentication-service:
+    build: ./src/backend/services/authentication
+    ports:
+      - "9000:9000"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/hotel_auth_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+      - JWT_SECRET=MyApp-Super-Secret-Key-2024-Docker
+    depends_on:
+      - postgres
+    networks:
+      - hotel_network
+
+  postgres:
+    image: postgres:16
+    container_name: hotel_postgres
+    environment:
+      POSTGRES_DB: hotel_auth_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - hotel_network
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    networks:
+      - hotel_network
+
+  frontend:
+    build: ./src/frontend/hotel-reservation-ui
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+    volumes:
+      - ./src/frontend/hotel-reservation-ui:/app
+      - /app/node_modules
+    networks:
+      - hotel_network
+
+volumes:
+  es_data:
+  postgres_data:
+
+networks:
+  hotel_network:
+    driver: bridge
+
+
+
+
+
+

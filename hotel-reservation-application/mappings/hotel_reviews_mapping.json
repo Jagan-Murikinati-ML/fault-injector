@@ -1,0 +1,35 @@
+{
+  "mappings": {
+    "properties": {
+      "hotel_id": {"type": "keyword"},
+      "customer_id": {"type": "keyword"},
+      "booking_id": {"type": "keyword"},
+      "rating": {"type": "float"},
+      "review_text": {
+        "type": "text",
+        "analyzer": "standard"
+      },
+      "review_title": {
+        "type": "text",
+        "analyzer": "standard"
+      },
+      "room_type": {"type": "keyword"},
+      "stay_date": {"type": "date"},
+      "review_date": {"type": "date"},
+      "verified_stay": {"type": "boolean"},
+      "helpful_votes": {"type": "integer"},
+      "customer_type": {"type": "keyword"},
+      "trip_type": {"type": "keyword"},
+      "aspects": {
+        "properties": {
+          "cleanliness": {"type": "float"},
+          "service": {"type": "float"},
+          "location": {"type": "float"},
+          "value_for_money": {"type": "float"},
+          "amenities": {"type": "float"}
+        }
+      },
+      "timestamp": {"type": "date"}
+    }
+  }
+}
