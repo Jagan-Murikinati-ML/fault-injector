@@ -193,7 +193,7 @@ function App() {
       // Room type filter
       if (newFilters.room_types && newFilters.room_types.length > 0) {
         const hasRoomType = newFilters.room_types.some(roomType => 
-          hotel.rooms?.some(room => room.room_type === roomType)
+          hotel.room_types?.some(room => room.type === roomType)
         );
         if (!hasRoomType) {
           return false;
@@ -202,7 +202,7 @@ function App() {
       
       // Guests/occupancy filter
       if (newFilters.guests) {
-        const maxOccupancy = Math.max(...(hotel.rooms?.map(room => room.max_occupancy) || [0]));
+        const maxOccupancy = Math.max(...(hotel.room_types?.map(room => room.max_occupancy) || [0]));
         if (maxOccupancy < newFilters.guests) {
           return false;
         }
@@ -290,18 +290,6 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
