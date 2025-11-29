@@ -9,16 +9,33 @@ class HotelSearchService:
         self.es = es_client
         self.index_name = "hotels"
     
-    async def search_hotels(self, search_params: Dict) -> Dict:
+    async def search_hotels(self, city=None, checkin=None, checkout=None, guests=None, min_price=None, max_price=None, amenities=None) -> Dict:
         """Search hotels with filters and sorting"""
+        print("=== SEARCH_HOTELS FUNCTION CALLED ===")
+        print(f"Parameters: city={city}, checkin={checkin}, checkout={checkout}, guests={guests}")
+        print("=== FUNCTION START ===")
+        
         try:
-            query = self._build_search_query(search_params)
+            search_params = {
+                "location": city,
+                "checkin_date": checkin,
+                "checkout_date": checkout,
+                "guests": guests,
+                "price_min": min_price,
+                "price_max": max_price,
+                "amenities": amenities
+            }
             
+            query = self._build_search_query(search_params)
+
+            # Add debug logging
+            import json
+            logger.info(f"Elasticsearch query: {json.dumps(query, indent=2)}")
+
             response = self.es.search(
                 index=self.index_name,
                 body=query,
-                from_=(search_params.get("page", 1) - 1) * search_params.get("limit", 20),
-                size=search_params.get("limit", 20)
+                size=100  # Return up to 100 hotels
             )
             
             return self._format_search_response(response, search_params)
@@ -29,9 +46,17 @@ class HotelSearchService:
     
     def _build_search_query(self, params: Dict) -> Dict:
         """Build Elasticsearch query"""
-        must_filters = [
-            {"match": {"city": {"query": params["location"], "operator": "and"}}}
-        ]
+        must_filters = []
+
+        if params.get("location"):
+            must_filters.append({
+                "match": {
+                    "city": {
+                        "query": params["location"],
+                        "operator": "and"
+                    }
+                }
+            })
         
         # Add rating filter if provided
         if params.get("rating_min"):
@@ -85,7 +110,7 @@ class HotelSearchService:
             sort_order.append({"current_pricing.min_price": {"order": "desc"}})
         
         return {
-            "query": {"bool": {"filter": must_filters}},
+            "query": {"bool": {"must": must_filters}},
             "sort": sort_order
         }
     
@@ -98,9 +123,7 @@ class HotelSearchService:
         
         return {
             "hotels": hotels,
-            "total": response["hits"]["total"]["value"],
-            "page": search_params.get("page", 1),
-            "limit": search_params.get("limit", 20)
+            "total": response["hits"]["total"]["value"]
         }
     
     async def get_filters(self, location: str) -> Dict:
@@ -220,6 +243,40 @@ class HotelSearchService:
         except Exception as e:
             logger.error(f"Error searching cities: {e}")
             return {"cities": [], "error": str(e)}
+    
+    async def get_hotel_by_id(self, hotel_id: str) -> Dict:
+        """Get hotel details by ID"""
+        try:
+            response = self.es.search(
+                index=self.index_name,
+                body={
+                    "query": {"term": {"id": hotel_id}},
+                    "size": 1
+                }
+            )
+            
+            if response["hits"]["total"]["value"] > 0:
+                return {"hotel": response["hits"]["hits"][0]["_source"]}
+            else:
+                return {"error": f"Hotel {hotel_id} not found"}
+            
+        except Exception as e:
+            logger.error(f"Error getting hotel {hotel_id}: {e}")
+            return {"error": f"Hotel {hotel_id} not found"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

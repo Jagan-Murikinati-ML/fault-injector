@@ -2,10 +2,10 @@
 -- Complete booking information (all booking data + additional details)
 CREATE TABLE booking_details (
     booking_detail_id BIGSERIAL PRIMARY KEY,
-    booking_id BIGINT NOT NULL REFERENCES bookings(booking_id) ON DELETE CASCADE,
+    booking_id BIGINT NOT NULL REFERENCES booking_info(booking_id) ON DELETE CASCADE,
     
     -- All booking info duplicated for complete record
-    user_id BIGINT NOT NULL,
+    user_id VARCHAR(50), -- Changed from BIGINT to VARCHAR for username
     hotel_id VARCHAR(50) NOT NULL,
     checkin_date DATE NOT NULL,
     checkout_date DATE NOT NULL,
@@ -22,6 +22,7 @@ CREATE TABLE booking_details (
     
     -- Additional details
     invoice_number VARCHAR(50) UNIQUE NOT NULL,
+    invoice_details JSONB DEFAULT '{}',
     payment_status VARCHAR(20) DEFAULT 'PENDING' CHECK (payment_status IN ('PENDING', 'PAID', 'FAILED', 'REFUNDED')),
     payment_method VARCHAR(30),
     payment_reference VARCHAR(100),
@@ -39,7 +40,7 @@ CREATE TABLE booking_details (
 );
 
 -- Indexes
-CREATE INDEX idx_bookings_user_id ON bookings(user_id);
-CREATE INDEX idx_bookings_hotel_id ON bookings(hotel_id);
-CREATE INDEX idx_booking_rooms_booking_id ON booking_rooms(booking_id);
 CREATE INDEX idx_booking_details_booking_id ON booking_details(booking_id);
+CREATE INDEX idx_booking_details_invoice ON booking_details(invoice_number);
+
+

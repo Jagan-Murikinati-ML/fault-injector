@@ -6,10 +6,12 @@ services:
     environment:
       - SEARCH_SERVICE_URL=http://search-service:8000
       - AUTH_SERVICE_URL=http://authentication-service:9000
+      - BOOKING_SERVICE_URL=http://booking-service:8001
       - JWT_SECRET=MyApp-Super-Secret-Key-2024-Docker
     depends_on:
       - search-service
       - authentication-service
+      - booking-service
     volumes:
       - ./src/backend/services/nodejs-bff:/app
       - /app/node_modules
@@ -17,7 +19,7 @@ services:
       - hotel_network
 
   search-service:
-    build: .
+    build: ./src/backend/services/search_service
     ports:
       - "8000:8000"
     environment:
@@ -26,8 +28,7 @@ services:
     depends_on:
       - elasticsearch
     volumes:
-      - .:/app
-    command: uvicorn src.backend.services.search_service.main:app --host 0.0.0.0 --port 8000 --reload
+      - ./src/backend/services/search_service:/app
     networks:
       - hotel_network
 
@@ -45,11 +46,30 @@ services:
     networks:
       - hotel_network
 
+  booking-service:
+    build: ./src/backend/services/booking_service
+    ports:
+      - "8001:8001"
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=hotel_booking_db
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - JWT_SECRET=MyApp-Super-Secret-Key-2024-Docker
+      - SEARCH_SERVICE_URL=http://search-service:8000
+    depends_on:
+      - postgres
+      - search-service
+    volumes:
+      - ./src/backend/services/booking_service:/app
+    networks:
+      - hotel_network
+
   postgres:
     image: postgres:16
     container_name: hotel_postgres
     environment:
-      POSTGRES_DB: hotel_auth_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     ports:
@@ -91,6 +111,9 @@ volumes:
 networks:
   hotel_network:
     driver: bridge
+
+
+
 
 
 

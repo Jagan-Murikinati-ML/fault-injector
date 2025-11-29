@@ -1,0 +1,202 @@
+# Quick cURL Commands for Booking Service Testing
+
+# ============================================
+# 1. HEALTH CHECK
+# ============================================
+curl http://localhost:8001/health
+
+
+# ============================================
+# 2. GET BOOKED ROOMS - Basic
+# ============================================
+curl -X GET "http://localhost:8001/booking/booked-rooms?hotel_id=H001&checkin_date=2024-12-01&checkout_date=2024-12-05&room_types=DELUXE,SUITE,STANDARD"
+
+
+# ============================================
+# 3. GET BOOKED ROOMS - With Pretty Print (requires jq)
+# ============================================
+curl -X GET "http://localhost:8001/booking/booked-rooms?hotel_id=H001&checkin_date=2024-12-01&checkout_date=2024-12-05&room_types=DELUXE,SUITE,STANDARD" | jq
+
+
+# ============================================
+# 4. GET BOOKED ROOMS - Different Date Range
+# ============================================
+curl -X GET "http://localhost:8001/booking/booked-rooms?hotel_id=H001&checkin_date=2024-12-10&checkout_date=2024-12-15&room_types=DELUXE,SUITE,STANDARD"
+
+
+# ============================================
+# 5. GET BOOKED ROOMS - Different Hotel
+# ============================================
+curl -X GET "http://localhost:8001/booking/booked-rooms?hotel_id=H002&checkin_date=2024-12-01&checkout_date=2024-12-05&room_types=DELUXE,SUITE"
+
+
+# ============================================
+# 6. GET BOOKED ROOMS - Single Room Type
+# ============================================
+curl -X GET "http://localhost:8001/booking/booked-rooms?hotel_id=H001&checkin_date=2024-12-01&checkout_date=2024-12-05&room_types=DELUXE"
+
+
+# ============================================
+# 7. CREATE BOOKING
+# ============================================
+curl -X POST "http://localhost:8001/booking/book-hotel" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "hotel_id": "hotel_001",
+    "user_id": "npriya1979",
+    "checkin_date": "2025-11-30",
+    "checkout_date": "2025-12-04",
+    "total_guests": 2,
+    "rooms": [
+      {
+        "room_type_code": "deluxe",
+        "booking_date": "2025-11-30",
+        "rooms_count": 2,
+        "cost_per_room_per_night": 8000.00
+      },
+      {
+        "room_type_code": "deluxe",
+        "booking_date": "2025-12-01",
+        "rooms_count": 2,
+        "cost_per_room_per_night": 8000.00
+      },
+      {
+        "room_type_code": "deluxe",
+        "booking_date": "2025-12-02",
+        "rooms_count": 2,
+        "cost_per_room_per_night": 8000.00
+      },
+      {
+        "room_type_code": "deluxe",
+        "booking_date": "2025-12-03",
+        "rooms_count": 2,
+        "cost_per_room_per_night": 8000.00
+      }
+    ],
+    "currency": "INR",
+    "guest_details": {
+      "guest_name": "Priya Sharma",
+      "guest_email": "priya.sharma@email.com",
+      "guest_phone": "+91-9876543210"
+    },
+    "special_requests": "Late checkout if possible",
+    "cancellation_policy": {
+      "cancellation_policy_type": "FREE",
+      "free_cancellation_hours": 24,
+      "cancellation_fee_percentage": 0.00,
+      "refund_policy": "Full refund if cancelled 24 hours before checkin"
+    }
+  }'
+
+
+# ============================================
+# 8. CREATE BOOKING - MORE ROOMS THAN AVAILABLE (Should Fail)
+# ============================================
+curl -X POST "http://localhost:8001/booking/book-hotel" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "hotel_id": "hotel_001",
+    "user_id": "test_user_2",
+    "checkin_date": "2025-11-30",
+    "checkout_date": "2025-12-04",
+    "total_guests": 2,
+    "rooms": [
+      {
+        "room_type_code": "deluxe",
+        "booking_date": "2025-11-30",
+        "rooms_count": 1,
+        "cost_per_room_per_night": 8000.00
+      },
+      {
+        "room_type_code": "deluxe",
+        "booking_date": "2025-12-01",
+        "rooms_count": 1,
+        "cost_per_room_per_night": 8000.00
+      },
+      {
+        "room_type_code": "deluxe",
+        "booking_date": "2025-12-02",
+        "rooms_count": 1,
+        "cost_per_room_per_night": 8000.00
+      },
+      {
+        "room_type_code": "deluxe",
+        "booking_date": "2025-12-03",
+        "rooms_count": 1,
+        "cost_per_room_per_night": 8000.00
+      }
+    ],
+    "currency": "INR",
+    "guest_details": {
+      "guest_name": "Test User",
+      "guest_email": "test@email.com",
+      "guest_phone": "+91-9876543210"
+    },
+    "special_requests": "Testing availability check",
+    "cancellation_policy": {
+      "cancellation_policy_type": "FREE",
+      "free_cancellation_hours": 24,
+      "cancellation_fee_percentage": 0.00,
+      "refund_policy": "Full refund if cancelled 24 hours before checkin"
+    }
+  }'
+
+
+# ============================================
+# POWERSHELL COMMANDS (Windows)
+# ============================================
+
+# Health Check
+Invoke-RestMethod -Uri "http://localhost:8001/health" -Method Get
+
+# Get Booked Rooms
+$uri = "http://localhost:8001/booking/booked-rooms?hotel_id=H001&checkin_date=2024-12-01&checkout_date=2024-12-05&room_types=DELUXE,SUITE,STANDARD"
+Invoke-RestMethod -Uri $uri -Method Get | ConvertTo-Json -Depth 10
+
+
+# ============================================
+# DOCKER COMMANDS
+# ============================================
+
+# Start booking service
+docker-compose up booking-service postgres
+
+# View logs
+docker-compose logs -f booking-service
+
+# Restart service
+docker-compose restart booking-service
+
+# Stop service
+docker-compose stop booking-service
+
+
+# ============================================
+# DATABASE COMMANDS
+# ============================================
+
+# Create database (if not exists)
+docker exec -it hotel_postgres psql -U postgres -c "CREATE DATABASE hotel_booking_db;"
+
+# Run schema scripts
+docker exec -i hotel_postgres psql -U postgres -d hotel_booking_db < database/schema/booking_info.sql
+docker exec -i hotel_postgres psql -U postgres -d hotel_booking_db < database/schema/booked_rooms.sql
+
+# Connect to database
+docker exec -it hotel_postgres psql -U postgres -d hotel_booking_db
+
+# Check tables
+docker exec -it hotel_postgres psql -U postgres -d hotel_booking_db -c "\dt"
+
+# Query booked rooms
+docker exec -it hotel_postgres psql -U postgres -d hotel_booking_db -c "SELECT * FROM booked_rooms LIMIT 10;"
+
+
+
+
+
+
+
+
+
+

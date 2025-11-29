@@ -91,21 +91,21 @@ const SearchForm = ({ onSearch, loading }) => {
             ))}
           </select>
         </div>
+        
+        <button 
+          type="submit" 
+          className="search-button"
+          disabled={loading}
+        >
+          {loading ? 'Searching...' : 'Search Hotels'}
+        </button>
       </form>
-      
-      <button 
-        type="submit" 
-        className="search-button"
-        onClick={handleSubmit}
-        disabled={loading}
-      >
-        {loading ? 'Searching...' : 'Search Hotels'}
-      </button>
     </div>
   );
 };
 
 export default SearchForm;
+
 
 
 

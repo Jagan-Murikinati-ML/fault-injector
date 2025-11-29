@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Query, Depends
 from typing import Optional, List
 from elasticsearch import Elasticsearch
-from ..services.hotel_search_service import HotelSearchService
-from ..auth import verify_token
+from services.hotel_search_service import HotelSearchService
+from auth import verify_token
 import os
 
 router = APIRouter()
@@ -53,7 +53,15 @@ async def search_hotels(
         "room_type": room_type
     }
     
-    return await hotel_service.search_hotels(search_params)
+    return await hotel_service.search_hotels(
+        city=location,
+        checkin=checkin_date,
+        checkout=checkout_date,
+        guests=guests,
+        min_price=price_min,
+        max_price=price_max,
+        amenities=amenities
+    )
 
 @router.get("/search/filters")
 async def get_filters(
@@ -75,13 +83,12 @@ async def search_cities(
 ):
     return await hotel_service.search_cities(q, limit)
 
-
-
-
-
-
-
-
+@router.get("/hotels/{hotel_id}")
+async def get_hotel_details(
+    hotel_id: str,
+    hotel_service: HotelSearchService = Depends(get_hotel_search_service)
+):
+    return await hotel_service.get_hotel_by_id(hotel_id)
 
 
 
