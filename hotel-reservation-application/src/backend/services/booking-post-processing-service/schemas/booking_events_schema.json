@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Booking Event Schema",
+  "type": "object",
+  "required": [
+    "message_version",
+    "event_type", 
+    "timestamp",
+    "source_service",
+    "booking_id",
+    "hotel_id",
+    "user_id",
+    "checkin_date",
+    "checkout_date",
+    "total_nights",
+    "total_guests",
+    "total_amount",
+    "currency",
+    "booking_status",
+    "guest_details",
+    "rooms",
+    "cancellation_policy"
+  ],
+  "properties": {
+    "message_version": {
+      "type": "string",
+      "enum": ["v1"]
+    },
+    "event_type": {
+      "type": "string",
+      "enum": ["booking_created"]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_service": {
+      "type": "string",
+      "enum": ["booking-service"]
+    },
+    "booking_id": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "hotel_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "user_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "checkin_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "checkout_date": {
+      "type": "string", 
+      "format": "date"
+    },
+    "total_nights": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "total_guests": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "total_amount": {
+      "type": "number",
+      "minimum": 0
+    },
+    "currency": {
+      "type": "string",
+      "enum": ["INR", "USD", "EUR"]
+    },
+    "booking_status": {
+      "type": "string",
+      "enum": ["CONFIRMED", "CANCELLED", "FAILED"]
+    },
+    "guest_details": {
+      "type": "object",
+      "required": ["guest_name", "guest_email"],
+      "properties": {
+        "guest_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "guest_email": {
+          "type": "string",
+          "format": "email"
+        },
+        "guest_phone": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "special_requests": {
+      "type": ["string", "null"]
+    },
+    "rooms": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["room_type_code", "booking_date", "rooms_count", "cost_per_room_per_night"],
+        "properties": {
+          "room_type_code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "booking_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "rooms_count": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "cost_per_room_per_night": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "cancellation_policy": {
+      "type": "object",
+      "required": ["cancellation_policy_type", "free_cancellation_hours", "cancellation_fee_percentage", "refund_policy"],
+      "properties": {
+        "cancellation_policy_type": {
+          "type": "string",
+          "enum": ["FREE", "PARTIAL_REFUND", "NON_REFUNDABLE"]
+        },
+        "free_cancellation_hours": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cancellation_fee_percentage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "refund_policy": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

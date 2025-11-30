@@ -6,6 +6,8 @@ import FilterPanel from './components/search/FilterPanel';
 import { hotelService } from './services/hotelService';
 import HotelDetailsPage from './components/hotel/HotelDetailsPage';
 import AuthContainer from './components/auth/AuthContainer';
+import MyBookingsPage from './components/booking/MyBookingsPage';
+import BookingDetailsPage from './components/booking/BookingDetailsPage';
 
 function App() {
   // Authentication state
@@ -38,6 +40,10 @@ function App() {
     roomTypes: [],
     maxGuests: 0
   });
+
+  // Add new state for My Bookings
+  const [showMyBookings, setShowMyBookings] = useState(false);
+  const [selectedBooking, setSelectedBooking] = useState(null);
 
   const fetchFilters = async (searchParams) => {
     try {
@@ -228,6 +234,24 @@ function App() {
     // Here you would typically send booking data to backend
   };
 
+  const handleMyBookingsClick = () => {
+    setShowMyBookings(true);
+    setSelectedHotel(null); // Close hotel details if open
+  };
+
+  const handleCloseMyBookings = () => {
+    setShowMyBookings(false);
+    setSelectedBooking(null);
+  };
+
+  const handleViewBookingDetails = (booking) => {
+    setSelectedBooking(booking);
+  };
+
+  const handleCloseBookingDetails = () => {
+    setSelectedBooking(null);
+  };
+
   // Show loading while checking auth
   if (authLoading) {
     return (
@@ -250,6 +274,7 @@ function App() {
         <div className="header-content">
           <h1>Hotel Reservation Application</h1>
           <div className="user-info">
+            <button onClick={handleMyBookingsClick} className="my-bookings-btn">My Bookings</button>
             <span className="welcome-text">Welcome, {user?.firstName || user?.username}!</span>
             <button onClick={handleLogout} className="logout-btn">Logout</button>
           </div>
@@ -285,11 +310,32 @@ function App() {
           </div>
         )}
       </main>
+
+      {/* My Bookings Modal */}
+      {showMyBookings && (
+        <MyBookingsPage 
+          onClose={handleCloseMyBookings}
+          onViewDetails={handleViewBookingDetails}
+        />
+      )}
+
+      {/* Booking Details Modal */}
+      {selectedBooking && (
+        <BookingDetailsPage 
+          booking={selectedBooking}
+          onClose={handleCloseBookingDetails}
+        />
+      )}
     </div>
   );
 }
 
 export default App;
+
+
+
+
+
 
 
 

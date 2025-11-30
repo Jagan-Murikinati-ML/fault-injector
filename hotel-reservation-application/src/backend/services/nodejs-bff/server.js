@@ -180,6 +180,125 @@ app.post('/api/booking/book-hotel', authenticateToken, async (req, res) => {
   }
 });
 
+// Get user bookings API - Protected
+app.get('/api/booking/my-bookings', authenticateToken, async (req, res) => {
+  try {
+    // Get bookings from booking service
+    const response = await axios.get(`${BOOKING_SERVICE_URL}/booking/my-bookings`, {
+      headers: {
+        'Authorization': req.headers['authorization']
+      }
+    });
+    
+    const bookingsData = response.data.data;
+    
+    // Get unique hotel IDs
+    const allBookings = [...bookingsData.current_bookings, ...bookingsData.past_bookings];
+    const hotelIds = [...new Set(allBookings.map(booking => booking.hotel_id))];
+    
+    console.log('Hotel IDs to fetch:', hotelIds);
+    
+    // Fetch hotel names for all unique hotel IDs
+    const hotelNames = {};
+    if (hotelIds.length > 0) {
+      for (const hotelId of hotelIds) {
+        try {
+          console.log(`Fetching hotel details for ID: ${hotelId}`);
+          const hotelResponse = await axios.get(`${SEARCH_SERVICE_URL}/hotels/${hotelId}`, {
+            headers: {
+              'Authorization': req.headers['authorization']
+            }
+          });
+          
+          console.log(`Hotel response for ${hotelId}:`, hotelResponse.data);
+          
+          if (hotelResponse.data.hotel) {
+            hotelNames[hotelId] = hotelResponse.data.hotel.name || hotelResponse.data.hotel.hotel_name;
+          }
+        } catch (hotelError) {
+          console.error(`Failed to fetch hotel ${hotelId}:`, hotelError.message);
+          hotelNames[hotelId] = 'Unknown Hotel';
+        }
+      }
+      
+      console.log('Hotel names mapping:', hotelNames);
+    }
+    
+    // Add hotel names to bookings
+    const enrichBookings = (bookings) => {
+      return bookings.map(booking => ({
+        ...booking,
+        hotel_name: hotelNames[booking.hotel_id] || 'Unknown Hotel'
+      }));
+    };
+    
+    const enrichedData = {
+      current_bookings: enrichBookings(bookingsData.current_bookings),
+      past_bookings: enrichBookings(bookingsData.past_bookings)
+    };
+    
+    res.json(createResponse(true, enrichedData, 'Bookings retrieved successfully'));
+    
+  } catch (error) {
+    console.error('My bookings API error:', error.message);
+    res.status(500).json(createResponse(false, null, 'Failed to get bookings', error.message));
+  }
+});
+
+// Get booking details API - Protected
+app.get('/api/booking/booking-details/:bookingId', authenticateToken, async (req, res) => {
+  try {
+    const { bookingId } = req.params;
+    
+    // Get booking details from booking service
+    const response = await axios.get(`${BOOKING_SERVICE_URL}/booking/booking-details/${bookingId}`, {
+      headers: {
+        'Authorization': req.headers['authorization']
+      }
+    });
+    
+    const bookingDetails = response.data.data;
+    
+    console.log('Fetching hotel name for hotel_id:', bookingDetails.hotel_id);
+    
+    // Fetch hotel name using the correct endpoint
+    let hotelName = 'Unknown Hotel';
+    try {
+      const hotelResponse = await axios.get(`${SEARCH_SERVICE_URL}/hotels/${bookingDetails.hotel_id}`, {
+        headers: {
+          'Authorization': req.headers['authorization']
+        }
+      });
+      
+      console.log('Hotel response for booking details:', hotelResponse.data);
+      
+      if (hotelResponse.data.hotel) {
+        hotelName = hotelResponse.data.hotel.name || hotelResponse.data.hotel.hotel_name;
+      }
+    } catch (hotelError) {
+      console.error('Failed to fetch hotel name:', hotelError.message);
+      console.error('Hotel error response:', hotelError.response?.data);
+    }
+    
+    // Add hotel name to booking details
+    const enrichedBookingDetails = {
+      ...bookingDetails,
+      hotel_name: hotelName
+    };
+    
+    res.json(createResponse(true, enrichedBookingDetails, 'Booking details retrieved successfully'));
+    
+  } catch (error) {
+    console.error('Booking details API error:', error.message);
+    
+    if (error.response && error.response.status === 404) {
+      res.status(404).json(createResponse(false, null, 'Booking not found', 'BOOKING_NOT_FOUND'));
+    } else {
+      res.status(500).json(createResponse(false, null, 'Failed to get booking details', error.message));
+    }
+  }
+});
+
 // Health check - Unprotected
 app.get('/health', (req, res) => {
   res.json(createResponse(true, { service: 'nodejs-bff', status: 'healthy' }, 'Service is running'));
@@ -188,6 +307,10 @@ app.get('/health', (req, res) => {
 app.listen(PORT, () => {
   console.log(`BFF server running on port ${PORT}`);
 });
+
+
+
+
 
 
 

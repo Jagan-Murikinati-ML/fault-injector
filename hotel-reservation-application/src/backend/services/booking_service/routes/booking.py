@@ -75,12 +75,58 @@ async def book_hotel(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
+@router.get("/my-bookings")
+async def get_my_bookings(
+    booking_service: BookingService = Depends(get_booking_service),
+    current_user: dict = Depends(verify_token)
+):
+    """
+    Get all bookings for the current user
+    """
+    try:
+        user_id = current_user.get('user_id')
+        if not user_id:
+            raise HTTPException(status_code=400, detail="User ID not found in token")
+        
+        bookings = await booking_service.get_user_bookings(user_id)
+        
+        return {
+            "success": True,
+            "data": bookings,
+            "message": "Bookings retrieved successfully"
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
-
-
-
-
-
-
+@router.get("/booking-details/{booking_id}")
+async def get_booking_details(
+    booking_id: int,
+    booking_service: BookingService = Depends(get_booking_service),
+    current_user: dict = Depends(verify_token)
+):
+    """
+    Get detailed booking information for a specific booking
+    """
+    try:
+        user_id = current_user.get('user_id')
+        if not user_id:
+            raise HTTPException(status_code=400, detail="User ID not found in token")
+        
+        booking_details = await booking_service.get_booking_details(booking_id, user_id)
+        
+        if not booking_details:
+            raise HTTPException(status_code=404, detail="Booking not found")
+        
+        return {
+            "success": True,
+            "data": booking_details,
+            "message": "Booking details retrieved successfully"
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
 

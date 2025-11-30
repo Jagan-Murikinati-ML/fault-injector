@@ -1,9 +1,12 @@
 import httpx
 import os
-import time
 import json
 from typing import List, Dict, Any
 from datetime import datetime, timedelta
+from kafka import KafkaProducer
+import logging
+
+logger = logging.getLogger(__name__)
 
 class BookingService:
     """
@@ -13,6 +16,13 @@ class BookingService:
     def __init__(self, db):
         self.db = db
         self.search_service_url = os.getenv("SEARCH_SERVICE_URL", "http://localhost:8000")
+        
+        # Initialize Kafka producer
+        self.kafka_producer = KafkaProducer(
+            bootstrap_servers=os.getenv("KAFKA_BOOTSTRAP_SERVERS", "kafka:9092"),
+            value_serializer=lambda v: json.dumps(v).encode('utf-8'),
+            key_serializer=lambda k: k.encode('utf-8') if k else None
+        )
     
     async def check_room_availability(self, hotel_id: str, checkin_date: str, checkout_date: str, rooms_needed: List[Dict]) -> bool:
         """Check if requested rooms are available"""
@@ -148,196 +158,216 @@ class BookingService:
         """
         Book a hotel with transaction support and availability validation
         """
-        # Validate room availability before booking
-        await self.check_room_availability(
-            booking_request['hotel_id'],
-            booking_request['checkin_date'].isoformat(),
-            booking_request['checkout_date'].isoformat(),
-            booking_request['rooms']
-        )
-        
-        async with self.db.pool.acquire() as conn:
-            async with conn.transaction():
-                try:
-                    # Calculate total amount and other details
-                    total_nights = (booking_request['checkout_date'] - booking_request['checkin_date']).days
-                    total_rooms = sum(room['rooms_count'] for room in booking_request['rooms'])
-                    total_amount = sum(room['rooms_count'] * room['cost_per_room_per_night'] for room in booking_request['rooms'])
-                    
-                    # Generate invoice number
-                    invoice_number = f"INV-{booking_request['hotel_id']}-{int(time.time())}"
-                    
-                    # Calculate cancellation deadline BEFORE using it
-                    checkin_datetime = datetime.combine(booking_request['checkin_date'], datetime.min.time())
-                    cancellation_deadline = checkin_datetime - timedelta(hours=booking_request['cancellation_policy']['free_cancellation_hours'])
-                    
-                    # Create detailed invoice data
-                    invoice_details = {
-                        "invoice_number": invoice_number,
-                        "issue_date": datetime.now().isoformat(),
-                        "due_date": booking_request['checkin_date'].isoformat(),
-                        "billing_details": {
-                            "guest_name": booking_request['guest_details']['guest_name'],
-                            "guest_email": booking_request['guest_details']['guest_email'],
-                            "guest_phone": booking_request['guest_details'].get('guest_phone')
-                        },
-                        "hotel_details": {
+        try:
+            logger.info(f"Starting booking for hotel_id: {booking_request.get('hotel_id')}")
+            logger.info(f"Booking request data: {booking_request}")
+            
+            # Validate room availability before booking
+            await self.check_room_availability(
+                booking_request['hotel_id'],
+                booking_request['checkin_date'].isoformat(),
+                booking_request['checkout_date'].isoformat(),
+                booking_request['rooms']
+            )
+            
+            async with self.db.pool.acquire() as conn:
+                async with conn.transaction():
+                    try:
+                        # Calculate totals
+                        total_nights = (booking_request['checkout_date'] - booking_request['checkin_date']).days
+                        total_rooms = sum(room['rooms_count'] for room in booking_request['rooms'])
+                        total_amount = sum(room['rooms_count'] * room['cost_per_room_per_night'] for room in booking_request['rooms'])
+                        
+                        # Calculate cancellation deadline
+                        checkin_datetime = datetime.combine(booking_request['checkin_date'], datetime.min.time())
+                        cancellation_deadline = checkin_datetime - timedelta(hours=booking_request['cancellation_policy']['free_cancellation_hours'])
+                        
+                        # Insert into booking_info
+                        booking_query = """
+                            INSERT INTO booking_info (
+                                hotel_id, user_id, checkin_date, checkout_date, 
+                                total_nights, total_rooms, total_guests, total_amount, currency, 
+                                booking_status, payment_status
+                            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+                            RETURNING booking_id
+                        """
+                        
+                        booking_id = await conn.fetchval(
+                            booking_query,
+                            booking_request['hotel_id'],
+                            booking_request['user_id'],
+                            booking_request['checkin_date'],
+                            booking_request['checkout_date'],
+                            total_nights,
+                            total_rooms,
+                            booking_request['total_guests'],
+                            total_amount,
+                            booking_request['currency'],
+                            'CONFIRMED',
+                            'PAID'
+                        )
+                        
+                        
+                        # Insert into booked_rooms for each room booking
+                        rooms_query = """
+                            INSERT INTO booked_rooms (
+                                hotel_id, room_type_code, booking_date, rooms_booked,
+                                cost_per_room_per_night, booking_id
+                            ) VALUES ($1, $2, $3, $4, $5, $6)
+                        """
+                        
+                        for room in booking_request['rooms']:
+                            await conn.execute(
+                                rooms_query,
+                                booking_request['hotel_id'],
+                                room['room_type_code'],
+                                room['booking_date'],
+                                room['rooms_count'],
+                                room['cost_per_room_per_night'],
+                                booking_id
+                            )
+                        
+                        # Send booking event to Kafka for post-processing
+                        booking_event = {
+                            "message_version": "v1",
+                            "event_type": "booking_created",
+                            "timestamp": datetime.now().isoformat(),
+                            "source_service": "booking-service",
+                            "booking_id": booking_id,
                             "hotel_id": booking_request['hotel_id'],
+                            "user_id": booking_request['user_id'],
                             "checkin_date": booking_request['checkin_date'].isoformat(),
                             "checkout_date": booking_request['checkout_date'].isoformat(),
-                            "total_nights": total_nights
-                        },
-                        "room_breakdown": [
-                            {
-                                "room_type": room['room_type_code'],
-                                "booking_date": room['booking_date'].isoformat(),
-                                "rooms_count": room['rooms_count'],
-                                "rate_per_room": float(room['cost_per_room_per_night']),
-                                "subtotal": float(room['rooms_count'] * room['cost_per_room_per_night'])
-                            }
-                            for room in booking_request['rooms']
-                        ],
-                        "pricing_summary": {
-                            "subtotal": float(total_amount),
-                            "taxes": 0.0,
+                            "total_nights": total_nights,
+                            "total_guests": booking_request['total_guests'],
                             "total_amount": float(total_amount),
-                            "currency": booking_request['currency']
-                        },
-                        "payment_info": {
-                            "payment_status": "PAID",
-                            "payment_method": "ONLINE",
-                            "transaction_id": f"TXN-{int(time.time())}"
-                        },
-                        "cancellation_info": {
-                            "policy_type": booking_request['cancellation_policy']['cancellation_policy_type'],
-                            "free_cancellation_hours": booking_request['cancellation_policy']['free_cancellation_hours'],
-                            "cancellation_fee_percentage": float(booking_request['cancellation_policy']['cancellation_fee_percentage']),
-                            "cancellation_deadline": cancellation_deadline.isoformat(),
-                            "refund_policy": booking_request['cancellation_policy']['refund_policy'],
-                            "cancellation_status": "NOT_CANCELLED",
-                            "potential_refund_amount": float(total_amount) if booking_request['cancellation_policy']['cancellation_policy_type'] == 'FREE' else 0.0,
-                            "cancellation_terms": f"Free cancellation until {cancellation_deadline.strftime('%Y-%m-%d %H:%M:%S')}. After that, {float(booking_request['cancellation_policy']['cancellation_fee_percentage'])}% cancellation fee applies."
+                            "currency": booking_request['currency'],
+                            "booking_status": "CONFIRMED",
+                            "guest_details": booking_request['guest_details'],
+                            "rooms": [
+                                {
+                                    "room_type_code": room['room_type_code'],
+                                    "booking_date": room['booking_date'].isoformat() if hasattr(room['booking_date'], 'isoformat') else room['booking_date'],
+                                    "rooms_count": room['rooms_count'],
+                                    "cost_per_room_per_night": float(room['cost_per_room_per_night'])
+                                }
+                                for room in booking_request['rooms']
+                            ],
+                            "special_requests": booking_request.get('special_requests'),
+                            "cancellation_policy": {
+                                "cancellation_policy_type": booking_request['cancellation_policy']['cancellation_policy_type'],
+                                "free_cancellation_hours": booking_request['cancellation_policy']['free_cancellation_hours'],
+                                "cancellation_fee_percentage": float(booking_request['cancellation_policy']['cancellation_fee_percentage']),
+                                "refund_policy": booking_request['cancellation_policy']['refund_policy']
+                            }
                         }
-                    }
-                    
-                    # Insert into booking_info
-                    booking_query = """
-                        INSERT INTO booking_info (
-                            hotel_id, user_id, checkin_date, checkout_date, 
-                            total_nights, total_rooms, total_guests, total_amount, currency, 
-                            booking_status, payment_status
-                        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
-                        RETURNING booking_id
-                    """
-                    
-                    booking_id = await conn.fetchval(
-                        booking_query,
-                        booking_request['hotel_id'],
-                        booking_request['user_id'],
-                        booking_request['checkin_date'],
-                        booking_request['checkout_date'],
-                        total_nights,
-                        total_rooms,
-                        booking_request['total_guests'],
-                        total_amount,
-                        booking_request['currency'],
-                        'CONFIRMED',
-                        'PAID'
-                    )
-                    
-                    # Insert into booking_details
-                    # TODO: Send complete booking data to Kafka topic instead
-                    details_query = """
-                        INSERT INTO booking_details (
-                            booking_id, user_id, hotel_id, checkin_date, checkout_date,
-                            total_guests, total_amount, currency, booking_status,
-                            guest_name, guest_email, guest_phone, special_requests,
-                            invoice_number, invoice_details, payment_status,
-                            cancellation_policy_type, free_cancellation_hours,
-                            cancellation_fee_percentage, cancellation_deadline, refund_policy
-                        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)
-                    """
-                    
-                    await conn.execute(
-                        details_query,
-                        booking_id,
-                        booking_request['user_id'],
-                        booking_request['hotel_id'],
-                        booking_request['checkin_date'],
-                        booking_request['checkout_date'],
-                        booking_request['total_guests'],
-                        total_amount,
-                        booking_request['currency'],
-                        'CONFIRMED',
-                        booking_request['guest_details']['guest_name'],
-                        booking_request['guest_details']['guest_email'],
-                        booking_request['guest_details'].get('guest_phone'),
-                        booking_request.get('special_requests'),
-                        invoice_number,
-                        json.dumps(invoice_details),
-                        'PAID',
-                        booking_request['cancellation_policy']['cancellation_policy_type'],
-                        booking_request['cancellation_policy']['free_cancellation_hours'],
-                        booking_request['cancellation_policy']['cancellation_fee_percentage'],
-                        cancellation_deadline,
-                        booking_request['cancellation_policy']['refund_policy']
-                    )
-                    
-                    # Insert into booked_rooms for each room booking
-                    rooms_query = """
-                        INSERT INTO booked_rooms (
-                            hotel_id, room_type_code, booking_date, rooms_booked,
-                            cost_per_room_per_night, booking_id
-                        ) VALUES ($1, $2, $3, $4, $5, $6)
-                    """
-                    
-                    for room in booking_request['rooms']:
-                        await conn.execute(
-                            rooms_query,
-                            booking_request['hotel_id'],
-                            room['room_type_code'],
-                            room['booking_date'],
-                            room['rooms_count'],
-                            room['cost_per_room_per_night'],
-                            booking_id
+                        
+                        # Send to Kafka
+                        self.kafka_producer.send(
+                            'booking-events',
+                            key=str(booking_id),
+                            value=booking_event
                         )
-                    
-                    return {
-                        "booking_id": booking_id,
-                        "hotel_id": booking_request['hotel_id'],
-                        "user_id": booking_request['user_id'],
-                        "checkin_date": booking_request['checkin_date'].isoformat(),
-                        "checkout_date": booking_request['checkout_date'].isoformat(),
-                        "total_nights": total_nights,
-                        "total_rooms": total_rooms,
-                        "total_amount": float(total_amount),
-                        "currency": booking_request['currency'],
-                        "booking_status": "CONFIRMED",
-                        "payment_status": "PAID"
-                    }
-                    
-                except Exception as e:
-                    raise Exception(f"Booking failed: {str(e)}")
+                        self.kafka_producer.flush()
+                        
+                        return {
+                            "booking_id": booking_id,
+                            "hotel_id": booking_request['hotel_id'],
+                            "user_id": booking_request['user_id'],
+                            "checkin_date": booking_request['checkin_date'].isoformat(),
+                            "checkout_date": booking_request['checkout_date'].isoformat(),
+                            "total_nights": total_nights,
+                            "total_rooms": total_rooms,
+                            "total_amount": float(total_amount),
+                            "currency": booking_request['currency'],
+                            "booking_status": "CONFIRMED",
+                            "payment_status": "PAID"
+                        }
+                        
+                    except Exception as e:
+                        raise Exception(f"Booking failed: {str(e)}")
+        except Exception as e:
+            logger.error(f"Booking failed with error: {str(e)}")
+            logger.error(f"Error type: {type(e)}")
+            raise Exception(f"Booking failed: {str(e)}")
 
+    async def get_user_bookings(self, user_id: str) -> List[Dict[str, Any]]:
+        """
+        Get basic booking information from booking_info table
+        """
+        query = """
+            SELECT 
+                booking_id, hotel_id, checkin_date, checkout_date,
+                total_guests, total_amount, currency, booking_status
+            FROM booking_info
+            WHERE user_id = $1
+            ORDER BY checkin_date DESC
+        """
+        
+        rows = await self.db.fetch(query, user_id)
+        
+        current_bookings = []
+        past_bookings = []
+        today = datetime.now().date()
+        
+        for row in rows:
+            booking = {
+                "booking_id": row["booking_id"],
+                "hotel_id": row["hotel_id"],
+                "checkin_date": row["checkin_date"].isoformat(),
+                "checkout_date": row["checkout_date"].isoformat(),
+                "total_guests": row["total_guests"],
+                "total_amount": float(row["total_amount"]),
+                "currency": row["currency"],
+                "booking_status": row["booking_status"]
+            }
+            
+            if row["checkin_date"] >= today:
+                current_bookings.append(booking)
+            else:
+                past_bookings.append(booking)
+        
+        return {
+            "current_bookings": current_bookings,
+            "past_bookings": past_bookings
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    async def get_booking_details(self, booking_id: int, user_id: str) -> Dict[str, Any]:
+        """
+        Get complete booking details from booking_details table
+        """
+        query = """
+            SELECT * FROM booking_details
+            WHERE booking_id = $1 AND user_id = $2
+        """
+        
+        row = await self.db.fetchrow(query, booking_id, user_id)
+        
+        if not row:
+            return None
+        
+        # Convert row to dict and handle data type conversions
+        booking_details = dict(row)
+        
+        # Convert dates to ISO format
+        if booking_details.get('checkin_date'):
+            booking_details['checkin_date'] = booking_details['checkin_date'].isoformat()
+        if booking_details.get('checkout_date'):
+            booking_details['checkout_date'] = booking_details['checkout_date'].isoformat()
+        if booking_details.get('cancellation_deadline'):
+            booking_details['cancellation_deadline'] = booking_details['cancellation_deadline'].isoformat()
+        if booking_details.get('created_at'):
+            booking_details['created_at'] = booking_details['created_at'].isoformat()
+        if booking_details.get('updated_at'):
+            booking_details['updated_at'] = booking_details['updated_at'].isoformat()
+        
+        # Convert Decimal to float
+        if booking_details.get('total_amount'):
+            booking_details['total_amount'] = float(booking_details['total_amount'])
+        if booking_details.get('cancellation_fee_percentage'):
+            booking_details['cancellation_fee_percentage'] = float(booking_details['cancellation_fee_percentage'])
+        
+        return booking_details
 
 
 
