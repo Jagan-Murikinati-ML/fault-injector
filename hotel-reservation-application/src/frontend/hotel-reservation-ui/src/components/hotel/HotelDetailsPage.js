@@ -201,8 +201,8 @@ const HotelDetailsPage = ({ hotel, searchParams, onClose, onBookingConfirm }) =>
       const bookingData = {
         hotel_id: hotel.id,
         user_id: getUserId(),
-        checkin_date: searchParams.checkin,
-        checkout_date: searchParams.checkout,
+        checkin_date: searchParams.checkin_date,  // ADD THIS
+        checkout_date: searchParams.checkout_date, // ADD THIS
         total_guests: totalGuests,
         rooms: rooms,
         currency: "INR",
@@ -228,7 +228,45 @@ const HotelDetailsPage = ({ hotel, searchParams, onClose, onBookingConfirm }) =>
       
     } catch (error) {
       console.error('Booking failed:', error);
-      setBookingError(error.response?.data?.message || 'Booking failed. Please try again.');
+      
+      // Extract detailed error message
+      let errorMessage = 'Booking failed. Please try again.';
+      
+      try {
+        if (error.response?.data?.error?.detail) {
+          const details = error.response.data.error.detail;
+          
+          if (Array.isArray(details) && details.length > 0) {
+            // Handle Pydantic validation errors array
+            const missingFields = details
+              .filter(d => d && d.type === 'missing')
+              .map(d => d.loc && d.loc.length > 0 ? d.loc[d.loc.length - 1] : 'unknown field');
+            
+            if (missingFields.length > 0) {
+              errorMessage = `Missing required fields: ${missingFields.join(', ')}`;
+            } else {
+              // Get first error message
+              const firstError = details.find(d => d && d.msg);
+              errorMessage = firstError ? firstError.msg : 'Validation error occurred';
+            }
+          } else if (typeof details === 'string') {
+            errorMessage = details;
+          } else {
+            errorMessage = 'Validation error occurred';
+          }
+        } else if (error.response?.data?.message) {
+          errorMessage = error.response.data.message;
+        } else if (error.response?.data?.error && typeof error.response.data.error === 'string') {
+          errorMessage = error.response.data.error;
+        } else if (error.message) {
+          errorMessage = error.message;
+        }
+      } catch (parseError) {
+        console.error('Error parsing error response:', parseError);
+        errorMessage = 'An unexpected error occurred. Please try again.';
+      }
+      
+      setBookingError(errorMessage);
     } finally {
       setBookingLoading(false);
     }
@@ -236,7 +274,7 @@ const HotelDetailsPage = ({ hotel, searchParams, onClose, onBookingConfirm }) =>
 
   // Fetch available rooms when component loads or dates change
   useEffect(() => {
-    if (hotel && searchParams?.checkin && searchParams?.checkout) {
+    if (hotel && searchParams?.checkin_date && searchParams?.checkout_date) {
       fetchAvailableRooms();
     }
   }, [hotel, searchParams?.checkin, searchParams?.checkout]);
@@ -245,20 +283,21 @@ const HotelDetailsPage = ({ hotel, searchParams, onClose, onBookingConfirm }) =>
     setLoadingAvailability(true);
     try {
       const roomTypes = hotel.room_types.map(room => room.type);
-      const totalRoomsData = {};
-      hotel.room_types.forEach(room => {
-        totalRoomsData[room.type] = room.total_rooms;
-      });
+      const roomTypesString = roomTypes.join(',');
       
-      const availabilityData = await hotelService.getAvailableRooms(
+      // Call the booked rooms API
+      const response = await hotelService.getAvailableRooms(
         hotel.id,
-        searchParams.checkin,
-        searchParams.checkout,
+        searchParams.checkin_date,
+        searchParams.checkout_date,
         roomTypes,
-        totalRoomsData
+        hotel.room_types.reduce((acc, room) => {
+          acc[room.type] = room.total_rooms;
+          return acc;
+        }, {})
       );
       
-      setAvailableRooms(availabilityData);
+      setAvailableRooms(response);
     } catch (error) {
       console.error('Failed to fetch room availability:', error);
       setAvailableRooms([]);
@@ -480,14 +519,14 @@ const HotelDetailsPage = ({ hotel, searchParams, onClose, onBookingConfirm }) =>
                     className="book-now-button-final"
                     onClick={handleBookNow}
                     disabled={bookingLoading}
-                    style={{marginRight: '10px'}}
+                    style={{marginRight: '10px', width: 'auto', minWidth: '150px'}}
                   >
                     {bookingLoading ? 'Booking...' : 'Confirm Booking'}
                   </button>
                   <button
+                    className="cancel-booking-button"
                     onClick={() => setShowBookingForm(false)}
                     disabled={bookingLoading}
-                    style={{padding: '10px 20px', backgroundColor: '#ccc'}}
                   >
                     Cancel
                   </button>
@@ -735,6 +774,13 @@ const HotelDetailsPage = ({ hotel, searchParams, onClose, onBookingConfirm }) =>
 };
 
 export default HotelDetailsPage;
+
+
+
+
+
+
+
 
 
 

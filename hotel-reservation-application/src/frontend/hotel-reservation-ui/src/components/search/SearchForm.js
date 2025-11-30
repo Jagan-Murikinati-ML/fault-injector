@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CityAutocomplete from './CityAutocomplete';
+import './SearchForm.css';
 
 const SearchForm = ({ onSearch, loading }) => {
   // Helper function to format date as YYYY-MM-DD
@@ -91,13 +92,13 @@ const SearchForm = ({ onSearch, loading }) => {
             ))}
           </select>
         </div>
-        
+
         <button 
           type="submit" 
-          className="search-button"
+          className="search-button-inline"
           disabled={loading}
         >
-          {loading ? 'Searching...' : 'Search Hotels'}
+          {loading ? 'Searching...' : 'Search'}
         </button>
       </form>
     </div>
@@ -105,6 +106,9 @@ const SearchForm = ({ onSearch, loading }) => {
 };
 
 export default SearchForm;
+
+
+
 
 
 

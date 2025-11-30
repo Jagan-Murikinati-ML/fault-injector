@@ -950,18 +950,16 @@ body {
   padding: 0.75rem 1.5rem;
   border-radius: 6px;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
-  width: 100%;
-  margin-top: 0.75rem;
+  min-width: 150px;
+  height: 48px;
   transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .book-now-button-final:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(45, 90, 39, 0.4);
+  box-shadow: 0 4px 12px rgba(45, 90, 39, 0.3);
 }
 
 .book-now-button-final:disabled {
@@ -969,4 +967,37 @@ body {
   cursor: not-allowed;
   background: #999;
 }
+
+.booking-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 0.75rem;
+}
+
+.cancel-booking-button {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 150px;
+  height: 48px;
+  transition: all 0.3s ease;
+}
+
+.cancel-booking-button:hover {
+  background: #5a6268;
+  transform: translateY(-1px);
+}
+
+.cancel-booking-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
 

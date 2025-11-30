@@ -5,15 +5,15 @@ WORKDIR /app
 # Copy package files first for better caching
 COPY package*.json ./
 
-# Install dependencies (this layer will be cached)
-RUN npm ci --only=production
+# Install dependencies with optimizations
+RUN npm ci --silent --no-audit --no-fund
 
 # Copy application code
 COPY . .
 
 # Create non-root user
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nodejs -u 1001
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001 -G nodejs
 
 # Change ownership
 RUN chown -R nodejs:nodejs /app
@@ -24,3 +24,5 @@ EXPOSE 3001
 
 # Start the application
 CMD ["npm", "start"]
+
+

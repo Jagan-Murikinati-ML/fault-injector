@@ -64,7 +64,15 @@ export const hotelService = {
       const roomTypesString = roomTypes.join(',');
       const response = await apiCall(`/api/booking/booked-rooms?hotel_id=${hotelId}&checkin_date=${checkinDate}&checkout_date=${checkoutDate}&room_types=${roomTypesString}`);
       
-      const bookedRoomsData = response.data;
+      console.log('Booked rooms API response:', response.data);
+      
+      // Handle BFF response structure - extract the actual data
+      const bookedRoomsData = response.data?.data || response.data || [];
+      
+      if (!Array.isArray(bookedRoomsData)) {
+        console.error('Expected array but got:', bookedRoomsData);
+        return [];
+      }
       
       const availableRoomsData = bookedRoomsData.map(booking => {
         const totalRooms = totalRoomsData[booking.room_type_code] || 0;
@@ -81,7 +89,7 @@ export const hotelService = {
       
       return availableRoomsData;
     } catch (error) {
-      console.error('Error fetching available rooms:', error);
+      console.error('Error getting available rooms:', error);
       throw error;
     }
   },
@@ -98,6 +106,7 @@ export const hotelService = {
 };
 
 export default hotelService;
+
 
 
 
