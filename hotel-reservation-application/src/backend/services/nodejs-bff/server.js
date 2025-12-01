@@ -1,3 +1,7 @@
+// IMPORTANT: Import instrumentation FIRST, before any other imports
+// This ensures OpenTelemetry can instrument all libraries
+require('./instrumentation');
+
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
