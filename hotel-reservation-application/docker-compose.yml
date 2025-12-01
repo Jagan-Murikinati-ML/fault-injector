@@ -8,10 +8,16 @@ services:
       - AUTH_SERVICE_URL=http://authentication-service:9000
       - BOOKING_SERVICE_URL=http://booking-service:8001
       - JWT_SECRET=MyApp-Super-Secret-Key-2024-Docker
+      # OpenTelemetry Tracing Configuration
+      - TRACING_ENABLED=true
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+      - OTEL_SERVICE_NAME=nodejs-bff
+      - OTEL_RESOURCE_ATTRIBUTES=service.namespace=hotel-reservation,service.version=1.0.0
     depends_on:
       - search-service
       - authentication-service
       - booking-service
+      - otel-collector
     volumes:
       - ./src/backend/services/nodejs-bff:/app
       - /app/node_modules
@@ -25,8 +31,14 @@ services:
     environment:
       - ELASTICSEARCH_URL=http://elasticsearch:9200
       - JWT_SECRET=MyApp-Super-Secret-Key-2024-Docker
+      # OpenTelemetry Tracing Configuration
+      - TRACING_ENABLED=true
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+      - OTEL_SERVICE_NAME=search-service
+      - OTEL_RESOURCE_ATTRIBUTES=service.namespace=hotel-reservation,service.version=1.0.0
     depends_on:
       - elasticsearch
+      - otel-collector
     volumes:
       - ./src/backend/services/search_service:/app
     networks:
@@ -41,8 +53,18 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=password
       - JWT_SECRET=MyApp-Super-Secret-Key-2024-Docker
+      # OpenTelemetry Tracing Configuration
+      - TRACING_ENABLED=true
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+      - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+      - OTEL_SERVICE_NAME=authentication-service
+      - OTEL_RESOURCE_ATTRIBUTES=service.namespace=hotel-reservation,service.version=1.0.0
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=none
+      - OTEL_LOGS_EXPORTER=none
     depends_on:
       - postgres
+      - otel-collector
     networks:
       - hotel_network
 
@@ -98,6 +120,12 @@ services:
       - "3001:3001"
     environment:
       - PORT=3001
+      # OpenTelemetry Tracing Configuration
+      - REACT_APP_TRACING_ENABLED=true
+      - REACT_APP_OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318/v1/traces
+      - REACT_APP_OTEL_SERVICE_NAME=frontend
+    depends_on:
+      - otel-collector
     volumes:
       - ./src/frontend/hotel-reservation-ui:/app
       - /app/node_modules
@@ -150,18 +178,61 @@ services:
       - "9092:9092"
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://kafka:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:29092,PLAINTEXT_HOST://kafka:9092"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT"
+      KAFKA_INTER_BROKER_LISTENER_NAME: "PLAINTEXT"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: true
     networks:
       - hotel_network
+  # ******************
+  # Telemetry Services
+  # ******************
+
+  # OpenTelemetry Collector - Receives traces from all services
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.97.0
+    container_name: hotel-otel-collector
+    command: ["--config=/etc/otel-collector-config.yml"]
+    volumes:
+      - ./otel-collector-config.yml:/etc/otel-collector-config.yml
+    ports:
+      - "4317:4317"   # OTLP gRPC receiver
+      - "4318:4318"   # OTLP HTTP receiver
+      - "8888:8888"   # Prometheus metrics exposed by the collector
+      - "8889:8889"   # Prometheus exporter metrics
+    networks:
+      - hotel_network
+    restart: unless-stopped
+
+  # Jaeger - Distributed Tracing UI
+  jaeger:
+    image: jaegertracing/all-in-one:1.55
+    container_name: hotel-jaeger
+    ports:
+      - "16686:16686"  # Jaeger UI
+      - "14250:14250"  # gRPC receiver
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+      # ✅ NEW: Badger Storage with 1 Hour TTL
+      - SPAN_STORAGE_TYPE=badger
+      - BADGER_EPHEMERAL=false
+      - BADGER_DIRECTORY_VALUE=/badger/data
+      - BADGER_DIRECTORY_KEY=/badger/key
+      - BADGER_SPAN_STORE_TTL=1h  # ✅ 1 HOUR RETENTION!
+    volumes:
+      - jaeger_badger_data:/badger  # ✅ NEW VOLUME
+    user: root 
+      
+    networks:
+      - hotel_network
+    restart: unless-stopped
 
 volumes:
   es_data:
   postgres_data:
+  jaeger_badger_data:
 
 networks:
   hotel_network:
